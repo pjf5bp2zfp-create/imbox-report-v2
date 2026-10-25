@@ -336,7 +336,7 @@ svg.i{width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* ---------- Tabs (Rapport / Agenda) ---------- */
-.tabs{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
+.tabs{display:inline-grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
 .tab{min-height:40px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:rgba(255,255,255,.8);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,color .2s}
 .tab.on{background:#fff;color:var(--navy)}
 .tab .n{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#04202a;font-size:.7rem;font-weight:800;display:inline-grid;place-items:center}
@@ -449,6 +449,55 @@ svg.i{width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
 .gauge-top .lbl{min-width:0}
 input,select,textarea{min-width:0}
 
+/* ---------- Mes gains ---------- */
+.view-gains .stepper,.view-gains .progress-wrap,.view-gains .btnrow,.view-gains .report-view,.view-gains .sidebar{display:none!important}
+.gains-view{display:none;max-width:860px;margin:0 auto}
+.view-gains .gains-view{display:block}
+.view-gains .layout{display:block}
+body.view-gains{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.g-title{font-size:1.25rem;font-weight:800;margin:4px 2px 12px;letter-spacing:-.01em}
+.kpi em{display:block;font-style:normal;font-size:.72rem;color:var(--text-3);margin-top:2px}
+.kpi.done{border-color:var(--green-soft)}
+.kpi.done b{color:var(--green)}
+.g-bar{display:flex;align-items:center;gap:10px;margin:0 2px 14px}
+.g-bar .progress{flex:1}
+.g-types{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:14px}
+@media (min-width:720px){.g-types{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.g-type{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-1,var(--sh-2));padding:12px;display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center;min-width:0}
+.g-type .tag{grid-column:1/-1;justify-self:start}
+.g-type b{font-size:1.4rem;font-weight:800;font-variant-numeric:tabular-nums}
+.g-type small{grid-column:1;color:var(--text-3);font-size:.75rem}
+.g-type .g-eur{grid-row:2/4;grid-column:2;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.g-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap}
+.seg{display:inline-grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}
+.seg-b{min-height:44px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--text-2,var(--text));font-weight:700;font-size:.9rem}
+.seg-b.on{background:var(--navy);color:#fff;box-shadow:var(--sh-2)}
+.g-rates{margin:4px 2px 14px}
+.g-per{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);margin-bottom:14px;overflow:hidden}
+.g-per-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px;border-bottom:1px solid var(--line)}
+.g-per-h b{font-size:1rem;font-weight:750}
+.g-per-h small{display:block;color:var(--text-3);font-size:.76rem}
+.g-per-sum{text-align:right;flex-shrink:0}
+.g-per-sum small{display:block;margin-top:4px;color:var(--text-3);font-size:.72rem}
+.g-row{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line);min-width:0}
+.g-row:last-child{border-bottom:0}
+.g-st{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:var(--surface-2);color:var(--text-3);font-weight:800;font-size:.8rem}
+.g-row.done .g-st{background:var(--green-soft);color:var(--green)}
+.g-main{flex:1;min-width:0}
+.g-main b{display:block;font-size:.9rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-main small{display:block;color:var(--text-3);font-size:.74rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-amt{font-weight:800;font-variant-numeric:tabular-nums;flex-shrink:0}
+.g-row.done .g-amt{color:var(--green)}
+@media (max-width:380px){.tab{padding:0 8px;font-size:.8rem;gap:4px}}
+
+.tab{white-space:nowrap}
+@media (max-width:479px){.hide-xs{display:none}}
+.show-xs{display:none}
+@media (max-width:479px){.show-xs{display:inline}}
+.g-bar .progress-txt{color:var(--text-2);white-space:nowrap}
+.g-bar .progress{background:var(--surface-2);border:1px solid var(--line)}
+@media (prefers-color-scheme:dark){.seg-b.on{background:var(--accent);color:#04202a}}
+
 </style>
 </head>
 <body>
@@ -464,6 +513,7 @@ input,select,textarea{min-width:0}
     <div class="tabs-row"><div class="tabs" role="tablist">
     <button type="button" class="tab on" data-view="report" role="tab" aria-selected="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg> Rapport</button>
     <button type="button" class="tab" data-view="agenda" role="tab" aria-selected="false"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Agenda <span class="n" id="tabAgendaN" style="display:none">0</span></button>
+    <button type="button" class="tab" data-view="gains" role="tab" aria-selected="false"><span aria-hidden="true">💶</span> <span class="hide-xs">Mes gains</span><span class="show-xs">Gains</span></button>
   </div></div>
     <span class="db-badge" id="dbBadge">Base magasins…</span>
   </div>
@@ -777,17 +827,36 @@ input,select,textarea{min-width:0}
   </div>
   <div class="ag-panel" id="agPanel-tarifs">
     <h3>Grille tarifaire</h3>
-    <p class="hint">Montant par intervention, selon la zone (IDF = 75, 77, 78, 91, 92, 93, 94, 95).</p>
+    <p class="hint">Montant par intervention, selon la zone et le type. IDF = 75, 77, 78, 91, 92, 93, 94, 95 ; Région = hors IDF. Par défaut : IDF Entretien 60 €, IDF Dépannage 80 €, Région Entretien 80 €, Région Dépannage 100 €.</p>
     <div class="tarif-grid">
-      <span></span><span class="h">IDF</span><span class="h">Région</span>
-      <b>Dépannage</b><input type="number" inputmode="decimal" data-tarif="IDF|Dépannage"><input type="number" inputmode="decimal" data-tarif="Région|Dépannage">
-      <b>Entretien</b><input type="number" inputmode="decimal" data-tarif="IDF|Entretien"><input type="number" inputmode="decimal" data-tarif="Région|Entretien">
+      <span></span><span class="h">Île-de-France</span><span class="h">Région (hors IDF)</span>
+      <b>Entretien</b><input type="number" inputmode="decimal" min="0" step="any" aria-label="IDF Entretien €" data-tarif="IDF|Entretien"><input type="number" inputmode="decimal" min="0" step="any" aria-label="Région Entretien €" data-tarif="Région|Entretien">
+      <b>Dépannage</b><input type="number" inputmode="decimal" min="0" step="any" aria-label="IDF Dépannage €" data-tarif="IDF|Dépannage"><input type="number" inputmode="decimal" min="0" step="any" aria-label="Région Dépannage €" data-tarif="Région|Dépannage">
     </div>
     <div class="ag-row"><button type="button" class="btn" id="agTarifReset">Valeurs par défaut</button><button type="button" class="btn primary" id="agTarifSave">Enregistrer</button></div>
   </div>
   <div id="agList"></div>
   <div class="ag-foot"><button type="button" class="btn" id="agClearAll">Vider l'agenda</button></div>
   <p class="foot">Agenda stocké uniquement sur cet appareil · IMBOX Report v2.0</p>
+</div>
+<div class="gains-view" id="gainsView">
+  <h2 class="g-title">Mes gains</h2>
+  <div class="ag-kpis g-kpis">
+    <div class="kpi money"><small>Total prévu</small><b id="gKpiTotal">0 €</b><em id="gKpiTotalN">0 intervention</em></div>
+    <div class="kpi done"><small>Réalisé</small><b id="gKpiDone">0 €</b><em id="gKpiDoneN">0 faite</em></div>
+    <div class="kpi"><small>Reste à faire</small><b id="gKpiTodo">0 €</b><em id="gKpiTodoN">0 à faire</em></div>
+  </div>
+  <div class="g-bar"><div class="progress"><span id="gBarFill"></span></div><span class="progress-txt" id="gBarTxt">0 % réalisé</span></div>
+  <div class="g-types" id="gByType"></div>
+  <div class="g-toolbar">
+    <div class="seg" role="group" aria-label="Regrouper par">
+      <button type="button" class="seg-b on" data-gper="day">Jour</button><button type="button" class="seg-b" data-gper="week">Semaine</button><button type="button" class="seg-b" data-gper="month">Mois</button>
+    </div>
+    <button type="button" class="btn" id="gBtnTarifs">€ Tarifs</button>
+  </div>
+  <p class="hint g-rates" id="gRates"></p>
+  <div id="gPeriods"></div>
+  <p class="foot">Montants calculés selon la zone (IDF / Région) et le type · IMBOX Report v2.0</p>
 </div>
 </div>
 
@@ -2304,7 +2373,11 @@ if (document.readyState === "loading") {
   "use strict";
   var KEY = "imbox.v2.agenda", TKEY = "imbox.v2.tarifs";
   var IDF = ["75", "77", "78", "91", "92", "93", "94", "95"];
-  var DEF_TARIFS = { "IDF": { "Dépannage": 80, "Entretien": 60 }, "Région": { "Dépannage": 80, "Entretien": 60 } };
+  /* Grille par défaut : zone × type (montant € par intervention) */
+  var DEF_TARIFS = { "IDF": { "Dépannage": 80, "Entretien": 60 }, "Région": { "Dépannage": 100, "Entretien": 80 } };
+  /* Ancienne valeur par défaut (v2.0 initiale) — jamais personnalisée si identique */
+  var LEGACY_DEF = { "IDF": { "Dépannage": 80, "Entretien": 60 }, "Région": { "Dépannage": 80, "Entretien": 60 } };
+  var ZONES = ["IDF", "Région"], TYPES = ["Dépannage", "Entretien"];
   var MONTHS = { "jan": 1, "janv": 1, "janvier": 1, "january": 1, "fev": 2, "fevr": 2, "fevrier": 2, "feb": 2, "february": 2,
     "mar": 3, "mars": 3, "march": 3, "avr": 4, "avril": 4, "apr": 4, "april": 4, "mai": 5, "may": 5,
     "juin": 6, "jun": 6, "june": 6, "juil": 7, "juillet": 7, "jul": 7, "july": 7, "aou": 8, "aout": 8, "aug": 8, "august": 8,
@@ -2320,11 +2393,29 @@ if (document.readyState === "loading") {
   /* ---------- storage ---------- */
   function load() { try { var a = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
   function save(list) { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) { say("Stockage local indisponible", "err"); } }
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function grid(t) { var g = {}; ZONES.forEach(function (z) { g[z] = {}; TYPES.forEach(function (ty) { var v = t && t[z] && t[z][ty]; g[z][ty] = typeof v === "number" && !isNaN(v) ? v : DEF_TARIFS[z][ty]; }); }); return g; }
+  function sameGrid(a, b) { return ZONES.every(function (z) { return TYPES.every(function (ty) { return a && a[z] && b[z] && a[z][ty] === b[z][ty]; }); }); }
+  /* Stockage : { v:2, custom:true, IDF:{…}, Région:{…} } — uniquement si l'utilisateur a personnalisé.
+     Migration : un ancien enregistrement (sans v) égal à l'ancienne grille par défaut
+     est considéré comme non personnalisé → nouvelles valeurs par défaut. */
   function tarifs() {
-    try { var t = JSON.parse(localStorage.getItem(TKEY) || "null"); if (t && t.IDF && t["Région"]) return t; } catch (e) {}
-    return JSON.parse(JSON.stringify(DEF_TARIFS));
+    var t = null;
+    try { t = JSON.parse(localStorage.getItem(TKEY) || "null"); } catch (e) { t = null; }
+    if (t && t.IDF && t["Région"]) {
+      if (t.v === 2 && t.custom) return grid(t);
+      if (!t.v && !sameGrid(grid(t), LEGACY_DEF) && !sameGrid(grid(t), DEF_TARIFS)) { saveTarifs(grid(t)); return grid(t); }
+    }
+    if (t) { try { localStorage.removeItem(TKEY); } catch (e) {} }
+    return clone(DEF_TARIFS);
   }
-  function saveTarifs(t) { try { localStorage.setItem(TKEY, JSON.stringify(t)); } catch (e) {} }
+  function saveTarifs(t) {
+    try {
+      var g = grid(t);
+      if (sameGrid(g, DEF_TARIFS)) localStorage.removeItem(TKEY);
+      else { g.v = 2; g.custom = true; localStorage.setItem(TKEY, JSON.stringify(g)); }
+    } catch (e) {}
+  }
   var items = load();
 
   /* ---------- parsing helpers ---------- */
@@ -2452,8 +2543,8 @@ if (document.readyState === "loading") {
         var c = cells[k];
         if (!c) continue;
         if (!o.type && parseType(c) && c.length < 30) { o.type = c; typeI = k; continue; }
+        if (!o.cp && /^\d{2}(\d{3})?$/.test(c)) { o.cp = c; continue; }  /* CP avant date : 59000 n'est pas une date Excel */
         if (!o.date && parseDate(c)) { o.date = c; continue; }
-        if (!o.cp && /^\d{2}(\d{3})?$/.test(c)) { o.cp = c; continue; }
         rest.push({ k: k, c: c });
       }
       rest.forEach(function (r) {
@@ -2479,7 +2570,8 @@ if (document.readyState === "loading") {
   function price(it, t) {
     t = t || tarifs();
     var z = it.zone === "IDF" ? "IDF" : "Région";
-    var v = t[z] && t[z][it.type];
+    var ty = it.type === "Dépannage" ? "Dépannage" : it.type === "Entretien" ? "Entretien" : null;
+    var v = ty && t[z] && t[z][ty];
     return typeof v === "number" && !isNaN(v) ? v : 0;
   }
   function eur(n) { return (Math.round(n * 100) / 100).toLocaleString("fr-FR") + " €"; }
@@ -2502,6 +2594,7 @@ if (document.readyState === "loading") {
     el("agKpiEur").textContent = eur(total);
     el("agKpiDone").textContent = eur(doneSum) + " réalisés";
     var tabN = el("tabAgendaN"); if (tabN) { tabN.textContent = todo; tabN.style.display = todo ? "" : "none"; }
+    renderGains();
     var host = el("agList");
     if (!list.length) {
       host.innerHTML = '<div class="ag-empty"><div class="ag-empty-ic">📅</div><b>Aucune intervention planifiée</b><p>Copiez les lignes de votre planning (Excel / e-mail) puis « Importer un planning », ou ajoutez une intervention.</p></div>';
@@ -2526,6 +2619,84 @@ if (document.readyState === "loading") {
             '<button type="button" class="btn ag-done">' + (it.done ? "↺ À faire" : "✓ Fait") + '</button>' +
             '<button type="button" class="btn icon ag-del" aria-label="Supprimer">🗑</button></div></article>';
         }).join("") + "</section>";
+    }).join("");
+  }
+
+  /* ---------- Mes gains ---------- */
+  var gPeriod = "day";
+  try { gPeriod = localStorage.getItem("imbox.v2.gperiod") || "day"; } catch (e) {}
+  function isoWeek(iso) {
+    var p = iso.split("-"), d = new Date(Date.UTC(+p[0], +p[1] - 1, +p[2]));
+    var dow = d.getUTCDay() || 7; d.setUTCDate(d.getUTCDate() + 4 - dow);
+    var y0 = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+    return { y: d.getUTCFullYear(), w: Math.ceil(((d - y0) / 86400000 + 1) / 7) };
+  }
+  function mondayOf(iso) { var p = iso.split("-"), d = new Date(+p[0], +p[1] - 1, +p[2]); d.setDate(d.getDate() - ((d.getDay() || 7) - 1)); return d; }
+  function dm(d) { return pad(d.getDate()) + "/" + pad(d.getMonth() + 1); }
+  function periodKey(iso, per) {
+    if (!iso) return { k: "~", label: "Sans date" };
+    if (per === "day") return { k: iso, label: dateLong(iso) };
+    if (per === "week") {
+      var w = isoWeek(iso), m = mondayOf(iso), e = new Date(m); e.setDate(m.getDate() + 6);
+      return { k: w.y + "-W" + pad(w.w), label: "Semaine " + w.w + " · " + dm(m) + " – " + dm(e) + "/" + e.getFullYear() };
+    }
+    var p = iso.split("-"), lab = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+    return { k: p[0] + "-" + p[1], label: lab.charAt(0).toUpperCase() + lab.slice(1) };
+  }
+  function renderGains() {
+    if (!el("gPeriods")) return;
+    var t = tarifs();
+    var list = items.slice().sort(function (a, b) { return (a.date || "").localeCompare(b.date || ""); });
+    var tot = { n: 0, eur: 0, dn: 0, deur: 0 }, byType = {}, byZone = {};
+    TYPES.forEach(function (ty) { byType[ty] = { n: 0, eur: 0, dn: 0 }; });
+    ZONES.forEach(function (z) { byZone[z] = { n: 0, eur: 0 }; });
+    list.forEach(function (it) {
+      var p = price(it, t), ty = byType[it.type], z = byZone[it.zone === "IDF" ? "IDF" : "Région"];
+      tot.n++; tot.eur += p; if (it.done) { tot.dn++; tot.deur += p; }
+      if (ty) { ty.n++; ty.eur += p; if (it.done) ty.dn++; }
+      z.n++; z.eur += p;
+    });
+    el("gKpiTotal").textContent = eur(tot.eur);
+    el("gKpiTotalN").textContent = tot.n + " intervention" + (tot.n > 1 ? "s" : "") + " prévue" + (tot.n > 1 ? "s" : "");
+    el("gKpiDone").textContent = eur(tot.deur);
+    el("gKpiDoneN").textContent = tot.dn + " faite" + (tot.dn > 1 ? "s" : "");
+    el("gKpiTodo").textContent = eur(tot.eur - tot.deur);
+    el("gKpiTodoN").textContent = (tot.n - tot.dn) + " à faire";
+    var pct = tot.eur ? Math.round(tot.deur / tot.eur * 100) : 0;
+    el("gBarFill").style.width = pct + "%"; el("gBarTxt").textContent = pct + " % réalisé";
+    el("gByType").innerHTML = TYPES.map(function (ty) {
+      var b = byType[ty];
+      return '<div class="g-type"><span class="tag ' + typeCls(ty) + '">' + ty + '</span><b>' + b.n + '</b><small>' + b.dn + " faite" + (b.dn > 1 ? "s" : "") + '</small><span class="g-eur">' + eur(b.eur) + "</span></div>";
+    }).join("") + ZONES.map(function (z) {
+      var b = byZone[z];
+      return '<div class="g-type"><span class="tag t-zone">' + (z === "IDF" ? "Île-de-France" : "Région") + '</span><b>' + b.n + '</b><small>' + (z === "IDF" ? "IDF" : "hors IDF") + '</small><span class="g-eur">' + eur(b.eur) + "</span></div>";
+    }).join("");
+    el("gRates").textContent = "Tarifs : IDF Entretien " + eur(t.IDF["Entretien"]) + " · IDF Dépannage " + eur(t.IDF["Dépannage"]) +
+      " · Région Entretien " + eur(t["Région"]["Entretien"]) + " · Région Dépannage " + eur(t["Région"]["Dépannage"]);
+    document.querySelectorAll("[data-gper]").forEach(function (b) { var on = b.getAttribute("data-gper") === gPeriod; b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); });
+    var tb = el("gPeriods");
+    if (!list.length) {
+      tb.innerHTML = '<div class="ag-empty"><div class="ag-empty-ic">💶</div><b>Aucun gain pour l\u2019instant</b><p>Importez un planning dans l\u2019onglet Agenda : les montants sont calculés automatiquement selon la zone et le type.</p></div>';
+      return;
+    }
+    var groups = {}, order = [];
+    list.forEach(function (it) {
+      var pk = periodKey(it.date, gPeriod);
+      if (!groups[pk.k]) { groups[pk.k] = { label: pk.label, items: [], eur: 0, deur: 0, dn: 0, dep: 0, ent: 0 }; order.push(pk.k); }
+      var g = groups[pk.k], p = price(it, t);
+      g.items.push(it); g.eur += p; if (it.done) { g.deur += p; g.dn++; }
+      if (it.type === "Dépannage") g.dep++; else if (it.type === "Entretien") g.ent++;
+    });
+    order.sort();
+    tb.innerHTML = order.map(function (k) {
+      var g = groups[k];
+      return '<section class="g-per"><header class="g-per-h"><div><b>' + esc(g.label) + "</b><small>" + g.items.length + " interv. · " + g.dep + " dépannage" + (g.dep > 1 ? "s" : "") + " · " + g.ent + " entretien" + (g.ent > 1 ? "s" : "") + '</small></div>' +
+        '<div class="g-per-sum"><span class="ag-sum">' + eur(g.eur) + '</span><small>' + eur(g.deur) + " réalisés · " + g.dn + "/" + g.items.length + " faites</small></div></header>" +
+        '<div class="g-rows">' + g.items.map(function (it) {
+          return '<div class="g-row' + (it.done ? " done" : "") + '"><span class="g-st" title="' + (it.done ? "Faite" : "Prévue") + '">' + (it.done ? "✓" : "○") + '</span>' +
+            '<div class="g-main"><b>' + esc(it.name || it.storeText || "Magasin") + "</b><small>" + esc((it.date ? it.date.split("-").reverse().join("/") : "—") + " · " + (it.type || "?") + " · " + (it.zone || "?") + " · S/N " + (it.sn || "—")) + "</small></div>" +
+            '<span class="g-amt">' + eur(price(it, t)) + "</span></div>";
+        }).join("") + "</div></section>";
     }).join("");
   }
 
@@ -2589,10 +2760,11 @@ if (document.readyState === "loading") {
   /* ---------- views ---------- */
   function showView(v) {
     document.body.classList.toggle("view-agenda", v === "agenda");
+    document.body.classList.toggle("view-gains", v === "gains");
     document.querySelectorAll(".tab").forEach(function (b) { var on = b.getAttribute("data-view") === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     try { localStorage.setItem("imbox.v2.view", v); } catch (e) {}
     window.scrollTo({ top: 0, behavior: "auto" });
-    if (v === "agenda") render();
+    if (v === "agenda" || v === "gains") render();
   }
   function setPanel(name) {
     ["import", "add", "tarifs"].forEach(function (n) {
@@ -2645,7 +2817,9 @@ if (document.readyState === "loading") {
       document.querySelectorAll("[data-tarif]").forEach(function (i) { var p = i.getAttribute("data-tarif").split("|"); var v = parseFloat(String(i.value).replace(",", ".")); t[p[0]][p[1]] = isNaN(v) ? 0 : v; });
       saveTarifs(t); render(); setPanel(null); say("Grille tarifaire enregistrée", "ok");
     };
-    el("agTarifReset").onclick = function () { saveTarifs(JSON.parse(JSON.stringify(DEF_TARIFS))); fillTarifs(); render(); };
+    el("agTarifReset").onclick = function () { try { localStorage.removeItem(TKEY); } catch (e) {} fillTarifs(); render(); say("Tarifs par défaut rétablis", "ok"); };
+    document.querySelectorAll("[data-gper]").forEach(function (b) { b.addEventListener("click", function () { gPeriod = b.getAttribute("data-gper"); try { localStorage.setItem("imbox.v2.gperiod", gPeriod); } catch (e) {} renderGains(); }); });
+    var gT = el("gBtnTarifs"); if (gT) gT.onclick = function () { showView("agenda"); setPanel("tarifs"); var p = el("agPanel-tarifs"); if (p && !p.classList.contains("open")) p.classList.add("open"); };
     el("agClearAll").onclick = function () {
       if (!items.length) return;
       if (!confirm("Supprimer toutes les interventions de l'agenda ?")) return;
@@ -2661,14 +2835,14 @@ if (document.readyState === "loading") {
     var cbx = el("consigneClose"); if (cbx) cbx.onclick = function () { el("consigneBar").className = "consigne"; };
   }
 
-  window.IMBOX_AGENDA = { parseText: parseText, parseDate: parseDate, zoneOf: zoneOf, price: price, tarifs: tarifs,
+  window.IMBOX_AGENDA = { parseText: parseText, parseDate: parseDate, zoneOf: zoneOf, price: price, tarifs: tarifs, DEF_TARIFS: DEF_TARIFS, renderGains: renderGains,
     list: function () { return items.slice(); }, total: function () { var t = tarifs(); return items.reduce(function (s, it) { return s + price(it, t); }, 0); },
     showView: showView, openReport: openReport };
 
   function start() {
     bind(); render();
     var v = "report"; try { v = localStorage.getItem("imbox.v2.view") || "report"; } catch (e) {}
-    if (v === "agenda") showView("agenda");
+    if (v === "agenda" || v === "gains") showView(v);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
