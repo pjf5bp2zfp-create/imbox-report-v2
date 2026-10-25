@@ -1,0 +1,4 @@
+# Données personnelles de planning : jamais publiées
+planning-*.json
+*.planning.json
+screens/

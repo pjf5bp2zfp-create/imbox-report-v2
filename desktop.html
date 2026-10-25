@@ -1,0 +1,2678 @@
+<!DOCTYPE html>
+<html lang="fr" class="imbox-mobile">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#0a1a33" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#050b16" media="(prefers-color-scheme: dark)">
+<meta name="color-scheme" content="light dark">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="IMBOX v2">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%230a1a33'/%3E%3Cpath d='M5 8l7-3.5L19 8v8l-7 3.5L5 16z' fill='none' stroke='%2319b8d6' stroke-width='2'/%3E%3C/svg%3E">
+<meta name="description" content="IMBOX Report v2.0 — rapport de maintenance CAPS Group France STC Nord">
+<title>IMBOX Report — CAPS Group — v2.0</title>
+<style>
+/* IMBOX Report v2.0 — CAPS Group France STC Nord — design system */
+:root{
+  color-scheme: light dark;
+  --brand:#1a5fa8; --brand-600:#164f8e; --brand-700:#123f72;
+  --navy:#0a1a33; --navy-2:#102a52;
+  --accent:#19b8d6; --accent-soft:rgba(25,184,214,.14);
+  --green:#1D9E75; --green-soft:rgba(29,158,117,.12);
+  --red:#E24B4A; --red-soft:rgba(226,75,74,.12);
+  --amber:#e3a008;
+  --bg:#eef2f7; --bg-grad:radial-gradient(1200px 600px at 100% -10%, rgba(26,95,168,.10), transparent 60%), radial-gradient(900px 500px at -10% 0%, rgba(25,184,214,.08), transparent 55%);
+  --surface:#ffffff; --surface-2:#f6f8fb; --surface-3:#edf1f6;
+  --text:#0f1b2d; --text-2:#475569; --text-3:#7a8699;
+  --line:#e2e8f0; --line-2:#cfd8e3;
+  --ring:0 0 0 4px rgba(26,95,168,.18);
+  --r-sm:10px; --r:14px; --r-lg:20px; --r-xl:26px;
+  --sh-1:0 1px 2px rgba(15,27,45,.05), 0 1px 1px rgba(15,27,45,.03);
+  --sh-2:0 1px 2px rgba(15,27,45,.04), 0 8px 24px -8px rgba(15,27,45,.12);
+  --sh-3:0 18px 50px -12px rgba(10,26,51,.35);
+  --ease:cubic-bezier(.2,.8,.2,1);
+  --font:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI Variable","Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --bar-h:84px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --brand:#4b8fe0; --brand-600:#3a7fd2; --brand-700:#2f6cb8;
+    --accent:#3fd0ea; --accent-soft:rgba(63,208,234,.14);
+    --green:#2bbd8e; --green-soft:rgba(43,189,142,.16);
+    --red:#f06463; --red-soft:rgba(240,100,99,.16);
+    --bg:#070d18; --bg-grad:radial-gradient(1100px 600px at 100% -10%, rgba(75,143,224,.14), transparent 60%), radial-gradient(900px 500px at -10% 0%, rgba(63,208,234,.07), transparent 55%);
+    --surface:#0f1828; --surface-2:#142036; --surface-3:#1a2842;
+    --text:#e8eef7; --text-2:#a9b6c9; --text-3:#7d8ba1;
+    --line:#1f2d45; --line-2:#2a3b58;
+    --ring:0 0 0 4px rgba(75,143,224,.28);
+    --sh-1:0 1px 2px rgba(0,0,0,.4);
+    --sh-2:0 1px 2px rgba(0,0,0,.35), 0 10px 30px -10px rgba(0,0,0,.6);
+    --sh-3:0 20px 50px -12px rgba(0,0,0,.7);
+  }
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:150px;overscroll-behavior-y:contain}
+body{
+  font-family:var(--font);font-size:16px;line-height:1.5;color:var(--text);
+  background:var(--bg);background-image:var(--bg-grad);background-attachment:fixed;
+  min-height:100dvh;-webkit-font-smoothing:antialiased;
+  padding-bottom:calc(var(--bar-h) + 24px + env(safe-area-inset-bottom,0px));
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+svg.i{width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- Header ---------- */
+.app-header{
+  position:sticky;top:0;z-index:100;color:#fff;
+  background:linear-gradient(120deg,var(--navy) 0%,var(--navy-2) 55%,#14457f 100%);
+  padding:max(12px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) 0 max(16px,env(safe-area-inset-left,0px));
+  box-shadow:0 6px 24px -10px rgba(10,26,51,.55);
+}
+@media (prefers-color-scheme: dark){.app-header{background:linear-gradient(120deg,#050b16 0%,#0b1a33 60%,#0f2a52 100%);border-bottom:1px solid var(--line)}}
+.hdr-row{display:flex;align-items:center;gap:12px;max-width:1240px;margin:0 auto}
+.logo{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;
+  background:linear-gradient(140deg,var(--accent),#1a5fa8);box-shadow:0 6px 16px -6px rgba(25,184,214,.7), inset 0 1px 0 rgba(255,255,255,.35)}
+.logo svg{width:22px;height:22px;stroke:#fff;stroke-width:2.2}
+.hdr-title{flex:1;min-width:0}
+.hdr-title h1{font-size:1.12rem;font-weight:750;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;line-height:1.2}
+.ver{font-size:.68rem;font-weight:700;letter-spacing:.04em;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22)}
+.hdr-title p{font-size:.78rem;color:rgba(255,255,255,.72);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.db-badge{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:650;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.16);white-space:nowrap}
+.db-badge::before{content:"";width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 0 3px rgba(52,211,153,.25)}
+.progress-wrap{max-width:1240px;margin:10px auto 0;display:flex;align-items:center;gap:10px;padding-bottom:10px}
+.progress{flex:1;height:6px;border-radius:999px;background:rgba(255,255,255,.14);overflow:hidden}
+.progress>span{display:block;height:100%;width:0;border-radius:inherit;background:linear-gradient(90deg,var(--accent),#7ee8fa);transition:width .5s var(--ease)}
+.progress-txt{font-size:.75rem;font-weight:700;font-variant-numeric:tabular-nums;color:rgba(255,255,255,.85);min-width:86px;text-align:right}
+/* Stepper chips (mobile) */
+.stepper{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding:2px 0 12px;max-width:1240px;margin:0 auto;scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;mask-image:linear-gradient(90deg,#000 92%,transparent)}
+.stepper::-webkit-scrollbar{display:none}
+.step{display:inline-flex;align-items:center;gap:7px;flex-shrink:0;scroll-snap-align:start;min-height:36px;padding:6px 12px 6px 7px;border-radius:999px;border:1px solid rgba(255,255,255,.16);background:rgba(255,255,255,.06);color:rgba(255,255,255,.82);font-size:.8rem;font-weight:600;transition:background .2s,border-color .2s,color .2s,transform .15s var(--ease)}
+.step:active{transform:scale(.96)}
+.step .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:.68rem;font-weight:800;background:rgba(255,255,255,.14);transition:background .25s}
+.step .dot svg{width:13px;height:13px;stroke-width:3}
+.step.active{background:#fff;color:var(--navy);border-color:#fff}
+.step.active .dot{background:var(--brand);color:#fff}
+.step.done .dot{background:var(--green);color:#fff}
+.step.partial .dot{background:var(--amber);color:#fff}
+
+/* ---------- Layout ---------- */
+.layout{max-width:1240px;margin:0 auto;padding:16px max(14px,env(safe-area-inset-right,0px)) 0 max(14px,env(safe-area-inset-left,0px))}
+.sidebar{display:none}
+.content{min-width:0;display:flex;flex-direction:column;gap:14px}
+
+/* Banner */
+#cdnBanner{display:none;margin:12px auto 0;max-width:1240px;border-radius:var(--r);background:#fff7e0;color:#7a5200;border:1px solid #f5d98c;padding:12px 14px;font-size:.88rem}
+#cdnBanner.show{display:block}
+#cdnBanner code{background:rgba(0,0,0,.06);padding:1px 6px;border-radius:6px;font-family:var(--mono);font-size:.8rem}
+@media (prefers-color-scheme: dark){#cdnBanner{background:#2a2108;color:#f5d98c;border-color:#5a4512}}
+
+/* ---------- Cards ---------- */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);animation:rise .45s var(--ease) both}
+@keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.card-head{width:100%;display:flex;align-items:center;gap:12px;padding:16px 16px;background:none;border:0;text-align:left;min-height:64px}
+.card-head .ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(145deg,rgba(26,95,168,.12),rgba(25,184,214,.12));color:var(--brand);flex-shrink:0}
+@media (prefers-color-scheme: dark){.card-head .ic{background:linear-gradient(145deg,rgba(75,143,224,.18),rgba(63,208,234,.12))}}
+.card-head .ttl{flex:1;min-width:0}
+.card-head h2{font-size:1.02rem;font-weight:720;letter-spacing:-.01em;line-height:1.25}
+.card-head small{display:block;font-size:.78rem;color:var(--text-3);font-weight:500;margin-top:1px}
+.pill{font-size:.72rem;font-weight:750;padding:4px 9px;border-radius:999px;background:var(--surface-3);color:var(--text-2);white-space:nowrap;font-variant-numeric:tabular-nums;transition:background .25s,color .25s}
+.pill.ok{background:var(--green-soft);color:var(--green)}
+.pill.part{background:rgba(227,160,8,.14);color:#b47c00}
+@media (prefers-color-scheme: dark){.pill.part{color:#f3c34d}}
+.pill.opt{background:transparent;border:1px dashed var(--line-2);color:var(--text-3)}
+.chev{width:20px;height:20px;color:var(--text-3);transition:transform .3s var(--ease)}
+.card.collapsed .chev{transform:rotate(-90deg)}
+.card-body{display:grid;grid-template-rows:1fr;transition:grid-template-rows .35s var(--ease)}
+.card.collapsed .card-body{grid-template-rows:0fr}
+.card-inner{min-height:0;overflow:hidden}
+.card.open-done .card-inner{overflow:visible}
+.card-pad{padding:2px 16px 18px;border-top:1px solid var(--line);padding-top:16px}
+.card.collapsed .card-pad{visibility:hidden}
+
+/* ---------- Fields ---------- */
+.field{margin-bottom:14px}
+.field:last-child{margin-bottom:0}
+.field label,.lbl{display:block;font-size:.8rem;font-weight:650;color:var(--text-2);margin-bottom:6px;letter-spacing:.005em}
+.field input,.field textarea,.field select{
+  width:100%;min-height:50px;padding:12px 14px;font-size:16px;border-radius:var(--r-sm);
+  border:1.5px solid var(--line-2);background:var(--surface-2);color:var(--text);
+  transition:border-color .18s,box-shadow .18s,background .18s;-webkit-appearance:none;appearance:none}
+.field textarea{min-height:96px;resize:vertical;line-height:1.45}
+.field input::placeholder,.field textarea::placeholder{color:var(--text-3);opacity:.85}
+.field input:hover,.field textarea:hover{border-color:var(--text-3)}
+.field input:focus,.field textarea:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring);background:var(--surface)}
+.field input[readonly]{background:var(--surface-3);color:var(--text-2)}
+.field input[type=date]{min-width:0}
+.hint{font-size:.78rem;color:var(--text-3);margin-top:6px}
+.g2,.g3{display:grid;grid-template-columns:1fr;gap:0 12px}
+@media (min-width:640px){.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:1fr 1fr 1fr}}
+.sub{font-size:.72rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--text-3);margin:18px 0 10px;display:flex;align-items:center;gap:10px}
+.sub::after{content:"";flex:1;height:1px;background:var(--line)}
+.sub:first-child{margin-top:0}
+
+/* ---------- Visit type segmented ---------- */
+.types{display:grid;grid-template-columns:repeat(auto-fit,minmax(100px,1fr));gap:8px}
+.tb{min-height:52px;padding:10px 12px;border-radius:var(--r);border:1.5px solid var(--line-2);background:var(--surface-2);color:var(--text-2);font-size:.92rem;font-weight:650;display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s var(--ease)}
+.tb:hover{border-color:var(--brand);color:var(--brand)}
+.tb:active{transform:scale(.97)}
+.tb.on{background:linear-gradient(140deg,var(--brand),var(--brand-700));border-color:transparent;color:#fff;box-shadow:0 8px 20px -10px rgba(26,95,168,.9)}
+.tb.on::before{content:"";width:8px;height:8px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.3)}
+
+/* ---------- Search ---------- */
+.search-wrap{position:relative}
+.search-box{position:relative}
+.search-box svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-3);pointer-events:none}
+.search-box input{padding-left:44px!important;min-height:54px!important;font-size:16px;border-radius:var(--r)!important;background:var(--surface)!important}
+#shopSuggestions{position:absolute;left:0;right:0;top:calc(100% + 6px);z-index:60;display:none;max-height:min(55vh,360px);overflow-y:auto;-webkit-overflow-scrolling:touch;background:var(--surface);border:1px solid var(--line-2);border-radius:var(--r);box-shadow:var(--sh-3);padding:6px;animation:pop .18s var(--ease)}
+@keyframes pop{from{opacity:0;transform:translateY(-4px) scale(.99)}to{opacity:1;transform:none}}
+#shopSuggestions.show{display:block}
+.sug-item{display:flex;flex-direction:column;justify-content:center;min-height:56px;padding:10px 12px;border-radius:10px;cursor:pointer;transition:background .12s}
+.sug-item+.sug-item{margin-top:2px}
+.sug-item:hover,.sug-item:active{background:var(--accent-soft)}
+.sug-item .nm{font-weight:680;font-size:.97rem}
+.sug-item .sn{font-family:var(--mono);font-size:.74rem;color:var(--brand);font-weight:600}
+.sug-item .loc{font-size:.8rem;color:var(--text-2)}
+.shop-count-hint{font-size:.82rem;color:var(--text-3);margin-bottom:12px}
+.manual-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.vbar{display:none;margin-top:12px;padding:12px 14px;border-radius:var(--r);background:var(--accent-soft);border:1px solid rgba(25,184,214,.3);font-size:.86rem;color:var(--text)}
+.vbar.show{display:block;animation:pop .25s var(--ease)}
+.vbar b{font-weight:750;color:var(--brand)}
+
+/* ---------- Buttons ---------- */
+.btn{min-height:48px;padding:10px 16px;border-radius:var(--r-sm);border:1.5px solid var(--line-2);background:var(--surface);color:var(--text-2);font-weight:650;font-size:.92rem;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all .18s var(--ease)}
+.btn:hover{border-color:var(--text-3);color:var(--text)}
+.btn:active{transform:scale(.97)}
+.btn.outline{border-color:var(--brand);color:var(--brand)}
+.btn.outline:hover{background:rgba(26,95,168,.07)}
+.btn svg{width:18px;height:18px}
+
+/* ---------- Liquid ---------- */
+.liquid{display:grid;gap:14px}
+@media (min-width:640px){.liquid{grid-template-columns:1.1fr 1fr}}
+.liquid-row{display:flex;gap:8px;align-items:stretch}
+.liquid-row input{flex:1;min-width:0;text-align:center;font-size:1.4rem!important;font-weight:750;font-variant-numeric:tabular-nums;min-height:56px!important;letter-spacing:.01em}
+.liq-btn,.ctr-btn{width:56px;min-height:56px;border-radius:var(--r);border:0;background:var(--surface-3);color:var(--brand);font-size:1.5rem;font-weight:700;display:grid;place-items:center;flex-shrink:0;transition:transform .12s var(--ease),background .15s}
+.liq-btn:hover,.ctr-btn:hover{background:rgba(26,95,168,.14)}
+.liq-btn:active,.ctr-btn:active{transform:scale(.92);background:var(--brand);color:#fff}
+.gauge{border-radius:var(--r);padding:14px;background:linear-gradient(160deg,rgba(29,158,117,.10),rgba(25,184,214,.08));border:1px solid rgba(29,158,117,.25);display:flex;flex-direction:column;gap:10px}
+.gauge-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.gauge-top .lbl{margin:0}
+.calc-input{border:0!important;background:transparent!important;padding:0!important;min-height:0!important;font-size:1.6rem!important;font-weight:800;color:var(--green)!important;text-align:right;width:auto!important;max-width:60%;font-variant-numeric:tabular-nums;box-shadow:none!important}
+.tank{position:relative;height:14px;border-radius:999px;background:var(--surface-3);overflow:hidden}
+.tank .old{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,var(--brand),var(--accent));border-radius:999px;transition:width .4s var(--ease)}
+.tank .add{position:absolute;top:0;bottom:0;right:0;background:repeating-linear-gradient(135deg,rgba(29,158,117,.55) 0 6px,rgba(29,158,117,.3) 6px 12px);transition:width .4s var(--ease)}
+.tank-legend{display:flex;justify-content:space-between;font-size:.74rem;color:var(--text-3);font-weight:600}
+.added-badge{display:none}
+
+/* ---------- Oui / Non rows ---------- */
+.ynr{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.ynr:last-child{border-bottom:0}
+.yn-label{flex:1;font-size:.95rem;font-weight:520;line-height:1.35}
+.yn-ctrl{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.yns{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;padding:4px;border-radius:14px;background:var(--surface-3);border:1px solid var(--line);flex-shrink:0}
+.yb{position:relative;z-index:1;min-width:66px;min-height:44px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:var(--text-2);font-weight:720;font-size:.92rem;transition:background .2s var(--ease),color .2s,box-shadow .2s,transform .12s}
+.yb:active{transform:scale(.95)}
+.yb.yes.on{background:var(--green);color:#fff;box-shadow:0 6px 14px -6px rgba(29,158,117,.9)}
+.yb.no.on{background:var(--red);color:#fff;box-shadow:0 6px 14px -6px rgba(226,75,74,.9)}
+.yb.on{animation:tick .28s var(--ease)}
+@keyframes tick{0%{transform:scale(.9)}60%{transform:scale(1.04)}100%{transform:scale(1)}}
+.qty{width:72px;min-height:52px;padding:8px;border-radius:12px;border:1.5px solid var(--line-2);background:var(--surface-2);font-size:16px;font-weight:700;text-align:center;font-variant-numeric:tabular-nums}
+.qty:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+@media (max-width:560px){
+  .ynr{flex-wrap:wrap}
+  .yn-label{flex-basis:100%}
+  .yn-ctrl{width:100%}
+  .yn-ctrl .yns{flex:1}
+  .yb{min-height:48px}
+}
+
+/* ---------- Counters ---------- */
+.counters{display:grid;gap:10px}
+@media (min-width:760px){.counters{grid-template-columns:repeat(3,1fr)}}
+.counter-card{border:1px solid var(--line);background:var(--surface-2);border-radius:var(--r);padding:12px;display:flex;flex-direction:column;gap:10px}
+.counter-card .lbl{margin:0;display:flex;justify-content:space-between;gap:6px}
+.counter-card .lbl em{font-style:normal;color:var(--text-3);font-weight:600}
+.counter{display:flex;align-items:center;gap:8px}
+.counter input{flex:1;min-width:0;text-align:center;font-size:1.35rem;font-weight:800;min-height:56px;border-radius:var(--r);border:1.5px solid var(--line-2);background:var(--surface);font-variant-numeric:tabular-nums;-moz-appearance:textfield;appearance:textfield}
+.counter input::-webkit-outer-spin-button,.counter input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+.counter input:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+.meter{height:4px;border-radius:999px;background:var(--surface-3);overflow:hidden}
+.meter span{display:block;height:100%;width:0;background:var(--brand);border-radius:inherit;transition:width .3s var(--ease),background .3s}
+.meter span.full{background:var(--green)}
+
+/* ---------- Media ---------- */
+.media-zone{border:2px dashed var(--line-2);border-radius:var(--r-lg);padding:18px;text-align:center;background:var(--surface-2);transition:border-color .2s,background .2s}
+.media-zone.drag{border-color:var(--brand);background:var(--accent-soft)}
+.media-zone input[type=file]{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;opacity:0}
+.media-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.media-btn{position:relative;overflow:hidden;min-height:56px;border-radius:var(--r);display:flex;align-items:center;justify-content:center;gap:10px;font-weight:700;font-size:1rem;color:#fff;cursor:pointer;background:linear-gradient(140deg,var(--brand),var(--brand-700));box-shadow:0 10px 20px -12px rgba(26,95,168,.9);transition:transform .15s var(--ease),filter .15s}
+.media-btn:hover{filter:brightness(1.07)}
+.media-btn:active{transform:scale(.97)}
+.media-btn-camera{background:linear-gradient(140deg,#0e8fb0,var(--brand))}
+.media-btn:focus-within{box-shadow:var(--ring)}
+.media-meta{display:inline-flex;align-items:center;gap:8px;margin-top:12px;font-size:.86rem;font-weight:750;color:var(--brand);font-variant-numeric:tabular-nums}
+.media-preview{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:14px}
+@media (min-width:640px){.media-preview{grid-template-columns:repeat(4,1fr)}}
+.media-thumb{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--surface-3);border:1px solid var(--line);animation:pop .3s var(--ease)}
+.media-thumb img,.media-thumb video{width:100%;height:100%;object-fit:cover;display:block}
+.media-thumb .vid-label{position:absolute;left:0;right:0;bottom:0;padding:6px 8px;font-size:.72rem;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.75));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.media-thumb .rm{position:absolute;top:6px;right:6px;width:44px;height:44px;border-radius:50%;border:0;background:rgba(10,20,35,.62);color:#fff;font-size:1.25rem;font-weight:600;line-height:1;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:background .15s,transform .12s}
+.media-thumb .rm:hover{background:var(--red)}
+.media-thumb .rm:active{transform:scale(.9)}
+
+/* ---------- Signature ---------- */
+.sig-wrap{position:relative;border-radius:var(--r);border:1.5px dashed var(--line-2);background:#fff;overflow:hidden}
+.sig-wrap::after{content:"";position:absolute;left:18px;right:18px;bottom:38px;border-bottom:1.5px solid #d6dde7;pointer-events:none}
+.sig-ph{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:.74rem;color:#9aa6b8;pointer-events:none;letter-spacing:.06em;text-transform:uppercase;font-weight:650}
+#sigCanvas{display:block;width:100%;height:180px;touch-action:none;cursor:crosshair;background:transparent;position:relative;z-index:1}
+.sig-actions{display:flex;gap:8px;margin-top:10px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+
+/* ---------- Bottom action bar ---------- */
+.btnrow{position:fixed;left:0;right:0;bottom:0;z-index:200;display:flex;gap:10px;align-items:center;
+  padding:12px max(14px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));
+  background:color-mix(in srgb,var(--surface) 82%,transparent);backdrop-filter:saturate(1.6) blur(18px);-webkit-backdrop-filter:saturate(1.6) blur(18px);
+  border-top:1px solid var(--line);box-shadow:0 -10px 30px -18px rgba(10,26,51,.45)}
+.btnrow button{min-height:56px;border-radius:16px;border:0;font-size:1rem;font-weight:750;display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s var(--ease),filter .15s,box-shadow .2s}
+.btnrow button:active{transform:scale(.97)}
+.btn-reset{flex:0 0 auto;padding:0 18px;background:var(--surface-3);color:var(--text-2)}
+.btn-reset:hover{color:var(--red)}
+.btn-pdf{flex:1;color:#fff;background:linear-gradient(120deg,var(--brand) 0%,var(--brand-700) 60%,#0e8fb0 130%);box-shadow:0 12px 26px -12px rgba(26,95,168,.95)}
+.btn-pdf:hover{filter:brightness(1.07)}
+.btn-pdf.disabled-look{opacity:.65}
+.btn-pdf .ring{width:34px;height:34px;flex-shrink:0}
+.btn-pdf .ring circle{fill:none;stroke-width:3.2}
+.btn-pdf .ring .bg{stroke:rgba(255,255,255,.25)}
+.btn-pdf .ring .fg{stroke:#fff;stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .5s var(--ease)}
+.btn-pdf .lbl2{display:flex;flex-direction:column;align-items:flex-start;line-height:1.15}
+.btn-pdf .lbl2 small{font-size:.72rem;font-weight:600;opacity:.8}
+.btn-pdf.busy{pointer-events:none;filter:saturate(.7)}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;top:calc(env(safe-area-inset-top,0px) + 16px);z-index:400;transform:translate(-50%,-140%);max-width:min(92vw,460px);
+  padding:12px 18px;border-radius:14px;font-size:.92rem;font-weight:600;text-align:center;color:#fff;background:#111c2e;box-shadow:var(--sh-3);opacity:0;pointer-events:none;transition:transform .35s var(--ease),opacity .25s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.toast.ok{background:linear-gradient(120deg,#178a66,var(--green))}
+.toast.err{background:linear-gradient(120deg,#c43a39,var(--red))}
+
+.foot{text-align:center;font-size:.76rem;color:var(--text-3);padding:8px 0 4px}
+
+/* ---------- Desktop ---------- */
+@media (min-width:1024px){
+  html{scroll-padding-top:120px}
+  .stepper{display:none}
+  .layout{display:grid;grid-template-columns:290px minmax(0,1fr);gap:28px;padding-top:24px}
+  .content{max-width:860px}
+  .sidebar{display:block;position:sticky;top:110px;align-self:start}
+  .side-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:18px}
+  .side-card h3{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--text-3);margin-bottom:12px}
+  .side-ring{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+  .side-ring svg{width:64px;height:64px}
+  .side-ring circle{fill:none;stroke-width:6}
+  .side-ring .bg{stroke:var(--surface-3)}
+  .side-ring .fg{stroke:url(#gradRing);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset .5s var(--ease)}
+  .side-ring b{font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;display:block;line-height:1}
+  .side-ring span{font-size:.8rem;color:var(--text-3)}
+  .vnav{display:flex;flex-direction:column;gap:2px}
+  .vnav button{display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:8px 10px;border:0;border-radius:10px;background:none;color:var(--text-2);font-size:.9rem;font-weight:600;text-align:left;transition:background .15s,color .15s}
+  .vnav button:hover{background:var(--surface-2);color:var(--text)}
+  .vnav button.active{background:rgba(26,95,168,.1);color:var(--brand)}
+  .vnav .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--surface-3);font-size:.68rem;font-weight:800;color:var(--text-3);flex-shrink:0;transition:background .25s}
+  .vnav .dot svg{width:12px;height:12px;stroke-width:3.2}
+  .vnav button.done .dot{background:var(--green);color:#fff}
+  .vnav button.partial .dot{background:var(--amber);color:#fff}
+  .vnav .opt{margin-left:auto;font-size:.68rem;color:var(--text-3);font-weight:600}
+  .side-shop{margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-size:.84rem;color:var(--text-2)}
+  .side-shop b{color:var(--text);display:block;font-size:.95rem}
+  .btnrow{left:auto;right:max(24px,calc((100vw - 1240px)/2 + 14px));bottom:20px;width:min(560px,calc(100vw - 360px));border:1px solid var(--line);border-radius:22px;padding:10px;box-shadow:var(--sh-3)}
+  .card-head{padding:18px 22px}
+  .card-pad{padding:18px 22px 22px}
+}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ---------- Tabs (Rapport / Agenda) ---------- */
+.tabs{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
+.tab{min-height:40px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:rgba(255,255,255,.8);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,color .2s}
+.tab.on{background:#fff;color:var(--navy)}
+.tab .n{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#04202a;font-size:.7rem;font-weight:800;display:inline-grid;place-items:center}
+.tabs-row{max-width:1240px;margin:10px auto 0;display:flex}
+.tabs-row .tabs{width:100%}
+@media (min-width:1024px){.tabs-row{margin:0}.tabs-row .tabs{width:auto}.hdr-row .tabs-row{order:3}}
+.view-agenda .stepper,.view-agenda .progress-wrap,.view-agenda .btnrow,.view-agenda .report-view,.view-agenda .sidebar{display:none!important}
+.agenda-view{display:none}
+.view-agenda .agenda-view{display:block}
+.view-agenda .layout{display:block}
+.view-agenda body,body.view-agenda{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+
+/* consigne banner in report */
+.consigne{display:none;align-items:flex-start;gap:10px;padding:12px 14px;border-radius:var(--r);background:rgba(227,160,8,.12);border:1px solid rgba(227,160,8,.35);font-size:.9rem}
+.consigne.show{display:flex;animation:pop .25s var(--ease)}
+.consigne>div{flex:1}
+.consigne b{color:#a36d00}
+@media (prefers-color-scheme: dark){.consigne b{color:#f3c34d}}
+.consigne .cb-meta{display:inline-block;margin-left:4px;font-size:.75rem;color:var(--text-3)}
+.consigne button{border:0;background:none;color:var(--text-3);font-size:1.2rem;width:36px;height:36px;border-radius:10px}
+
+/* ---------- Agenda ---------- */
+.agenda-view{max-width:860px;margin:0 auto}
+.ag-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.kpi{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:14px 12px}
+.kpi small{display:block;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--text-3)}
+.kpi b{display:block;font-size:1.5rem;font-weight:800;font-variant-numeric:tabular-nums;margin-top:2px;letter-spacing:-.01em}
+.kpi.money{background:linear-gradient(140deg,var(--navy),#14457f);color:#fff;border-color:transparent}
+.kpi.money small{color:rgba(255,255,255,.7)}
+.kpi.money em{display:block;font-style:normal;font-size:.72rem;color:rgba(255,255,255,.7);margin-top:2px}
+.ag-toolbar{display:grid;grid-template-columns:1fr 1fr auto;gap:8px;margin-bottom:12px}
+.btn.primary{background:linear-gradient(140deg,var(--brand),var(--brand-700));color:#fff;border-color:transparent}
+.btn.primary:hover{color:#fff;filter:brightness(1.07)}
+.btn.primary:disabled{opacity:.5}
+.btn.icon{width:48px;padding:0}
+.ag-panel{display:none;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:16px;margin-bottom:14px;animation:pop .22s var(--ease)}
+.ag-panel.open{display:block}
+.ag-panel h3{font-size:1rem;font-weight:750;margin-bottom:4px}
+.ag-panel p.hint{margin:0 0 12px}
+.ag-panel textarea{width:100%;min-height:140px;padding:12px;border-radius:var(--r-sm);border:1.5px solid var(--line-2);background:var(--surface-2);font-family:var(--mono);font-size:16px;line-height:1.4;resize:vertical}
+.ag-panel textarea:focus{outline:none;border-color:var(--brand);box-shadow:var(--ring)}
+.ag-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.ag-row .btn{flex:1 1 140px}
+.file-btn{position:relative;overflow:hidden}
+.file-btn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+#agPreview{display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.pv-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px}
+.pv-h span{font-weight:800;color:var(--green)}
+.pv-err{margin:0 0 10px 18px;font-size:.82rem;color:var(--red)}
+.pv-list{display:flex;flex-direction:column;gap:6px;max-height:50vh;overflow:auto}
+.pv-row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line)}
+.pv-row.dup{opacity:.55}
+.pv-main{min-width:0}
+.pv-main b{display:block;font-size:.92rem}
+.pv-main small{color:var(--text-3);font-size:.78rem}
+.pv-tags{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;max-width:45%}
+.pv-act{display:flex;gap:8px;margin-top:12px}
+.pv-act .btn{flex:1}
+.tag{display:inline-flex;align-items:center;height:24px;padding:0 9px;border-radius:999px;font-size:.72rem;font-weight:750;white-space:nowrap}
+.t-dep{background:var(--red-soft);color:var(--red)}
+.t-ent{background:rgba(26,95,168,.12);color:var(--brand)}
+.t-zone{background:var(--surface-3);color:var(--text-2)}
+.t-db{background:var(--green-soft);color:var(--green)}
+.t-nodb{background:rgba(227,160,8,.14);color:#a36d00}
+@media (prefers-color-scheme: dark){.t-nodb{color:#f3c34d}}
+.ag-day{margin-bottom:18px}
+.ag-day-h{display:flex;justify-content:space-between;align-items:center;padding:6px 4px 10px}
+.ag-day-h b{font-size:1rem;font-weight:750}
+.ag-day-h small{display:block;color:var(--text-3);font-size:.78rem}
+.ag-sum{font-weight:800;font-variant-numeric:tabular-nums;color:var(--green);background:var(--green-soft);padding:6px 12px;border-radius:999px}
+.ag-item{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:14px 16px;margin-bottom:10px;animation:rise .35s var(--ease) both;transition:opacity .2s}
+.ag-item::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:var(--brand)}
+.ag-item:has(.t-dep)::before{background:var(--red)}
+.ag-item.done{opacity:.6}
+.ag-item.done .ag-name{text-decoration:line-through}
+.ag-tags{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.ag-price{margin-left:auto;font-weight:800;font-variant-numeric:tabular-nums}
+.ag-name{font-size:1.05rem;font-weight:750;margin-top:8px;letter-spacing:-.01em}
+.ag-sn{font-family:var(--mono);font-size:.8rem;color:var(--brand);font-weight:650}
+.ag-addr{font-size:.86rem;color:var(--text-2);margin-top:2px}
+.ag-note{margin-top:8px;padding:8px 10px;border-radius:10px;background:rgba(227,160,8,.1);font-size:.84rem;font-weight:600}
+.ag-actions{display:flex;gap:8px;margin-top:12px}
+.ag-actions .ag-go{flex:1}
+.ag-empty{text-align:center;padding:36px 16px;background:var(--surface);border:1px dashed var(--line-2);border-radius:var(--r-lg);color:var(--text-2)}
+.ag-empty-ic{font-size:2rem;margin-bottom:6px}
+.ag-empty p{font-size:.88rem;margin-top:4px}
+.tarif-grid{display:grid;grid-template-columns:auto 1fr 1fr;gap:8px;align-items:center;font-size:.88rem}
+.tarif-grid input{width:100%;min-height:48px;padding:10px;border-radius:var(--r-sm);border:1.5px solid var(--line-2);background:var(--surface-2);font-size:16px;font-weight:700;text-align:center}
+.tarif-grid .h{font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--text-3);text-align:center}
+.ag-foot{display:flex;justify-content:center;margin:8px 0 20px}
+.ag-foot .btn{color:var(--red)}
+
+/* ---------- v2 layout fixes ---------- */
+.card-body{grid-template-columns:minmax(0,1fr)}
+.card-inner,.content,.agenda-view,.field,.g2>*,.g3>*{min-width:0}
+.hdr-row{flex-wrap:wrap}
+.hdr-row .tabs-row{order:10;flex-basis:100%;margin:10px 0 0}
+.hdr-title h1{white-space:nowrap}
+@media (max-width:479px){.db-badge{display:none}}
+@media (min-width:1024px){
+  .hdr-row{flex-wrap:nowrap}
+  .hdr-row .tabs-row{order:0;flex-basis:auto;margin:0 8px 0 auto}
+  .hdr-title{flex:0 1 auto}
+  .sidebar{top:96px}
+}
+.g2,.g3,.liquid,.counters{grid-template-columns:minmax(0,1fr)}
+@media (min-width:640px){.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.liquid{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}}
+@media (min-width:760px){.counters{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.calc-input{width:9ch!important;min-width:0;flex:0 1 auto}
+.gauge-top .lbl{min-width:0}
+input,select,textarea{min-width:0}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="gradRing" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#19b8d6"/><stop offset="1" stop-color="#1a5fa8"/></linearGradient></defs></svg>
+
+<header class="app-header">
+  <div class="hdr-row">
+    <div class="logo"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7l8-4 8 4v10l-8 4-8-4z"/><path d="M4 7l8 4 8-4M12 11v10"/></svg></div>
+    <div class="hdr-title">
+      <h1>IMBOX Report <span class="ver">v2.0</span></h1>
+      <p>CAPS Group — France STC Nord · Technicien terrain</p>
+    </div>
+    <div class="tabs-row"><div class="tabs" role="tablist">
+    <button type="button" class="tab on" data-view="report" role="tab" aria-selected="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg> Rapport</button>
+    <button type="button" class="tab" data-view="agenda" role="tab" aria-selected="false"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Agenda <span class="n" id="tabAgendaN" style="display:none">0</span></button>
+  </div></div>
+    <span class="db-badge" id="dbBadge">Base magasins…</span>
+  </div>
+
+  <div class="progress-wrap"><div class="progress" role="progressbar" aria-label="Progression du rapport"><span id="progressFill"></span></div><span class="progress-txt" id="progressTxt">0 % complété</span></div>
+  <nav class="stepper" id="stepper" aria-label="Sections"></nav>
+</header>
+
+<div id="cdnBanner" role="status">
+  ⚠️ <strong>pdf-lib / modèle CAPS non chargé</strong> — le PDF officiel ne peut pas être généré.
+  Vérifiez que <code>pdf-lib.min.js</code> et <code>imbox-officiel-modele.pdf</code> sont à côté de cette page.
+</div>
+
+<div class="layout">
+  <aside class="sidebar">
+    <div class="side-card">
+      <h3>Progression</h3>
+      <div class="side-ring">
+        <svg viewBox="0 0 64 64"><circle class="bg" cx="32" cy="32" r="27"/><circle class="fg" id="sideRingFg" cx="32" cy="32" r="27"/></svg>
+        <div><b id="sidePct">0 %</b><span>du rapport</span></div>
+      </div>
+      <nav class="vnav" id="vnav" aria-label="Sections"></nav>
+      <div class="side-shop" id="sideShop"></div>
+    </div>
+  </aside>
+  <main class="content report-view">
+  <div class="consigne" id="consigneBar"></div>
+
+  <section class="card open-done" id="sec-type">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-type-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg></span>
+      <span class="ttl"><h2>Type d'intervention</h2><small>Coché sur le rapport officiel</small></span>
+      <span class="pill">Service</span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-type-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="types" id="visitTypes" role="group" aria-label="Type d'intervention">
+        <button type="button" class="tb on" data-type="Service">Service</button>
+        <button type="button" class="tb" data-type="Panne">Panne</button>
+        <button type="button" class="tb" data-type="Installation">Installation</button>
+        <button type="button" class="tb" data-type="Enlevement">Enlèvement</button>
+        <button type="button" class="tb" data-type="Echange">Échange</button>
+      </div>
+      <input type="hidden" id="visitType" value="Service">
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-magasin">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-magasin-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3c0 1.7 1.3 3 3 3s3-1.3 3-3"/><path d="M10 20v-5h4v5"/></svg></span>
+      <span class="ttl"><h2>Recherche magasin</h2><small>Base embarquée · nom, S/N, ville, CP</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-magasin-body"><div class="card-inner"><div class="card-pad">
+
+      <p class="shop-count-hint" id="shopCountHint">Base embarquée en cours de chargement…</p>
+      <div class="field search-wrap">
+        <label for="shopSearch">Rechercher (nom / S/N / ville / CP)</label>
+        <div class="search-box"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="shopSearch" placeholder="Ex. Gémo Lille, 250100, Roubaix…" autocomplete="off" enterkeyhint="search"></div>
+        <div id="shopSuggestions" role="listbox"></div>
+        <p class="hint">Tapez au moins 1 caractère · accents ignorés (Gemo = Gémo)</p>
+      </div>
+      <div class="manual-row">
+        <button type="button" class="btn outline" id="btnManual"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg> Saisie manuelle</button>
+        <button type="button" class="btn" id="btnClearShop"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg> Effacer magasin</button>
+      </div>
+      <div class="vbar" id="visitBar"></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-infos">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-infos-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6M9 15h4"/></svg></span>
+      <span class="ttl"><h2>Informations magasin</h2><small>Coordonnées, compteur et niveau de liquide</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-infos-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="g2">
+        <div class="field"><label for="shopName">Nom du magasin</label><input id="shopName" type="text" placeholder="—" ></div>
+        <div class="field"><label for="shopAddr">Adresse</label><input id="shopAddr" type="text" placeholder="—" ></div>
+        <div class="field"><label for="shopCityCp">Ville / Code postal</label><input type="text" id="shopCityCp" placeholder="—"><input type="hidden" id="shopCity" value=""><input type="hidden" id="shopCp" value=""></div>
+        <div class="field"><label for="shopPhone">Téléphone</label><input id="shopPhone" type="tel" placeholder="—" ></div>
+        <div class="field"><label for="shopSn">Serial Number / N° de série</label><input id="shopSn" type="text" placeholder="—" inputmode="numeric"></div>
+        <div class="field"><label for="shopCtr">Counter Number / N° de compteur</label><input id="shopCtr" type="text" placeholder="—" ></div>
+      </div>
+      <div class="sub">Liquide</div>
+      <div class="liquid">
+        <div class="field">
+          <label for="oldLevel">Ancien niveau de liquide (litres)</label>
+          <div class="liquid-row">
+            <button type="button" class="liq-btn" id="liqMinus" aria-label="Diminuer">−</button>
+            <input type="text" id="oldLevel" inputmode="decimal" pattern="[0-9]+([\.,][0-9]{0,3})?" autocomplete="off" enterkeyhint="done" value="0" placeholder="ex: 14,500" class="editable-num">
+            <button type="button" class="liq-btn" id="liqPlus" aria-label="Augmenter">+</button>
+          </div>
+          <p class="hint">0 – 20 L · précision 0,001 · boutons ±0,5 L</p>
+        </div>
+        <div class="gauge">
+          <div class="gauge-top"><label class="lbl" for="addedLevelInput">Liquide ajouté<br><span style="font-weight:500;color:var(--text-3)">calculé auto (20 − ancien)</span></label>
+          <input type="text" id="addedLevelInput" readonly class="calc-input" placeholder="—" value=""></div>
+          <div class="tank" aria-hidden="true"><span class="old" id="tankOld"></span><span class="add" id="tankAdd"></span></div>
+          <div class="tank-legend"><span>0 L</span><span>Ancien ▮ · Ajouté ▨</span><span>20 L</span></div>
+          <div class="added-badge" id="addedLevel" aria-live="polite" style="display:none">20,000 L</div>
+        </div>
+      </div>
+      <div class="field" style="margin-top:14px"><label for="shopFreq">Fréquence des visites</label><input type="text" id="shopFreq" readonly placeholder="—"></div>
+      <input type="hidden" id="shopFluid" value=""><input type="hidden" id="shopLast" value=""><input type="hidden" id="shopNext" value="">
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-service">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-service-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 13l-8 8-3-3 8-8-1.3-1.3a4 4 0 0 1-5-5L13 2z"/><path d="M5 21l4-4"/></svg></span>
+      <span class="ttl"><h2>Service</h2><small>Checklist entretien · consommables</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-service-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="checklist"><div class="ynr"><span class="yn-label">Avez-vous nettoyé la chambre ?</span><div class="yn-ctrl"><div class="yns" id="y0" role="group" aria-label="Avez-vous nettoyé la chambre ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Avez-vous remplacé le bidon de liquide ?</span><div class="yn-ctrl"><div class="yns" id="y1" role="group" aria-label="Avez-vous remplacé le bidon de liquide ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Avez-vous fait le test de pulvérisation ?</span><div class="yn-ctrl"><div class="yns" id="y2" role="group" aria-label="Avez-vous fait le test de pulvérisation ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Avez-vous réglé le niveau de fluide à 20 L ?</span><div class="yn-ctrl"><div class="yns" id="y3" role="group" aria-label="Avez-vous réglé le niveau de fluide à 20 L ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Avez-vous remplacé les buses arrière en plastique ?</span><div class="yn-ctrl"><div class="yns" id="y4" role="group" aria-label="Avez-vous remplacé les buses arrière en plastique ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div><input class="qty" id="q0" type="number" min="0" placeholder="Qté" inputmode="numeric" aria-label="Quantité"></div></div><div class="ynr"><span class="yn-label">Avez-vous remplacé les buses en laiton avant/sup. ?</span><div class="yn-ctrl"><div class="yns" id="y5" role="group" aria-label="Avez-vous remplacé les buses en laiton avant/sup. ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div><input class="qty" id="q1" type="number" min="0" placeholder="Qté" inputmode="numeric" aria-label="Quantité"></div></div><div class="ynr"><span class="yn-label">Avez-vous remplacé la buse centrale arrière en laiton ?</span><div class="yn-ctrl"><div class="yns" id="y6" role="group" aria-label="Avez-vous remplacé la buse centrale arrière en laiton ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Avez-vous remplacé des filtres ?</span><div class="yn-ctrl"><div class="yns" id="y7" role="group" aria-label="Avez-vous remplacé des filtres ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div><input class="qty" id="q2" type="number" min="0" placeholder="Qté" inputmode="numeric" aria-label="Quantité"></div></div><div class="ynr"><span class="yn-label">Changer les inserts en carton</span><div class="yn-ctrl"><div class="yns" id="y8" role="group" aria-label="Changer les inserts en carton"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div><div class="ynr"><span class="yn-label">Changer les deux tapis</span><div class="yn-ctrl"><div class="yns" id="y9" role="group" aria-label="Changer les deux tapis"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div></div>
+      <div class="sub">Consommables · 14 tapis avant + 7 tapis arrière + 2 boîtes de lingettes</div>
+      <div class="counters">
+        <div class="counter-card"><label class="lbl" for="cntTapisAv">Tapis avant <em>max 14</em></label>
+        <div class="counter"><button type="button" class="ctr-btn" data-target="cntTapisAv" data-dir="-1" aria-label="Moins">−</button><input type="number" id="cntTapisAv" min="0" max="14" value="0" inputmode="numeric" class="editable-num"><button type="button" class="ctr-btn" data-target="cntTapisAv" data-dir="1" aria-label="Plus">+</button></div>
+        <div class="meter"><span id="m_cntTapisAv"></span></div></div>
+        <div class="counter-card"><label class="lbl" for="cntTapisAr">Tapis arrière <em>max 7</em></label>
+        <div class="counter"><button type="button" class="ctr-btn" data-target="cntTapisAr" data-dir="-1" aria-label="Moins">−</button><input type="number" id="cntTapisAr" min="0" max="7" value="0" inputmode="numeric" class="editable-num"><button type="button" class="ctr-btn" data-target="cntTapisAr" data-dir="1" aria-label="Plus">+</button></div>
+        <div class="meter"><span id="m_cntTapisAr"></span></div></div>
+        <div class="counter-card"><label class="lbl" for="cntLingettes">Boîtes lingettes <em>max 2</em></label>
+        <div class="counter"><button type="button" class="ctr-btn" data-target="cntLingettes" data-dir="-1" aria-label="Moins">−</button><input type="number" id="cntLingettes" min="0" max="2" value="0" inputmode="numeric" class="editable-num"><button type="button" class="ctr-btn" data-target="cntLingettes" data-dir="1" aria-label="Plus">+</button></div>
+        <div class="meter"><span id="m_cntLingettes"></span></div></div>
+      </div>
+      <div class="sub">Contrôle final</div>
+      <div class="ynr"><span class="yn-label">Les surfaces sont propres et exemptes de dommage visible ?</span><div class="yn-ctrl"><div class="yns" id="y10" role="group" aria-label="Les surfaces sont propres et exemptes de dommage visible ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="ynr"><span class="yn-label">Avez-vous pris toutes les photos obligatoires ?</span><div class="yn-ctrl"><div class="yns" id="y11" role="group" aria-label="Avez-vous pris toutes les photos obligatoires ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-panne">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-panne-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.5v.01"/></svg></span>
+      <span class="ttl"><h2>Panne</h2><small>Réparation, explication et pièces</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-panne-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="ynr"><span class="yn-label">La panne a-t-elle été réparée avec succès ?</span><div class="yn-ctrl"><div class="yns" id="y12" role="group" aria-label="La panne a-t-elle été réparée avec succès ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="field" style="margin-top:12px"><label for="obsPanne">Sinon, veuillez expliquer</label><textarea id="obsPanne" placeholder="Description de la panne..."></textarea></div>
+      <div class="field"><label for="piecesReplaced">Avez-vous remplacé des pièces ? Lesquelles ?</label><textarea id="piecesReplaced" placeholder="Liste des pièces remplacées..."></textarea></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-ci">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-ci-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></svg></span>
+      <span class="ttl"><h2>Circuit imprimé — remplacement</h2><small>Nouveau circuit : S/N, compteur, téléphone</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-ci-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="g2">
+        <div class="field"><label for="ciSn">N° de série du nouveau circuit imprimé</label><input id="ciSn" type="text" placeholder="—" ></div>
+        <div class="field"><label for="ciCtr">Compteur circuit imprimé</label><input id="ciCtr" type="text" placeholder="—" ></div>
+        <div class="field"><label for="ciTel">N° de téléphone du nouveau c. imprimé</label><input id="ciTel" type="text" placeholder="—" ></div>
+      </div>
+      <div class="ynr"><span class="yn-label">Photo du N° de série prise ?</span><div class="yn-ctrl"><div class="yns" id="y13" role="group" aria-label="Photo du N° de série prise ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-installation">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-installation-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 8l-9-5-9 5 9 5z"/><path d="M3 8v8l9 5 9-5V8"/><path d="M12 13v8"/></svg></span>
+      <span class="ttl"><h2>Installation</h2><small>Transport, pulvérisation, LTE</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-installation-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="ynr"><span class="yn-label">L'appareil a-t-il été endommagé lors du transport ?</span><div class="yn-ctrl"><div class="yns" id="y17" role="group" aria-label="L&#x27;appareil a-t-il été endommagé lors du transport ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="ynr"><span class="yn-label">Avez-vous fait le test de pulvérisation ?</span><div class="yn-ctrl"><div class="yns" id="y18" role="group" aria-label="Avez-vous fait le test de pulvérisation ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="ynr"><span class="yn-label">Le LTE fonctionne-t-il ? (pas de × dans le coin gauche)</span><div class="yn-ctrl"><div class="yns" id="y19" role="group" aria-label="Le LTE fonctionne-t-il ? (pas de × dans le coin gauche)"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-flagship">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-flagship-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 21V4"/><path d="M5 4h12l-2 4 2 4H5"/></svg></span>
+      <span class="ttl"><h2>Flagship</h2><small>Software, connectivité, photos</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-flagship-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="g2">
+        <div class="field"><label for="swVersion">Version du Software</label><input id="swVersion" type="text" placeholder="—" ></div>
+        <div class="field"><label for="fluid2">Niveau de fluide 2</label><input id="fluid2" type="text" placeholder="—" ></div>
+      </div>
+      <div class="ynr"><span class="yn-label">Le LTE fonctionne-t-il ? (pas de × dans le coin gauche)</span><div class="yn-ctrl"><div class="yns" id="y14" role="group" aria-label="Le LTE fonctionne-t-il ? (pas de × dans le coin gauche)"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="ynr"><span class="yn-label">Le Wi-Fi fonctionne-t-il ?</span><div class="yn-ctrl"><div class="yns" id="y15" role="group" aria-label="Le Wi-Fi fonctionne-t-il ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+      <div class="ynr"><span class="yn-label">Avez-vous pris toutes les photos obligatoires ?</span><div class="yn-ctrl"><div class="yns" id="y16" role="group" aria-label="Avez-vous pris toutes les photos obligatoires ?"><button type="button" class="yb yes" data-yn="yes">Oui</button><button type="button" class="yb no" data-yn="no">Non</button></div></div></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-exchange">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-exchange-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h14l-4-4M20 16H6l4 4"/></svg></span>
+      <span class="ttl"><h2>Exchange / Enlèvement / Déménagement</h2><small>Unité enlevée et nouvelle unité</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-exchange-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="g2">
+        <div class="field"><label for="remSn">N° de série unité enlevée</label><input id="remSn" type="text" placeholder="—" ></div>
+        <div class="field"><label for="remCtr">N° de compteur unité enlevée</label><input id="remCtr" type="text" placeholder="—" ></div>
+        <div class="field"><label for="newSn">N° de série nouvelle unité</label><input id="newSn" type="text" placeholder="—" ></div>
+        <div class="field"><label for="newCtr">N° de compteur nouvelle unité</label><input id="newCtr" type="text" placeholder="—" ></div>
+      </div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-media">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-media-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg></span>
+      <span class="ttl"><h2>Photos &amp; Vidéos</h2><small>Intégrées au PDF · compression 1600 px</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-media-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="media-zone">
+        <div class="media-btns">
+          <label class="media-btn" id="btnMediaGallery"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="M21 16l-5-5-9 9"/></svg> Galerie
+            <input type="file" id="mediaInputGallery" accept="image/*,video/*" multiple>
+          </label>
+          <label class="media-btn media-btn-camera" id="btnMediaCamera"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg> Caméra
+            <input type="file" id="mediaInputCamera" accept="image/*" capture="environment">
+          </label>
+        </div>
+        <p class="hint" style="margin-top:10px">Galerie ou appareil photo · max 8 photos compressées (1600px) · vidéos listées par nom</p>
+        <p class="media-meta" id="mediaMeta">0 / 8 photos</p>
+      </div>
+      <div class="media-preview" id="mediaPreview"></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-tech">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-tech-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg></span>
+      <span class="ttl"><h2>Informations technicien</h2><small>Date, nom et observations</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-tech-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="g2">
+        <div class="field"><label for="svcDate">Date</label><input type="date" id="svcDate"></div>
+        <div class="field"><label for="techName">Nom du technicien</label><input type="text" id="techName" placeholder="Prénom NOM" autocomplete="name"></div>
+      </div>
+      <div class="field"><label for="techComments">Commentaires / observations</label><textarea id="techComments" rows="3" placeholder="Tout autre commentaire ou observation..."></textarea></div>
+    </div></div></div>
+  </section>
+  <section class="card open-done" id="sec-signature">
+    <button type="button" class="card-head" aria-expanded="true" aria-controls="sec-signature-body">
+      <span class="ic"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg></span>
+      <span class="ttl"><h2>Cachet et signature</h2><small>Signez au doigt ou à la souris</small></span>
+      <span class="pill"></span>
+      <svg class="i chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <div class="card-body" id="sec-signature-body"><div class="card-inner"><div class="card-pad">
+
+      <div class="sig-wrap"><canvas id="sigCanvas" width="600" height="200"></canvas><div class="sig-ph" id="sigPh">Signer ici</div></div>
+      <div class="sig-actions">
+        <p class="hint" style="margin:0">Signez au doigt (iPhone / Android) ou à la souris</p>
+        <button type="button" class="btn" id="sigClear"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Effacer la signature</button>
+      </div>
+    </div></div></div>
+  </section>
+  <p class="foot">IMBOX Report v2.0 · CAPS Group — France STC Nord · 155 magasins embarqués</p>
+  </main>
+
+<div class="agenda-view" id="agendaView">
+  <div class="ag-kpis">
+    <div class="kpi"><small>Interventions</small><b id="agKpiN">0</b></div>
+    <div class="kpi"><small>À faire</small><b id="agKpiTodo">0</b></div>
+    <div class="kpi money"><small>Gains prévus</small><b id="agKpiEur">0 €</b><em id="agKpiDone">0 € réalisés</em></div>
+  </div>
+  <div class="ag-toolbar">
+    <button type="button" class="btn primary" id="agBtnImport">📥 Importer un planning</button>
+    <button type="button" class="btn" id="agBtnAdd">＋ Ajouter</button>
+    <button type="button" class="btn icon" id="agBtnTarifs" aria-label="Grille tarifaire" title="Grille tarifaire">€</button>
+  </div>
+  <div class="ag-panel" id="agPanel-import">
+    <h3>Importer un planning</h3>
+    <p class="hint">Copiez les lignes du tableau (Excel / e-mail : S/N · Magasin + adresse · CP / dép. · Date · · Type · Consigne) puis collez-les ici. CSV et fichier JSON acceptés. breakdown → Dépannage, service → Entretien.</p>
+    <textarea id="agImportText" placeholder="S/N&#9;Magasin + adresse&#9;CP&#9;Date&#9;&#9;Type&#9;Consigne" spellcheck="false" autocapitalize="off" autocomplete="off"></textarea>
+    <div class="ag-row">
+      <button type="button" class="btn" id="agPasteBtn">📋 Coller</button>
+      <label class="btn file-btn">📄 Fichier (.json/.csv)<input type="file" id="agFile" accept=".json,.csv,.tsv,.txt,application/json,text/csv,text/plain"></label>
+      <button type="button" class="btn primary" id="agAnalyze">Analyser →</button>
+    </div>
+    <div id="agPreview"></div>
+  </div>
+  <div class="ag-panel" id="agPanel-add">
+    <h3>Ajouter une intervention</h3>
+    <div class="g2" style="margin-top:10px">
+      <div class="field"><label for="agAddSn">S/N</label><input id="agAddSn" type="text" inputmode="numeric" placeholder="ex. 250100"><p class="hint" id="agAddHint"></p></div>
+      <div class="field"><label for="agAddDate">Date</label><input id="agAddDate" type="date"></div>
+      <div class="field"><label for="agAddName">Magasin</label><input id="agAddName" type="text" placeholder="—"></div>
+      <div class="field"><label for="agAddAddr">Adresse</label><input id="agAddAddr" type="text" placeholder="—"></div>
+      <div class="field"><label for="agAddCp">Code postal / département</label><input id="agAddCp" type="text" inputmode="numeric" placeholder="75001"></div>
+      <div class="field"><label for="agAddType">Type</label><select id="agAddType"><option>Entretien</option><option>Dépannage</option></select></div>
+    </div>
+    <div class="field"><label for="agAddNote">Consigne</label><input id="agAddNote" type="text" placeholder="—"></div>
+    <div class="ag-row"><button type="button" class="btn primary" id="agAddOk">Ajouter à l'agenda</button></div>
+  </div>
+  <div class="ag-panel" id="agPanel-tarifs">
+    <h3>Grille tarifaire</h3>
+    <p class="hint">Montant par intervention, selon la zone (IDF = 75, 77, 78, 91, 92, 93, 94, 95).</p>
+    <div class="tarif-grid">
+      <span></span><span class="h">IDF</span><span class="h">Région</span>
+      <b>Dépannage</b><input type="number" inputmode="decimal" data-tarif="IDF|Dépannage"><input type="number" inputmode="decimal" data-tarif="Région|Dépannage">
+      <b>Entretien</b><input type="number" inputmode="decimal" data-tarif="IDF|Entretien"><input type="number" inputmode="decimal" data-tarif="Région|Entretien">
+    </div>
+    <div class="ag-row"><button type="button" class="btn" id="agTarifReset">Valeurs par défaut</button><button type="button" class="btn primary" id="agTarifSave">Enregistrer</button></div>
+  </div>
+  <div id="agList"></div>
+  <div class="ag-foot"><button type="button" class="btn" id="agClearAll">Vider l'agenda</button></div>
+  <p class="foot">Agenda stocké uniquement sur cet appareil · IMBOX Report v2.0</p>
+</div>
+</div>
+
+<div class="btnrow">
+  <button type="button" class="btn-reset" id="btnReset"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg> Reset</button>
+  <button type="button" class="btn-pdf" id="btnPdf"><svg class="ring" viewBox="0 0 34 34"><circle class="bg" cx="17" cy="17" r="14"/><circle class="fg" id="btnRingFg" cx="17" cy="17" r="14"/></svg><span class="lbl2">Générer PDF<small id="btnPdfSub">modèle officiel CAPS</small></span></button>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="pdf-lib.min.js"></script>
+<script>
+/* ============================================================
+   IMBOX Report Form — CAPS Group France STC Nord
+   Correctifs Bidoulaye 23/09/2026 14:30 — PDF embarqué, liquide FR, photos, saisie.
+   Base magasins EMBARQUÉE (démo crédible ~155 enseignes FR).
+   TODO Sheets live : remplacer/compléter DB via CSV Google Sheets
+   publié (export?format=csv) + parseCSV(). Non branché tant que
+   l'URL terrain n'est pas fournie.
+   ============================================================ */
+
+var DB = [
+  {sn:"250100",name:"Gémo Lille",addr:"12 Rue Faidherbe",city:"Lille",cp:"59000",phone:"03 20 10 20 10",freq:"Bimensuelle",lastVisit:"2026-08-01",nextVisit:"2026-08-31",fluidMl:15000},
+  {sn:"250101",name:"Gémo Roubaix",addr:"12 Rue de la Mairie",city:"Roubaix",cp:"59100",phone:"03 20 17 23 11",freq:"Mensuelle",lastVisit:"2026-08-04",nextVisit:"2026-09-03",fluidMl:20000},
+  {sn:"250102",name:"Gémo Tourcoing",addr:"22 Rue Chanzy",city:"Tourcoing",cp:"59200",phone:"03 20 24 26 12",freq:"Mensuelle",lastVisit:"2026-08-07",nextVisit:"2026-09-06",fluidMl:20000},
+  {sn:"250103",name:"Gémo Amiens",addr:"3 Place René Goblet",city:"Amiens",cp:"80000",phone:"03 22 31 29 13",freq:"Mensuelle",lastVisit:"2026-08-10",nextVisit:"2026-09-09",fluidMl:20000},
+  {sn:"250104",name:"Gémo Arras",addr:"9 Rue de la Taillerie",city:"Arras",cp:"62000",phone:"03 21 38 32 14",freq:"Mensuelle",lastVisit:"2026-08-13",nextVisit:"2026-09-12",fluidMl:20000},
+  {sn:"250105",name:"Gémo Valenciennes",addr:"11 Rue de Famars",city:"Valenciennes",cp:"59300",phone:"03 27 45 35 15",freq:"Mensuelle",lastVisit:"2026-08-16",nextVisit:"2026-09-15",fluidMl:15000},
+  {sn:"250106",name:"Gémo Dunkerque",addr:"5 Place Jean Bart",city:"Dunkerque",cp:"59140",phone:"03 28 52 38 16",freq:"Mensuelle",lastVisit:"2026-08-19",nextVisit:"2026-09-18",fluidMl:20000},
+  {sn:"250107",name:"Gémo Lens",addr:"12 Place Jean Jaurès",city:"Lens",cp:"62300",phone:"03 21 59 41 17",freq:"Bimensuelle",lastVisit:"2026-08-22",nextVisit:"2026-09-21",fluidMl:20000},
+  {sn:"250108",name:"Gémo Calais",addr:"2 Place d'Armes",city:"Calais",cp:"62100",phone:"03 21 66 44 18",freq:"Mensuelle",lastVisit:"2026-08-25",nextVisit:"2026-09-24",fluidMl:20000},
+  {sn:"250109",name:"Gémo Beauvais",addr:"6 Rue de la Manufacture",city:"Beauvais",cp:"60000",phone:"03 44 73 47 19",freq:"Mensuelle",lastVisit:"2026-08-28",nextVisit:"2026-09-27",fluidMl:20000},
+  {sn:"250110",name:"Gémo Compiègne",addr:"10 Rue Magenta",city:"Compiègne",cp:"60200",phone:"03 44 80 50 20",freq:"Mensuelle",lastVisit:"2026-08-31",nextVisit:"2026-09-30",fluidMl:15000},
+  {sn:"250111",name:"Gémo Saint-Quentin",addr:"3 Place de l'Hôtel de Ville",city:"Saint-Quentin",cp:"02100",phone:"03 23 87 53 21",freq:"Mensuelle",lastVisit:"2026-09-03",nextVisit:"2026-10-03",fluidMl:20000},
+  {sn:"250112",name:"Gémo Le Havre",addr:"Centre Commercial Docks Vauban",city:"Le Havre",cp:"76600",phone:"02 35 14 56 22",freq:"Mensuelle",lastVisit:"2026-09-06",nextVisit:"2026-10-06",fluidMl:20000},
+  {sn:"250113",name:"Gémo Rouen",addr:"12 Rue Jeanne d'Arc",city:"Rouen",cp:"76000",phone:"02 35 21 59 23",freq:"Mensuelle",lastVisit:"2026-09-09",nextVisit:"2026-10-09",fluidMl:20000},
+  {sn:"250114",name:"Gémo Caen",addr:"3 Place Saint-Sauveur",city:"Caen",cp:"14000",phone:"02 31 28 62 24",freq:"Bimensuelle",lastVisit:"2026-08-03",nextVisit:"2026-09-02",fluidMl:20000},
+  {sn:"250115",name:"Gémo Reims",addr:"Centre Commercial Thillois",city:"Reims",cp:"51100",phone:"03 26 35 65 25",freq:"Mensuelle",lastVisit:"2026-08-06",nextVisit:"2026-09-05",fluidMl:15000},
+  {sn:"250116",name:"Gémo Metz",addr:"12 Rue Serpenoise",city:"Metz",cp:"57000",phone:"03 87 42 68 26",freq:"Mensuelle",lastVisit:"2026-08-09",nextVisit:"2026-09-08",fluidMl:20000},
+  {sn:"250117",name:"Gémo Nancy",addr:"14 Rue Saint-Dizier",city:"Nancy",cp:"54000",phone:"03 83 49 71 27",freq:"Mensuelle",lastVisit:"2026-08-12",nextVisit:"2026-09-11",fluidMl:20000},
+  {sn:"250118",name:"Gémo Strasbourg",addr:"15 Rue des Grandes Arcades",city:"Strasbourg",cp:"67000",phone:"03 88 56 74 28",freq:"Mensuelle",lastVisit:"2026-08-15",nextVisit:"2026-09-14",fluidMl:20000},
+  {sn:"250119",name:"Gémo Mulhouse",addr:"10 Rue du Sauvage",city:"Mulhouse",cp:"68100",phone:"03 89 63 77 29",freq:"Mensuelle",lastVisit:"2026-08-18",nextVisit:"2026-09-17",fluidMl:20000},
+  {sn:"250120",name:"Gémo Dijon",addr:"4 Place Darcy",city:"Dijon",cp:"21000",phone:"03 80 70 80 30",freq:"Mensuelle",lastVisit:"2026-08-21",nextVisit:"2026-09-20",fluidMl:15000},
+  {sn:"250121",name:"Gémo Besançon",addr:"Centre Commercial Chateaufarine",city:"Besançon",cp:"25000",phone:"03 81 77 83 31",freq:"Bimensuelle",lastVisit:"2026-08-24",nextVisit:"2026-09-23",fluidMl:20000},
+  {sn:"250122",name:"Gémo Paris",addr:"12 Boulevard Saint-Martin",city:"Paris",cp:"75001",phone:"01 40 84 86 32",freq:"Mensuelle",lastVisit:"2026-08-27",nextVisit:"2026-09-26",fluidMl:20000},
+  {sn:"250123",name:"Gémo Paris 2",addr:"3 Rue du Faubourg Montmartre",city:"Paris",cp:"75009",phone:"01 42 11 89 33",freq:"Mensuelle",lastVisit:"2026-08-30",nextVisit:"2026-09-29",fluidMl:20000},
+  {sn:"250124",name:"Gémo Paris 3",addr:"12 Boulevard Saint-Martin",city:"Paris",cp:"75010",phone:"01 40 18 22 34",freq:"Mensuelle",lastVisit:"2026-09-02",nextVisit:"2026-10-02",fluidMl:20000},
+  {sn:"250125",name:"Gémo Puteaux",addr:"Parvis de La Défense",city:"Puteaux",cp:"92800",phone:"01 47 25 25 35",freq:"Mensuelle",lastVisit:"2026-09-05",nextVisit:"2026-10-05",fluidMl:15000},
+  {sn:"250126",name:"Gémo Créteil",addr:"Centre Commercial Créteil Soleil",city:"Créteil",cp:"94000",phone:"01 49 32 28 36",freq:"Mensuelle",lastVisit:"2026-09-08",nextVisit:"2026-10-08",fluidMl:20000},
+  {sn:"250127",name:"Gémo Boulogne-Billancourt",addr:"8 Rue Gallieni",city:"Boulogne-Billancourt",cp:"92100",phone:"01 46 39 31 37",freq:"Mensuelle",lastVisit:"2026-08-02",nextVisit:"2026-09-01",fluidMl:20000},
+  {sn:"250128",name:"Gémo Lyon",addr:"Centre Commercial Part-Dieu",city:"Lyon",cp:"69003",phone:"04 78 46 34 38",freq:"Bimensuelle",lastVisit:"2026-08-05",nextVisit:"2026-09-04",fluidMl:20000},
+  {sn:"250129",name:"Gémo Lyon 2",addr:"Rue de la République",city:"Lyon",cp:"69002",phone:"04 78 53 37 39",freq:"Mensuelle",lastVisit:"2026-08-08",nextVisit:"2026-09-07",fluidMl:20000},
+  {sn:"250130",name:"Gémo Villeurbanne",addr:"Centre Commercial Carré de Soie",city:"Villeurbanne",cp:"69100",phone:"04 78 60 40 40",freq:"Mensuelle",lastVisit:"2026-08-11",nextVisit:"2026-09-10",fluidMl:15000},
+  {sn:"250131",name:"Gémo Marseille",addr:"Centre Prado Shopping",city:"Marseille",cp:"13008",phone:"04 91 67 43 41",freq:"Mensuelle",lastVisit:"2026-08-14",nextVisit:"2026-09-13",fluidMl:20000},
+  {sn:"250132",name:"Gémo Marseille 2",addr:"Centre Commercial Grand Littoral",city:"Marseille",cp:"13015",phone:"04 91 74 46 42",freq:"Mensuelle",lastVisit:"2026-08-17",nextVisit:"2026-09-16",fluidMl:20000},
+  {sn:"250133",name:"Gémo Aix-en-Provence",addr:"Cours Mirabeau",city:"Aix-en-Provence",cp:"13100",phone:"04 42 81 49 43",freq:"Mensuelle",lastVisit:"2026-08-20",nextVisit:"2026-09-19",fluidMl:20000},
+  {sn:"250134",name:"Gémo Toulouse",addr:"Centre Commercial Compans",city:"Toulouse",cp:"31000",phone:"05 61 88 52 44",freq:"Mensuelle",lastVisit:"2026-08-23",nextVisit:"2026-09-22",fluidMl:20000},
+  {sn:"250135",name:"Gémo Blagnac",addr:"Avenue de l'Europe",city:"Blagnac",cp:"31700",phone:"05 61 15 55 45",freq:"Bimensuelle",lastVisit:"2026-08-26",nextVisit:"2026-09-25",fluidMl:15000},
+  {sn:"250136",name:"Gémo Bordeaux",addr:"22 Rue Sainte-Catherine",city:"Bordeaux",cp:"33000",phone:"05 56 22 58 46",freq:"Mensuelle",lastVisit:"2026-08-29",nextVisit:"2026-09-28",fluidMl:20000},
+  {sn:"250137",name:"Gémo Mérignac",addr:"Avenue de la Somme",city:"Mérignac",cp:"33700",phone:"05 56 29 61 47",freq:"Mensuelle",lastVisit:"2026-09-01",nextVisit:"2026-10-01",fluidMl:20000},
+  {sn:"250138",name:"Gémo Nantes",addr:"Place Royale",city:"Nantes",cp:"44000",phone:"02 40 36 64 48",freq:"Mensuelle",lastVisit:"2026-09-04",nextVisit:"2026-10-04",fluidMl:20000},
+  {sn:"250139",name:"Gémo Saint-Herblain",addr:"Centre Atlantis",city:"Saint-Herblain",cp:"44800",phone:"02 40 43 67 49",freq:"Mensuelle",lastVisit:"2026-09-07",nextVisit:"2026-10-07",fluidMl:20000},
+  {sn:"250140",name:"Gémo Rennes",addr:"Rue d'Orléans",city:"Rennes",cp:"35000",phone:"02 99 50 70 50",freq:"Mensuelle",lastVisit:"2026-08-01",nextVisit:"2026-08-31",fluidMl:15000},
+  {sn:"250141",name:"Gémo Brest",addr:"Rue de Siam",city:"Brest",cp:"29200",phone:"02 98 57 73 51",freq:"Mensuelle",lastVisit:"2026-08-04",nextVisit:"2026-09-03",fluidMl:20000},
+  {sn:"250142",name:"Gémo Angers",addr:"Centre Commercial Espace Anjou",city:"Angers",cp:"49000",phone:"02 41 64 76 52",freq:"Bimensuelle",lastVisit:"2026-08-07",nextVisit:"2026-09-06",fluidMl:20000},
+  {sn:"250143",name:"Gémo Le Mans",addr:"Rue des Minimes",city:"Le Mans",cp:"72000",phone:"02 43 71 79 53",freq:"Mensuelle",lastVisit:"2026-08-10",nextVisit:"2026-09-09",fluidMl:20000},
+  {sn:"250144",name:"Gémo Orléans",addr:"Centre Commercial Place d'Arc",city:"Orléans",cp:"45000",phone:"02 38 78 82 54",freq:"Mensuelle",lastVisit:"2026-08-13",nextVisit:"2026-09-12",fluidMl:20000},
+  {sn:"250145",name:"Gémo Tours",addr:"Rue Nationale",city:"Tours",cp:"37000",phone:"02 47 85 85 55",freq:"Mensuelle",lastVisit:"2026-08-16",nextVisit:"2026-09-15",fluidMl:15000},
+  {sn:"250146",name:"Gémo Montpellier",addr:"Centre Odysseum",city:"Montpellier",cp:"34000",phone:"04 67 12 88 56",freq:"Mensuelle",lastVisit:"2026-08-19",nextVisit:"2026-09-18",fluidMl:20000},
+  {sn:"250147",name:"Gémo Nîmes",addr:"Boulevard Victor Hugo",city:"Nîmes",cp:"30000",phone:"04 66 19 21 57",freq:"Mensuelle",lastVisit:"2026-08-22",nextVisit:"2026-09-21",fluidMl:20000},
+  {sn:"250148",name:"Gémo Nice",addr:"Avenue Jean Médecin",city:"Nice",cp:"06000",phone:"04 93 26 24 58",freq:"Mensuelle",lastVisit:"2026-08-25",nextVisit:"2026-09-24",fluidMl:20000},
+  {sn:"250149",name:"Gémo Cannes",addr:"Centre Commercial La Bocca",city:"Cannes",cp:"06400",phone:"04 93 33 27 59",freq:"Bimensuelle",lastVisit:"2026-08-28",nextVisit:"2026-09-27",fluidMl:20000},
+  {sn:"250150",name:"Gémo Toulon",addr:"Centre Commercial Mayol",city:"Toulon",cp:"83000",phone:"04 94 40 30 60",freq:"Mensuelle",lastVisit:"2026-08-31",nextVisit:"2026-09-30",fluidMl:15000},
+  {sn:"250151",name:"Gémo Grenoble",addr:"Place Grenette",city:"Grenoble",cp:"38000",phone:"04 76 47 33 61",freq:"Mensuelle",lastVisit:"2026-09-03",nextVisit:"2026-10-03",fluidMl:20000},
+  {sn:"250152",name:"Gémo Annecy",addr:"Centre Commercial Courier",city:"Annecy",cp:"74000",phone:"04 50 54 36 62",freq:"Mensuelle",lastVisit:"2026-09-06",nextVisit:"2026-10-06",fluidMl:20000},
+  {sn:"250153",name:"Gémo Clermont-Ferrand",addr:"Place de Jaude",city:"Clermont-Ferrand",cp:"63000",phone:"04 73 61 39 63",freq:"Mensuelle",lastVisit:"2026-09-09",nextVisit:"2026-10-09",fluidMl:20000},
+  {sn:"250154",name:"Gémo Limoges",addr:"Centre Commercial Boisseuil",city:"Limoges",cp:"87000",phone:"05 55 68 42 64",freq:"Mensuelle",lastVisit:"2026-08-03",nextVisit:"2026-09-02",fluidMl:20000},
+  {sn:"250155",name:"Eram Poitiers",addr:"Rue des Cordeliers",city:"Poitiers",cp:"86000",phone:"05 49 75 45 65",freq:"Mensuelle",lastVisit:"2026-08-06",nextVisit:"2026-09-05",fluidMl:15000},
+  {sn:"250156",name:"Eram La Rochelle",addr:"Centre Commercial Lafond",city:"La Rochelle",cp:"17000",phone:"05 46 82 48 66",freq:"Bimensuelle",lastVisit:"2026-08-09",nextVisit:"2026-09-08",fluidMl:20000},
+  {sn:"250157",name:"Eram Pau",addr:"Rue Serviez",city:"Pau",cp:"64000",phone:"05 59 89 51 67",freq:"Mensuelle",lastVisit:"2026-08-12",nextVisit:"2026-09-11",fluidMl:20000},
+  {sn:"250158",name:"Eram Bayonne",addr:"Centre Commercial BAB2",city:"Bayonne",cp:"64100",phone:"05 59 16 54 68",freq:"Mensuelle",lastVisit:"2026-08-15",nextVisit:"2026-09-14",fluidMl:20000},
+  {sn:"250159",name:"Eram Perpignan",addr:"Quai Vauban",city:"Perpignan",cp:"66000",phone:"04 68 23 57 69",freq:"Mensuelle",lastVisit:"2026-08-18",nextVisit:"2026-09-17",fluidMl:20000},
+  {sn:"250160",name:"Eram Avignon",addr:"Centre Commercial Cap Sud",city:"Avignon",cp:"84000",phone:"04 90 30 60 70",freq:"Mensuelle",lastVisit:"2026-08-21",nextVisit:"2026-09-20",fluidMl:15000},
+  {sn:"250161",name:"Eram Troyes",addr:"Rue Émile Zola",city:"Troyes",cp:"10000",phone:"03 25 37 63 71",freq:"Mensuelle",lastVisit:"2026-08-24",nextVisit:"2026-09-23",fluidMl:20000},
+  {sn:"250162",name:"Eram Charleville-Mézières",addr:"Place Ducale",city:"Charleville-Mézières",cp:"08000",phone:"03 24 44 66 72",freq:"Mensuelle",lastVisit:"2026-08-27",nextVisit:"2026-09-26",fluidMl:20000},
+  {sn:"250163",name:"Eram Maubeuge",addr:"Place de la République",city:"Maubeuge",cp:"59600",phone:"03 27 51 69 73",freq:"Bimensuelle",lastVisit:"2026-08-30",nextVisit:"2026-09-29",fluidMl:20000},
+  {sn:"250164",name:"Eram Boulogne-sur-Mer",addr:"Centre Commercial Auchan",city:"Boulogne-sur-Mer",cp:"62200",phone:"03 21 58 72 74",freq:"Mensuelle",lastVisit:"2026-09-02",nextVisit:"2026-10-02",fluidMl:20000},
+  {sn:"250165",name:"Eram Saint-Omer",addr:"Rue des Clouteries",city:"Saint-Omer",cp:"62500",phone:"03 21 65 75 75",freq:"Mensuelle",lastVisit:"2026-09-05",nextVisit:"2026-10-05",fluidMl:15000},
+  {sn:"250166",name:"Eram Douai",addr:"Place d'Armes",city:"Douai",cp:"59500",phone:"03 27 72 78 76",freq:"Mensuelle",lastVisit:"2026-09-08",nextVisit:"2026-10-08",fluidMl:20000},
+  {sn:"250167",name:"Eram Cambrai",addr:"Rue de Noyon",city:"Cambrai",cp:"59400",phone:"03 27 79 81 77",freq:"Mensuelle",lastVisit:"2026-08-02",nextVisit:"2026-09-01",fluidMl:20000},
+  {sn:"250168",name:"Eram Béthune",addr:"Grand Place",city:"Béthune",cp:"62400",phone:"03 21 86 84 78",freq:"Mensuelle",lastVisit:"2026-08-05",nextVisit:"2026-09-04",fluidMl:20000},
+  {sn:"250169",name:"Eram Liévin",addr:"Rue Jean Jaurès",city:"Liévin",cp:"62800",phone:"03 21 13 87 79",freq:"Mensuelle",lastVisit:"2026-08-08",nextVisit:"2026-09-07",fluidMl:20000},
+  {sn:"250170",name:"Eram Hénin-Beaumont",addr:"Centre Commercial",city:"Hénin-Beaumont",cp:"62110",phone:"03 21 20 20 80",freq:"Bimensuelle",lastVisit:"2026-08-11",nextVisit:"2026-09-10",fluidMl:15000},
+  {sn:"250171",name:"Eram Villeneuve-d'Ascq",addr:"Avenue du Brigadier Driant",city:"Villeneuve-d'Ascq",cp:"59650",phone:"03 20 27 23 81",freq:"Mensuelle",lastVisit:"2026-08-14",nextVisit:"2026-09-13",fluidMl:20000},
+  {sn:"250172",name:"Eram Wasquehal",addr:"Centre Commercial",city:"Wasquehal",cp:"59290",phone:"03 20 34 26 82",freq:"Mensuelle",lastVisit:"2026-08-17",nextVisit:"2026-09-16",fluidMl:20000},
+  {sn:"250173",name:"Eram Wattrelos",addr:"Rue Jean Jaurès",city:"Wattrelos",cp:"59150",phone:"03 20 41 29 83",freq:"Mensuelle",lastVisit:"2026-08-20",nextVisit:"2026-09-19",fluidMl:20000},
+  {sn:"250174",name:"Eram Armentières",addr:"Place du Général de Gaulle",city:"Armentières",cp:"59280",phone:"03 20 48 32 84",freq:"Mensuelle",lastVisit:"2026-08-23",nextVisit:"2026-09-22",fluidMl:20000},
+  {sn:"250175",name:"Eram Hazebrouck",addr:"Rue de Thiennes",city:"Hazebrouck",cp:"59190",phone:"03 28 55 35 85",freq:"Mensuelle",lastVisit:"2026-08-26",nextVisit:"2026-09-25",fluidMl:15000},
+  {sn:"250176",name:"Eram Abbeville",addr:"Place de l'Amiral Courbet",city:"Abbeville",cp:"80100",phone:"03 22 62 38 86",freq:"Mensuelle",lastVisit:"2026-08-29",nextVisit:"2026-09-28",fluidMl:20000},
+  {sn:"250177",name:"Eram Laon",addr:"Rue Châtelaine",city:"Laon",cp:"02000",phone:"03 23 69 41 87",freq:"Bimensuelle",lastVisit:"2026-09-01",nextVisit:"2026-10-01",fluidMl:20000},
+  {sn:"250178",name:"Eram Soissons",addr:"Place de l'Hôtel de Ville",city:"Soissons",cp:"02200",phone:"03 23 76 44 88",freq:"Mensuelle",lastVisit:"2026-09-04",nextVisit:"2026-10-04",fluidMl:20000},
+  {sn:"250179",name:"Eram Château-Thierry",addr:"Rue du Château",city:"Château-Thierry",cp:"02400",phone:"03 23 83 47 89",freq:"Mensuelle",lastVisit:"2026-09-07",nextVisit:"2026-10-07",fluidMl:20000},
+  {sn:"250180",name:"Eram Montdidier",addr:"Place du Général de Gaulle",city:"Montdidier",cp:"80500",phone:"03 22 10 50 90",freq:"Mensuelle",lastVisit:"2026-08-01",nextVisit:"2026-08-31",fluidMl:15000},
+  {sn:"250181",name:"Eram Creil",addr:"Rue de la République",city:"Creil",cp:"60100",phone:"03 44 17 53 91",freq:"Mensuelle",lastVisit:"2026-08-04",nextVisit:"2026-09-03",fluidMl:20000},
+  {sn:"250182",name:"Eram Senlis",addr:"Place Henri IV",city:"Senlis",cp:"60300",phone:"03 44 24 56 92",freq:"Mensuelle",lastVisit:"2026-08-07",nextVisit:"2026-09-06",fluidMl:20000},
+  {sn:"250183",name:"Eram Noyon",addr:"Rue Saint-Éloi",city:"Noyon",cp:"60400",phone:"03 44 31 59 93",freq:"Mensuelle",lastVisit:"2026-08-10",nextVisit:"2026-09-09",fluidMl:20000},
+  {sn:"250184",name:"Eram Thillois",addr:"Centre Commercial Thillois",city:"Thillois",cp:"51370",phone:"03 26 38 62 94",freq:"Bimensuelle",lastVisit:"2026-08-13",nextVisit:"2026-09-12",fluidMl:20000},
+  {sn:"250185",name:"Eram Mondeville",addr:"Avenue des Courses",city:"Mondeville",cp:"14120",phone:"02 31 45 65 95",freq:"Mensuelle",lastVisit:"2026-08-16",nextVisit:"2026-09-15",fluidMl:15000},
+  {sn:"250186",name:"Eram Lille",addr:"45 Rue de Béthune",city:"Lille",cp:"59000",phone:"03 20 52 68 96",freq:"Mensuelle",lastVisit:"2026-08-19",nextVisit:"2026-09-18",fluidMl:20000},
+  {sn:"250187",name:"Eram Roubaix",addr:"45 Grand Place",city:"Roubaix",cp:"59100",phone:"03 20 59 71 97",freq:"Mensuelle",lastVisit:"2026-08-22",nextVisit:"2026-09-21",fluidMl:20000},
+  {sn:"250188",name:"Eram Tourcoing",addr:"15 Grand Place",city:"Tourcoing",cp:"59200",phone:"03 20 66 74 98",freq:"Mensuelle",lastVisit:"2026-08-25",nextVisit:"2026-09-24",fluidMl:20000},
+  {sn:"250189",name:"Eram Amiens",addr:"7 Rue du Hocquet",city:"Amiens",cp:"80000",phone:"03 22 73 77 99",freq:"Mensuelle",lastVisit:"2026-08-28",nextVisit:"2026-09-27",fluidMl:20000},
+  {sn:"250190",name:"Eram Arras",addr:"22 Grand Place",city:"Arras",cp:"62000",phone:"03 21 80 80 10",freq:"Mensuelle",lastVisit:"2026-08-31",nextVisit:"2026-09-30",fluidMl:15000},
+  {sn:"250191",name:"Eram Valenciennes",addr:"5 Rue Ferrand",city:"Valenciennes",cp:"59300",phone:"03 27 87 83 11",freq:"Bimensuelle",lastVisit:"2026-09-03",nextVisit:"2026-10-03",fluidMl:20000},
+  {sn:"250192",name:"Eram Dunkerque",addr:"14 Avenue de la Mer",city:"Dunkerque",cp:"59140",phone:"03 28 14 86 12",freq:"Mensuelle",lastVisit:"2026-09-06",nextVisit:"2026-10-06",fluidMl:20000},
+  {sn:"250193",name:"Eram Lens",addr:"90 Rue Jean Jaurès",city:"Lens",cp:"62300",phone:"03 21 21 89 13",freq:"Mensuelle",lastVisit:"2026-09-09",nextVisit:"2026-10-09",fluidMl:20000},
+  {sn:"250194",name:"Eram Calais",addr:"8 Rue Royale",city:"Calais",cp:"62100",phone:"03 21 28 22 14",freq:"Mensuelle",lastVisit:"2026-08-03",nextVisit:"2026-09-02",fluidMl:20000},
+  {sn:"250195",name:"Eram Beauvais",addr:"4 Place Jeanne Hachette",city:"Beauvais",cp:"60000",phone:"03 44 35 25 15",freq:"Mensuelle",lastVisit:"2026-08-06",nextVisit:"2026-09-05",fluidMl:15000},
+  {sn:"250196",name:"Eram Compiègne",addr:"28 Place de l'Hôtel de Ville",city:"Compiègne",cp:"60200",phone:"03 44 42 28 16",freq:"Mensuelle",lastVisit:"2026-08-09",nextVisit:"2026-09-08",fluidMl:20000},
+  {sn:"250197",name:"Eram Saint-Quentin",addr:"12 Rue d'Isle",city:"Saint-Quentin",cp:"02100",phone:"03 23 49 31 17",freq:"Mensuelle",lastVisit:"2026-08-12",nextVisit:"2026-09-11",fluidMl:20000},
+  {sn:"250198",name:"Eram Le Havre",addr:"8 Place de l'Hôtel de Ville",city:"Le Havre",cp:"76600",phone:"02 35 56 34 18",freq:"Bimensuelle",lastVisit:"2026-08-15",nextVisit:"2026-09-14",fluidMl:20000},
+  {sn:"250199",name:"Eram Rouen",addr:"91 Rue du Gros Horloge",city:"Rouen",cp:"76000",phone:"02 35 63 37 19",freq:"Mensuelle",lastVisit:"2026-08-18",nextVisit:"2026-09-17",fluidMl:20000},
+  {sn:"250200",name:"Snipes Caen",addr:"8 Rue Saint-Pierre",city:"Caen",cp:"14000",phone:"02 31 70 40 20",freq:"Mensuelle",lastVisit:"2026-08-21",nextVisit:"2026-09-20",fluidMl:15000},
+  {sn:"250201",name:"Snipes Reims",addr:"4 Place Drouet d'Erlon",city:"Reims",cp:"51100",phone:"03 26 77 43 21",freq:"Mensuelle",lastVisit:"2026-08-24",nextVisit:"2026-09-23",fluidMl:20000},
+  {sn:"250202",name:"Snipes Metz",addr:"Centre Commercial Muse",city:"Metz",cp:"57000",phone:"03 87 84 46 22",freq:"Mensuelle",lastVisit:"2026-08-27",nextVisit:"2026-09-26",fluidMl:20000},
+  {sn:"250203",name:"Snipes Nancy",addr:"8 Place Stanislas",city:"Nancy",cp:"54000",phone:"03 83 11 49 23",freq:"Mensuelle",lastVisit:"2026-08-30",nextVisit:"2026-09-29",fluidMl:20000},
+  {sn:"250204",name:"Snipes Strasbourg",addr:"Centre Commercial Rivetoile",city:"Strasbourg",cp:"67000",phone:"03 88 18 52 24",freq:"Mensuelle",lastVisit:"2026-09-02",nextVisit:"2026-10-02",fluidMl:20000},
+  {sn:"250205",name:"Snipes Mulhouse",addr:"Centre Commercial Porte Jeune",city:"Mulhouse",cp:"68100",phone:"03 89 25 55 25",freq:"Bimensuelle",lastVisit:"2026-09-05",nextVisit:"2026-10-05",fluidMl:15000},
+  {sn:"250206",name:"Snipes Dijon",addr:"8 Rue de la Liberté",city:"Dijon",cp:"21000",phone:"03 80 32 58 26",freq:"Mensuelle",lastVisit:"2026-09-08",nextVisit:"2026-10-08",fluidMl:20000},
+  {sn:"250207",name:"Snipes Besançon",addr:"5 Place Pasteur",city:"Besançon",cp:"25000",phone:"03 81 39 61 27",freq:"Mensuelle",lastVisit:"2026-08-02",nextVisit:"2026-09-01",fluidMl:20000},
+  {sn:"250208",name:"Snipes Paris",addr:"8 Avenue de l'Opéra",city:"Paris",cp:"75001",phone:"01 40 46 64 28",freq:"Mensuelle",lastVisit:"2026-08-05",nextVisit:"2026-09-04",fluidMl:20000},
+  {sn:"250209",name:"Snipes Paris 2",addr:"15 Rue La Fayette",city:"Paris",cp:"75009",phone:"01 42 53 67 29",freq:"Mensuelle",lastVisit:"2026-08-08",nextVisit:"2026-09-07",fluidMl:20000},
+  {sn:"250210",name:"Snipes Paris 3",addr:"12 Boulevard Saint-Martin",city:"Paris",cp:"75010",phone:"01 40 60 70 30",freq:"Mensuelle",lastVisit:"2026-08-11",nextVisit:"2026-09-10",fluidMl:15000},
+  {sn:"250211",name:"Snipes Puteaux",addr:"Parvis de La Défense",city:"Puteaux",cp:"92800",phone:"01 47 67 73 31",freq:"Mensuelle",lastVisit:"2026-08-14",nextVisit:"2026-09-13",fluidMl:20000},
+  {sn:"250212",name:"Snipes Créteil",addr:"Centre Commercial Créteil Soleil",city:"Créteil",cp:"94000",phone:"01 49 74 76 32",freq:"Bimensuelle",lastVisit:"2026-08-17",nextVisit:"2026-09-16",fluidMl:20000},
+  {sn:"250213",name:"Snipes Boulogne-Billancourt",addr:"8 Rue Gallieni",city:"Boulogne-Billancourt",cp:"92100",phone:"01 46 81 79 33",freq:"Mensuelle",lastVisit:"2026-08-20",nextVisit:"2026-09-19",fluidMl:20000},
+  {sn:"250214",name:"Snipes Lyon",addr:"17 Rue du Dr Bouchut",city:"Lyon",cp:"69003",phone:"04 78 88 82 34",freq:"Mensuelle",lastVisit:"2026-08-23",nextVisit:"2026-09-22",fluidMl:20000},
+  {sn:"250215",name:"Snipes Lyon 2",addr:"Place Bellecour",city:"Lyon",cp:"69002",phone:"04 78 15 85 35",freq:"Mensuelle",lastVisit:"2026-08-26",nextVisit:"2026-09-25",fluidMl:15000},
+  {sn:"250216",name:"Snipes Villeurbanne",addr:"Centre Commercial Carré de Soie",city:"Villeurbanne",cp:"69100",phone:"04 78 22 88 36",freq:"Mensuelle",lastVisit:"2026-08-29",nextVisit:"2026-09-28",fluidMl:20000},
+  {sn:"250217",name:"Snipes Marseille",addr:"55 Avenue du Prado",city:"Marseille",cp:"13008",phone:"04 91 29 21 37",freq:"Mensuelle",lastVisit:"2026-09-01",nextVisit:"2026-10-01",fluidMl:20000},
+  {sn:"250218",name:"Snipes Marseille 2",addr:"Centre Commercial Grand Littoral",city:"Marseille",cp:"13015",phone:"04 91 36 24 38",freq:"Mensuelle",lastVisit:"2026-09-04",nextVisit:"2026-10-04",fluidMl:20000},
+  {sn:"250219",name:"Snipes Aix-en-Provence",addr:"Cours Mirabeau",city:"Aix-en-Provence",cp:"13100",phone:"04 42 43 27 39",freq:"Bimensuelle",lastVisit:"2026-09-07",nextVisit:"2026-10-07",fluidMl:20000},
+  {sn:"250220",name:"Snipes Toulouse",addr:"8 Rue Alsace-Lorraine",city:"Toulouse",cp:"31000",phone:"05 61 50 30 40",freq:"Mensuelle",lastVisit:"2026-08-01",nextVisit:"2026-08-31",fluidMl:15000},
+  {sn:"250221",name:"Snipes Blagnac",addr:"Avenue de l'Europe",city:"Blagnac",cp:"31700",phone:"05 61 57 33 41",freq:"Mensuelle",lastVisit:"2026-08-04",nextVisit:"2026-09-03",fluidMl:20000},
+  {sn:"250222",name:"Snipes Bordeaux",addr:"Place de la Comédie",city:"Bordeaux",cp:"33000",phone:"05 56 64 36 42",freq:"Mensuelle",lastVisit:"2026-08-07",nextVisit:"2026-09-06",fluidMl:20000},
+  {sn:"250223",name:"Snipes Mérignac",addr:"Avenue de la Somme",city:"Mérignac",cp:"33700",phone:"05 56 71 39 43",freq:"Mensuelle",lastVisit:"2026-08-10",nextVisit:"2026-09-09",fluidMl:20000},
+  {sn:"250224",name:"Snipes Nantes",addr:"Rue Crébillon",city:"Nantes",cp:"44000",phone:"02 40 78 42 44",freq:"Mensuelle",lastVisit:"2026-08-13",nextVisit:"2026-09-12",fluidMl:20000},
+  {sn:"250225",name:"Deichmann Saint-Herblain",addr:"Centre Atlantis",city:"Saint-Herblain",cp:"44800",phone:"02 40 85 45 45",freq:"Mensuelle",lastVisit:"2026-08-16",nextVisit:"2026-09-15",fluidMl:15000},
+  {sn:"250226",name:"Deichmann Rennes",addr:"Centre Commercial Alma",city:"Rennes",cp:"35000",phone:"02 99 12 48 46",freq:"Bimensuelle",lastVisit:"2026-08-19",nextVisit:"2026-09-18",fluidMl:20000},
+  {sn:"250227",name:"Deichmann Brest",addr:"Rue de Siam",city:"Brest",cp:"29200",phone:"02 98 19 51 47",freq:"Mensuelle",lastVisit:"2026-08-22",nextVisit:"2026-09-21",fluidMl:20000},
+  {sn:"250228",name:"Deichmann Angers",addr:"Centre Commercial Espace Anjou",city:"Angers",cp:"49000",phone:"02 41 26 54 48",freq:"Mensuelle",lastVisit:"2026-08-25",nextVisit:"2026-09-24",fluidMl:20000},
+  {sn:"250229",name:"Deichmann Le Mans",addr:"Rue des Minimes",city:"Le Mans",cp:"72000",phone:"02 43 33 57 49",freq:"Mensuelle",lastVisit:"2026-08-28",nextVisit:"2026-09-27",fluidMl:20000},
+  {sn:"250230",name:"Deichmann Orléans",addr:"Rue de la République",city:"Orléans",cp:"45000",phone:"02 38 40 60 50",freq:"Mensuelle",lastVisit:"2026-08-31",nextVisit:"2026-09-30",fluidMl:15000},
+  {sn:"250231",name:"Deichmann Tours",addr:"Rue Nationale",city:"Tours",cp:"37000",phone:"02 47 47 63 51",freq:"Mensuelle",lastVisit:"2026-09-03",nextVisit:"2026-10-03",fluidMl:20000},
+  {sn:"250232",name:"Deichmann Montpellier",addr:"Avenue de la Mer",city:"Montpellier",cp:"34000",phone:"04 67 54 66 52",freq:"Mensuelle",lastVisit:"2026-09-06",nextVisit:"2026-10-06",fluidMl:20000},
+  {sn:"250233",name:"Deichmann Nîmes",addr:"Boulevard Victor Hugo",city:"Nîmes",cp:"30000",phone:"04 66 61 69 53",freq:"Bimensuelle",lastVisit:"2026-09-09",nextVisit:"2026-10-09",fluidMl:20000},
+  {sn:"250234",name:"Deichmann Nice",addr:"Rue Masséna",city:"Nice",cp:"06000",phone:"04 93 68 72 54",freq:"Mensuelle",lastVisit:"2026-08-03",nextVisit:"2026-09-02",fluidMl:20000},
+  {sn:"250235",name:"Deichmann Cannes",addr:"Centre Commercial La Bocca",city:"Cannes",cp:"06400",phone:"04 93 75 75 55",freq:"Mensuelle",lastVisit:"2026-08-06",nextVisit:"2026-09-05",fluidMl:15000},
+  {sn:"250236",name:"Deichmann Toulon",addr:"Centre Commercial Mayol",city:"Toulon",cp:"83000",phone:"04 94 82 78 56",freq:"Mensuelle",lastVisit:"2026-08-09",nextVisit:"2026-09-08",fluidMl:20000},
+  {sn:"250237",name:"Deichmann Grenoble",addr:"Place Grenette",city:"Grenoble",cp:"38000",phone:"04 76 89 81 57",freq:"Mensuelle",lastVisit:"2026-08-12",nextVisit:"2026-09-11",fluidMl:20000},
+  {sn:"250238",name:"Deichmann Annecy",addr:"Centre Commercial Courier",city:"Annecy",cp:"74000",phone:"04 50 16 84 58",freq:"Mensuelle",lastVisit:"2026-08-15",nextVisit:"2026-09-14",fluidMl:20000},
+  {sn:"250239",name:"Deichmann Clermont-Ferrand",addr:"Place de Jaude",city:"Clermont-Ferrand",cp:"63000",phone:"04 73 23 87 59",freq:"Mensuelle",lastVisit:"2026-08-18",nextVisit:"2026-09-17",fluidMl:20000},
+  {sn:"250240",name:"Deichmann Limoges",addr:"Centre Commercial Boisseuil",city:"Limoges",cp:"87000",phone:"05 55 30 20 60",freq:"Bimensuelle",lastVisit:"2026-08-21",nextVisit:"2026-09-20",fluidMl:15000},
+  {sn:"250241",name:"Deichmann Poitiers",addr:"Rue des Cordeliers",city:"Poitiers",cp:"86000",phone:"05 49 37 23 61",freq:"Mensuelle",lastVisit:"2026-08-24",nextVisit:"2026-09-23",fluidMl:20000},
+  {sn:"250242",name:"Deichmann La Rochelle",addr:"Centre Commercial Lafond",city:"La Rochelle",cp:"17000",phone:"05 46 44 26 62",freq:"Mensuelle",lastVisit:"2026-08-27",nextVisit:"2026-09-26",fluidMl:20000},
+  {sn:"250243",name:"Deichmann Pau",addr:"Rue Serviez",city:"Pau",cp:"64000",phone:"05 59 51 29 63",freq:"Mensuelle",lastVisit:"2026-08-30",nextVisit:"2026-09-29",fluidMl:20000},
+  {sn:"250244",name:"Deichmann Bayonne",addr:"Centre Commercial BAB2",city:"Bayonne",cp:"64100",phone:"05 59 58 32 64",freq:"Mensuelle",lastVisit:"2026-09-02",nextVisit:"2026-10-02",fluidMl:20000},
+  {sn:"250245",name:"Deichmann Perpignan",addr:"Quai Vauban",city:"Perpignan",cp:"66000",phone:"04 68 65 35 65",freq:"Mensuelle",lastVisit:"2026-09-05",nextVisit:"2026-10-05",fluidMl:15000},
+  {sn:"250246",name:"Deichmann Avignon",addr:"Centre Commercial Cap Sud",city:"Avignon",cp:"84000",phone:"04 90 72 38 66",freq:"Mensuelle",lastVisit:"2026-09-08",nextVisit:"2026-10-08",fluidMl:20000},
+  {sn:"250247",name:"Deichmann Troyes",addr:"Rue Émile Zola",city:"Troyes",cp:"10000",phone:"03 25 79 41 67",freq:"Bimensuelle",lastVisit:"2026-08-02",nextVisit:"2026-09-01",fluidMl:20000},
+  {sn:"250248",name:"Deichmann Charleville-Mézières",addr:"Place Ducale",city:"Charleville-Mézières",cp:"08000",phone:"03 24 86 44 68",freq:"Mensuelle",lastVisit:"2026-08-05",nextVisit:"2026-09-04",fluidMl:20000},
+  {sn:"250249",name:"Deichmann Maubeuge",addr:"Place de la République",city:"Maubeuge",cp:"59600",phone:"03 27 13 47 69",freq:"Mensuelle",lastVisit:"2026-08-08",nextVisit:"2026-09-07",fluidMl:20000},
+  {sn:"250250",name:"Deichmann Boulogne-sur-Mer",addr:"Centre Commercial Auchan",city:"Boulogne-sur-Mer",cp:"62200",phone:"03 21 20 50 70",freq:"Mensuelle",lastVisit:"2026-08-11",nextVisit:"2026-09-10",fluidMl:15000},
+  {sn:"250251",name:"Deichmann Saint-Omer",addr:"Rue des Clouteries",city:"Saint-Omer",cp:"62500",phone:"03 21 27 53 71",freq:"Mensuelle",lastVisit:"2026-08-14",nextVisit:"2026-09-13",fluidMl:20000},
+  {sn:"250252",name:"Deichmann Douai",addr:"Place d'Armes",city:"Douai",cp:"59500",phone:"03 27 34 56 72",freq:"Mensuelle",lastVisit:"2026-08-17",nextVisit:"2026-09-16",fluidMl:20000},
+  {sn:"250253",name:"Deichmann Cambrai",addr:"Rue de Noyon",city:"Cambrai",cp:"59400",phone:"03 27 41 59 73",freq:"Mensuelle",lastVisit:"2026-08-20",nextVisit:"2026-09-19",fluidMl:20000},
+  {sn:"250254",name:"Deichmann Béthune",addr:"Grand Place",city:"Béthune",cp:"62400",phone:"03 21 48 62 74",freq:"Bimensuelle",lastVisit:"2026-08-23",nextVisit:"2026-09-22",fluidMl:20000}
+];
+
+/* Netlify-style Oui/Non + visit type (no dynamic CHECKLISTS) */
+var CURRENT_VISIT_TYPE = "Service";
+
+
+var mediaStore = [];
+var selectedShop = null;
+var sigPad = { drawing: false, lastX: 0, lastY: 0, hasInk: false };
+
+function $(id) { return document.getElementById(id); }
+
+function toast(msg, type) {
+  var t = $("toast");
+  if (!t) return;
+  t.textContent = msg;
+  t.className = "toast show" + (type ? " " + type : "");
+  clearTimeout(toast._tm);
+  toast._tm = setTimeout(function () { t.className = "toast"; }, 3000);
+}
+
+function todayISO() {
+  var d = new Date();
+  var m = String(d.getMonth() + 1).padStart(2, "0");
+  var day = String(d.getDate()).padStart(2, "0");
+  return d.getFullYear() + "-" + m + "-" + day;
+}
+
+function formatDateFR(iso) {
+  if (!iso) return "—";
+  var p = String(iso).split("-");
+  if (p.length !== 3) return iso;
+  return p[2] + "/" + p[1] + "/" + p[0];
+}
+
+function fold(s) {
+  return String(s || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
+}
+
+/* ---- Magasin search ---- */
+function searchShops(q) {
+  q = fold(q).trim();
+  if (!q) return [];
+  var out = [];
+  for (var i = 0; i < DB.length; i++) {
+    var s = DB[i];
+    var hay = fold(s.name + " " + s.sn + " " + s.city + " " + s.cp + " " + s.addr);
+    if (hay.indexOf(q) !== -1) {
+      out.push(s);
+      if (out.length >= 15) break;
+    }
+  }
+  return out;
+}
+
+function renderSuggestions(list) {
+  var box = $("shopSuggestions");
+  if (!list.length) { box.className = ""; box.innerHTML = ""; return; }
+  box.innerHTML = list.map(function (s, i) {
+    return '<div class="sug-item" role="option" data-idx="' + i + '">' +
+      '<div class="nm">' + esc(s.name) + '</div>' +
+      '<div class="sn">S/N ' + esc(s.sn) + '</div>' +
+      '<div class="loc">' + esc(s.cp) + " " + esc(s.city) + " — " + esc(s.addr) + '</div>' +
+      '</div>';
+  }).join("");
+  box._list = list;
+  box.className = "show";
+  box.querySelectorAll(".sug-item").forEach(function (el) {
+    var locked = false;
+    function choose(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+      if (locked) return;
+      locked = true;
+      setTimeout(function () { locked = false; }, 400);
+      var shop = box._list[parseInt(el.getAttribute("data-idx"), 10)];
+      if (shop) pickShop(shop);
+    }
+    el.addEventListener("click", choose);
+    el.addEventListener("touchend", choose, { passive: false });
+  });
+}
+
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function unlockShopFields() {
+  ["shopName","shopSn","shopAddr","shopCityCp","shopCity","shopCp","shopPhone","shopCtr","shopFluid","shopFreq","shopLast","shopNext"].forEach(function (id) {
+    var el = $(id);
+    if (!el) return;
+    if (id === "shopFreq") return; /* stay readonly from DB */
+    el.readOnly = false;
+    el.removeAttribute("readonly");
+    el.removeAttribute("disabled");
+  });
+}
+
+function pickShop(s) {
+  selectedShop = s;
+  unlockShopFields();
+  $("shopSearch").value = s.name;
+  $("shopName").value = s.name;
+  $("shopSn").value = s.sn;
+  $("shopAddr").value = s.addr;
+  $("shopCity").value = s.city;
+  $("shopCp").value = s.cp;
+  var cityCp = $("shopCityCp");
+  if (cityCp) cityCp.value = (s.city || "") + (s.cp ? " — " + s.cp : "");
+  $("shopPhone").value = s.phone;
+  if ($("shopCtr") && !$("shopCtr").value) $("shopCtr").value = "";
+  $("shopFluid").value = (s.fluidMl / 1000).toFixed(3) + " L (" + s.fluidMl + " mL)";
+  $("shopFreq").value = s.freq;
+  $("shopLast").value = formatDateFR(s.lastVisit);
+  $("shopNext").value = formatDateFR(s.nextVisit);
+  /* Prefill ancien niveau from DB fluidMl (mL → L, 3 decimals) */
+  var lv = parseFloat(s.fluidMl);
+  if (!isNaN(lv) && lv > 0) {
+    var liters = lv / 1000;
+    if (liters > 20) liters = 20;
+    $("oldLevel").value = liters.toFixed(3).replace(".", ",");
+    updateAdded();
+  }
+  $("shopSuggestions").className = "";
+  $("shopSuggestions").innerHTML = "";
+  var vb = $("visitBar");
+  if (vb) {
+    vb.className = "vbar show";
+    vb.innerHTML = "Dernière visite : <b>" + esc(formatDateFR(s.lastVisit) || "—") + "</b> &nbsp;|&nbsp; Prochaine : <b>" + esc(formatDateFR(s.nextVisit) || "—") + "</b> &nbsp;|&nbsp; " + esc(s.freq || "");
+  }
+  toast("Magasin sélectionné : " + s.name, "ok");
+}
+
+function syncCityCpFields() {
+  var raw = ($("shopCityCp") && $("shopCityCp").value) || "";
+  var parts = raw.split("—");
+  if (parts.length >= 2) {
+    $("shopCity").value = parts[0].trim();
+    $("shopCp").value = parts.slice(1).join("—").trim();
+  } else if (raw.trim()) {
+    $("shopCity").value = raw.trim();
+  }
+}
+
+function shopFromFields() {
+  syncCityCpFields();
+  return {
+    sn: ($("shopSn").value || "").trim(),
+    name: ($("shopName").value || "").trim(),
+    addr: ($("shopAddr").value || "").trim(),
+    city: ($("shopCity").value || "").trim(),
+    cp: ($("shopCp").value || "").trim(),
+    phone: ($("shopPhone").value || "").trim(),
+    counter: ($("shopCtr") && $("shopCtr").value || "").trim(),
+    freq: ($("shopFreq").value || "").trim() || "—",
+    lastVisit: ($("shopLast").value || "").trim(),
+    nextVisit: ($("shopNext").value || "").trim(),
+    fluidMl: 20000,
+    fluidLabel: ($("shopFluid").value || "").trim()
+  };
+}
+
+function enableManualShop() {
+  selectedShop = null;
+  $("shopSearch").value = "";
+  $("shopSuggestions").className = "";
+  unlockShopFields();
+  var freq = $("shopFreq");
+  if (freq) { freq.readOnly = false; }
+  $("shopName").focus();
+  toast("Saisie manuelle activée", "ok");
+}
+
+function clearShop() {
+  selectedShop = null;
+  $("shopSearch").value = "";
+  ["shopName","shopSn","shopAddr","shopCity","shopCp","shopCityCp","shopPhone","shopCtr","shopFluid","shopFreq","shopLast","shopNext"].forEach(function (id) {
+    var el = $(id); if (el) el.value = "";
+  });
+  $("shopSuggestions").className = "";
+  var vb = $("visitBar");
+  if (vb) { vb.className = "vbar"; vb.innerHTML = ""; }
+}
+
+/* ---- Liquide ---- */
+function parseLiters(raw) {
+  if (raw == null) return NaN;
+  var s = String(raw).trim().replace(/\s/g, "").replace(",", ".");
+  if (!s) return NaN;
+  var v = parseFloat(s);
+  return v;
+}
+
+function updateAdded(opts) {
+  opts = opts || {};
+  var el = $("oldLevel");
+  if (!el) return 0;
+  el.readOnly = false;
+  el.removeAttribute("readonly");
+  var v = parseLiters(el.value);
+  var addEl = $("addedLevelInput");
+  var badge = $("addedLevel");
+  if (isNaN(v) || v < 0 || v > 20) {
+    if (addEl) addEl.value = "";
+    if (badge) badge.textContent = "";
+    return 0;
+  }
+  if (opts.snap) {
+    /* keep user precision up to 3 decimals (text input accepts comma) */
+    el.value = v.toFixed(3).replace(".", ",");
+  }
+  var addedStr = (20 - v).toFixed(3).replace(".", ",") + " L";
+  if (addEl) addEl.value = addedStr;
+  if (badge) badge.textContent = addedStr;
+  return +(20 - v).toFixed(3);
+}
+
+function calcFluid() { return updateAdded(); }
+
+function bumpLiquid(delta) {
+  var el = $("oldLevel");
+  var v = parseLiters(el.value);
+  if (isNaN(v)) v = 0;
+  v = Math.min(20, Math.max(0, +(v + delta).toFixed(3)));
+  el.value = v.toFixed(3).replace(".", ",");
+  updateAdded();
+}
+
+function tog(id, val) {
+  var c = $(id);
+  if (!c) return;
+  c.querySelectorAll(".yb").forEach(function (b) { b.classList.remove("on"); });
+  var t = c.querySelector(".yb." + val);
+  if (t) t.classList.add("on");
+}
+
+function gyn(id) {
+  var c = $(id);
+  if (!c) return "—";
+  var a = c.querySelector(".yb.on");
+  return a ? a.textContent.trim() : "—";
+}
+
+function setVisitTypeUI(typeName) {
+  CURRENT_VISIT_TYPE = typeName || "Service";
+  var hid = $("visitType");
+  if (hid) hid.value = CURRENT_VISIT_TYPE;
+  document.querySelectorAll("#visitTypes .tb").forEach(function (b) {
+    b.classList.toggle("on", b.getAttribute("data-type") === CURRENT_VISIT_TYPE);
+  });
+}
+
+function bindOuiNonToggles() {
+  document.querySelectorAll(".yns").forEach(function (group) {
+    group.querySelectorAll(".yb").forEach(function (btn) {
+      function activate(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        var val = btn.getAttribute("data-yn") || (btn.classList.contains("yes") ? "yes" : "no");
+        group.querySelectorAll(".yb").forEach(function (b) { b.classList.remove("on"); });
+        btn.classList.add("on");
+      }
+      btn.addEventListener("click", activate);
+      btn.addEventListener("touchend", activate, { passive: false });
+    });
+  });
+}
+
+function clearAllOuiNon() {
+  document.querySelectorAll(".yns .yb.on").forEach(function (b) { b.classList.remove("on"); });
+  ["q0","q1","q2"].forEach(function (id) { var el = $(id); if (el) el.value = ""; });
+}
+
+/* ---- Counters ---- */
+function bumpCounter(id, dir) {
+  var el = $(id);
+  if (!el) return;
+  var max = parseInt(el.getAttribute("max"), 10);
+  var min = parseInt(el.getAttribute("min"), 10) || 0;
+  var v = parseInt(el.value, 10) || 0;
+  v = Math.min(max, Math.max(min, v + dir));
+  el.value = String(v);
+}
+
+function clampCounterInput(el) {
+  if (!el) return;
+  var max = parseInt(el.getAttribute("max"), 10);
+  var min = parseInt(el.getAttribute("min"), 10) || 0;
+  var v = parseInt(String(el.value).replace(/[^0-9]/g, ""), 10);
+  if (isNaN(v)) v = min;
+  el.value = String(Math.min(max, Math.max(min, v)));
+}
+
+/* ---- Checklist toggles ---- */
+function checklistVal(id) {
+  var map = {
+    cl_propre: "y0", cl_niveau: "y3", cl_test: "y2", cl_buses: "y4",
+    cl_filtre: "y7", cl_lingettes: "y8", cl_tapis: "y9", cl_hygiene: "y10",
+    cl_piece: "__pieces__", cl_bloque: "y12", cl_flagship: "y14"
+  };
+  var key = map[id] || id;
+  if (key === "__pieces__") {
+    var p = ($("piecesReplaced") && $("piecesReplaced").value || "").trim();
+    return p ? "Oui" : "—";
+  }
+  if (/^y\d+$/.test(key)) return gyn(key);
+  return "—";
+}
+
+
+/* ---- Android WebView bridge detect ---- */
+(function () {
+  try {
+    var ua = (navigator.userAgent || "").toLowerCase();
+    var hasBridge = !!(window.ImboxAndroid && typeof window.ImboxAndroid.saveBase64 === "function");
+    var isAndroidUa = ua.indexOf("android") >= 0;
+    window.__IMBOX_ANDROID = !!(hasBridge || isAndroidUa);
+  } catch (e) {
+    window.__IMBOX_ANDROID = false;
+  }
+})();
+
+/* ---- Media ---- */
+/* Compress image → JPEG (max edge 1600px, q≈0.72) for reliable PDF embed */
+var MEDIA_MAX_PHOTOS = 8;
+var MEDIA_MAX_EDGE = 1600;
+var MEDIA_JPEG_Q = 0.72;
+
+function compressImageToJpeg(file) {
+  return new Promise(function (resolve, reject) {
+    var url = URL.createObjectURL(file);
+    var img = new Image();
+    img.onload = function () {
+      try {
+        var w = img.naturalWidth || img.width;
+        var h = img.naturalHeight || img.height;
+        if (!w || !h) { URL.revokeObjectURL(url); reject(new Error("image vide")); return; }
+        var scale = Math.min(1, MEDIA_MAX_EDGE / Math.max(w, h));
+        var cw = Math.max(1, Math.round(w * scale));
+        var ch = Math.max(1, Math.round(h * scale));
+        var canvas = document.createElement("canvas");
+        canvas.width = cw; canvas.height = ch;
+        var ctx = canvas.getContext("2d");
+        ctx.fillStyle = "#ffffff";
+        ctx.fillRect(0, 0, cw, ch);
+        ctx.drawImage(img, 0, 0, cw, ch);
+        var dataUrl = canvas.toDataURL("image/jpeg", MEDIA_JPEG_Q);
+        URL.revokeObjectURL(url);
+        if (!dataUrl || dataUrl.length < 32 || dataUrl.indexOf("base64,") < 0) {
+          reject(new Error("dataUrl vide apres compression"));
+          return;
+        }
+        resolve({ dataUrl: dataUrl, width: cw, height: ch, size: Math.round(dataUrl.length * 0.75) });
+      } catch (err) {
+        URL.revokeObjectURL(url);
+        reject(err);
+      }
+    };
+    img.onerror = function () {
+      URL.revokeObjectURL(url);
+      reject(new Error("lecture image impossible (HEIC non supporté ?)"));
+    };
+    img.src = url;
+  });
+}
+
+function handleMediaFiles(files) {
+  Array.prototype.forEach.call(files, function (file) {
+    if (!file.type.match(/^(image|video)\//) && !/\.(jpe?g|png|gif|webp|heic|heif)$/i.test(file.name)) return;
+    var isVideo = (file.type.indexOf("video/") === 0) || /\.(mp4|mov|webm|m4v)$/i.test(file.name);
+    if (isVideo) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        mediaStore.push({
+          id: "m" + Date.now() + Math.random().toString(36).slice(2, 7),
+          name: file.name,
+          type: file.type || "video/mp4",
+          isVideo: true,
+          dataUrl: e.target.result,
+          size: file.size
+        });
+        renderMedia();
+        toast("Vidéo ajoutée (listée dans le PDF, non embarquée)", "ok");
+      };
+      reader.readAsDataURL(file);
+      return;
+    }
+    var photoCount = mediaStore.filter(function (m) { return !m.isVideo; }).length;
+    if (photoCount >= MEDIA_MAX_PHOTOS) {
+      toast("Maximum " + MEDIA_MAX_PHOTOS + " photos (supprimez-en une)", "err");
+      return;
+    }
+    compressImageToJpeg(file).then(function (out) {
+      if (!out || !out.dataUrl || out.dataUrl.length < 32) {
+        throw new Error("compression sans dataUrl");
+      }
+      var base = file.name.replace(/\.[^.]+$/, "") || "photo";
+      mediaStore.push({
+        id: "m" + Date.now() + Math.random().toString(36).slice(2, 7),
+        name: base + ".jpg",
+        type: "image/jpeg",
+        isVideo: false,
+        dataUrl: out.dataUrl,
+        size: out.size,
+        width: out.width,
+        height: out.height,
+        compressed: true
+      });
+      renderMedia();
+      toast("Photo compressée (" + Math.round(out.size / 1024) + " Ko)", "ok");
+    }).catch(function (err) {
+      // Fallback: raw FileReader (PNG/JPEG only) — skip blank results
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        var raw = e.target && e.target.result;
+        if (!raw || String(raw).length < 32) {
+          toast("Impossible d'ajouter : image vide", "err");
+          return;
+        }
+        mediaStore.push({
+          id: "m" + Date.now() + Math.random().toString(36).slice(2, 7),
+          name: file.name,
+          type: file.type || "image/jpeg",
+          isVideo: false,
+          dataUrl: raw,
+          size: file.size,
+          compressed: false
+        });
+        renderMedia();
+        toast("Photo ajoutée (sans compression)", "ok");
+      };
+      reader.onerror = function () { toast("Impossible d'ajouter : " + (err && err.message ? err.message : file.name), "err"); };
+      reader.readAsDataURL(file);
+    });
+  });
+}
+
+function renderMedia() {
+  var box = $("mediaPreview");
+  var photoN = mediaStore.filter(function (m) { return !m.isVideo; }).length;
+  var vidN = mediaStore.filter(function (m) { return m.isVideo; }).length;
+  var meta = $("mediaMeta");
+  if (meta) {
+    meta.textContent = photoN + " / " + MEDIA_MAX_PHOTOS + " photos" +
+      (vidN ? (" · " + vidN + " vidéo" + (vidN > 1 ? "s" : "")) : "");
+  }
+  box.innerHTML = mediaStore.map(function (m) {
+    if (m.isVideo) {
+      return '<div class="media-thumb" data-id="' + m.id + '">' +
+        '<video src="' + m.dataUrl + '" muted playsinline></video>' +
+        '<div class="vid-label">🎬 ' + esc(m.name) + '</div>' +
+        '<button type="button" class="rm" aria-label="Supprimer">×</button></div>';
+    }
+    return '<div class="media-thumb" data-id="' + m.id + '">' +
+      '<img src="' + m.dataUrl + '" alt="">' +
+      '<button type="button" class="rm" aria-label="Supprimer">×</button></div>';
+  }).join("");
+  box.querySelectorAll(".rm").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      var id = btn.parentElement.getAttribute("data-id");
+      mediaStore = mediaStore.filter(function (m) { return m.id !== id; });
+      renderMedia();
+    });
+  });
+}
+
+/* ---- Signature canvas (DPR + pointer events iOS) ---- */
+function initSignature() {
+  var canvas = $("sigCanvas");
+  if (!canvas) return;
+  var ctx = canvas.getContext("2d");
+  var dpr = window.devicePixelRatio || 1;
+  var rect = canvas.getBoundingClientRect();
+  var cssW = rect.width || (canvas.parentElement && canvas.parentElement.clientWidth) || 600;
+  var cssH = 180;
+  canvas.style.width = cssW + "px";
+  canvas.style.height = cssH + "px";
+  canvas.width = Math.floor(cssW * dpr);
+  canvas.height = Math.floor(cssH * dpr);
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.lineWidth = 2.4;
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.strokeStyle = "#1a1a2e";
+  sigPad.hasInk = false;
+  sigPad.drawing = false;
+
+  function pos(e) {
+    var r = canvas.getBoundingClientRect();
+    var t = (e.touches && e.touches[0]) || (e.changedTouches && e.changedTouches[0]) || e;
+    return { x: (t.clientX - r.left), y: (t.clientY - r.top) };
+  }
+  function start(e) {
+    e.preventDefault();
+    sigPad.drawing = true;
+    var p = pos(e);
+    sigPad.lastX = p.x; sigPad.lastY = p.y;
+  }
+  function move(e) {
+    if (!sigPad.drawing) return;
+    e.preventDefault();
+    var p = pos(e);
+    ctx.beginPath();
+    ctx.moveTo(sigPad.lastX, sigPad.lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+    sigPad.lastX = p.x; sigPad.lastY = p.y;
+    sigPad.hasInk = true;
+  }
+  function end(e) {
+    if (e) e.preventDefault();
+    sigPad.drawing = false;
+  }
+
+  // Clear previous handlers by cloning? Re-assign is enough for on*
+  canvas.onmousedown = start;
+  canvas.onmousemove = move;
+  canvas.onmouseup = end;
+  canvas.onmouseleave = end;
+  canvas.ontouchstart = start;
+  canvas.ontouchmove = move;
+  canvas.ontouchend = end;
+  canvas.ontouchcancel = end;
+
+  if (window.PointerEvent) {
+    canvas.onpointerdown = function (e) { canvas.setPointerCapture(e.pointerId); start(e); };
+    canvas.onpointermove = move;
+    canvas.onpointerup = end;
+    canvas.onpointercancel = end;
+  }
+}
+
+function clearSignature() {
+  initSignature();
+}
+
+function getSignatureDataUrl() {
+  if (!sigPad.hasInk) return null;
+  return $("sigCanvas").toDataURL("image/png");
+}
+
+/* ---- PDF generation (official CAPS AcroForm + medias annex) ---- */
+function pdfLibReady() {
+  return !!(window.PDFLib && window.PDFLib.PDFDocument);
+}
+
+function jspdfReady() {
+  /* legacy helper kept; primary path uses pdf-lib */
+  return pdfLibReady() || !!(window.jspdf && window.jspdf.jsPDF) || typeof window.jsPDF === "function";
+}
+
+function updateCdnBanner() {
+  var ban = $("cdnBanner");
+  var btn = $("btnPdf");
+  if (!pdfLibReady()) {
+    if (ban) { ban.className = "show"; ban.style.display = "block"; }
+    if (btn) {
+      btn.title = "pdf-lib non chargé — voir bandeau";
+      btn.classList.add("disabled-look");
+    }
+  } else {
+    if (ban) { ban.className = ""; ban.style.display = "none"; }
+    if (btn) {
+      btn.title = "Générer le PDF du rapport (modèle officiel CAPS)";
+      btn.classList.remove("disabled-look");
+    }
+  }
+}
+
+function checklistVal(id) {
+  var items = getChecklistState("cl-service")
+    .concat(getChecklistState("cl-panne"))
+    .concat(getChecklistState("cl-ci"));
+  for (var i = 0; i < items.length; i++) {
+    if (items[i].id === id) return items[i].value;
+  }
+  return "—";
+}
+
+function setOuiNon(form, ouiName, nonName, val) {
+  try {
+    var oui = form.getCheckBox(ouiName);
+    var non = form.getCheckBox(nonName);
+    if (val === "Oui") { oui.check(); non.uncheck(); }
+    else if (val === "Non") { oui.uncheck(); non.check(); }
+    else { oui.uncheck(); non.uncheck(); }
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function setVisitType(form, visitType) {
+  var map = {
+    "préventive": "Service", "preventive": "Service", "Service": "Service",
+    "curative": "Panne", "Panne": "Panne",
+    "installation": "Installation", "Installation": "Installation",
+    "autre": "Echange", "Echange": "Echange", "Échange": "Echange",
+    "Enlevement": "Enlevement", "Enlèvement": "Enlevement"
+  };
+  var names = ["Service", "Panne", "Installation", "Echange", "Enlevement"];
+  var target = map[visitType] || map[fold(visitType)] || CURRENT_VISIT_TYPE || "Service";
+  if (target === "Échange") target = "Echange";
+  if (target === "Enlèvement") target = "Enlevement";
+  names.forEach(function (n) {
+    try {
+      var cb = form.getCheckBox(n);
+      if (target && n === target) cb.check(); else cb.uncheck();
+    } catch (e) {}
+  });
+}
+
+function safeSetText(form, name, value, filled) {
+  try {
+    var tf = form.getTextField(name);
+    var v = value == null ? "" : String(value);
+    if (v.length > 500) v = v.substring(0, 500);
+    /* Force DA Tf so setFontSize/updateFieldAppearances keep size 9 (template DA may be octal-escaped). */
+    try { tf.acroField.setDefaultAppearance("/Helv 9 Tf 0 g"); } catch (daErr) {}
+    try { tf.setFontSize(9); } catch (fe) {}
+    tf.setText(v);
+    if (filled) filled.push(name);
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+function dataUrlToUint8(dataUrl) {
+  var comma = dataUrl.indexOf(",");
+  var b64 = comma >= 0 ? dataUrl.substring(comma + 1) : dataUrl;
+  var bin = atob(b64);
+  var len = bin.length;
+  var bytes = new Uint8Array(len);
+  for (var i = 0; i < len; i++) bytes[i] = bin.charCodeAt(i);
+  return bytes;
+}
+
+function uint8ToBase64(u8) {
+  var CHUNK = 0x8000;
+  var parts = [];
+  for (var i = 0; i < u8.length; i += CHUNK) {
+    parts.push(String.fromCharCode.apply(null, u8.subarray(i, i + CHUNK)));
+  }
+  return btoa(parts.join(""));
+}
+
+async function appendMediasPage(pdfDoc, PDFLib) {
+  var photos = mediaStore.filter(function (m) { return !m.isVideo; });
+  var videos = mediaStore.filter(function (m) { return m.isVideo; });
+  /* A4 landscape (same as CAPS template) */
+  var page = pdfDoc.addPage([841.89, 595.28]);
+  var W = page.getWidth();
+  var H = page.getHeight();
+  var M = 36;
+  var y = H - M;
+  var helv = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+  var helvBold = await pdfDoc.embedFont(PDFLib.StandardFonts.HelveticaBold);
+  page.drawText("Photos et videos", { x: M, y: y - 18, size: 18, font: helvBold, color: PDFLib.rgb(0.1, 0.37, 0.66) });
+  y -= 36;
+  if (!photos.length && !videos.length) {
+    page.drawText("Aucun media joint.", { x: M, y: y, size: 11, font: helv, color: PDFLib.rgb(0.4, 0.4, 0.45) });
+    return;
+  }
+  if (photos.length) {
+    var colW = (W - 2 * M - 16) / 2;
+    var imgH = 160;
+    var col = 0;
+    for (var i = 0; i < photos.length; i++) {
+      if (col === 0 && y < M + imgH + 40) {
+        page = pdfDoc.addPage([841.89, 595.28]);
+        W = page.getWidth(); H = page.getHeight();
+        y = H - M;
+        page.drawText("Photos et videos (suite)", { x: M, y: y - 16, size: 14, font: helvBold, color: PDFLib.rgb(0.1, 0.37, 0.66) });
+        y -= 32;
+      }
+      var xPos = M + col * (colW + 16);
+      var data = photos[i].dataUrl;
+      try {
+        if (data && data.indexOf("data:image/") === 0) {
+          var bytes = dataUrlToUint8(data);
+          var img;
+          if (data.indexOf("image/png") >= 0) img = await pdfDoc.embedPng(bytes);
+          else img = await pdfDoc.embedJpg(bytes);
+          var iw = img.width, ih = img.height;
+          var scale = Math.min(colW / iw, imgH / ih);
+          var dw = iw * scale, dh = ih * scale;
+          page.drawImage(img, { x: xPos, y: y - dh, width: dw, height: dh });
+          var label = (photos[i].name || "photo").substring(0, 40);
+          page.drawText(label, { x: xPos, y: y - dh - 12, size: 8, font: helv, color: PDFLib.rgb(0.4, 0.4, 0.45) });
+        }
+      } catch (errEmb) {
+        page.drawText("(photo non integrable)", { x: xPos, y: y - 20, size: 9, font: helv, color: PDFLib.rgb(0.8, 0.2, 0.2) });
+      }
+      col++;
+      if (col === 2 || i === photos.length - 1) {
+        y -= imgH + 28;
+        col = 0;
+      }
+    }
+  }
+  if (videos.length) {
+    if (y < M + 60) {
+      page = pdfDoc.addPage([841.89, 595.28]);
+      W = page.getWidth(); H = page.getHeight();
+      y = H - M;
+    }
+    page.drawText("Videos (non integrees — trop volumineuses) :", { x: M, y: y, size: 11, font: helvBold, color: PDFLib.rgb(0.4, 0.4, 0.45) });
+    y -= 18;
+    for (var vi = 0; vi < videos.length; vi++) {
+      if (y < M + 20) {
+        page = pdfDoc.addPage([841.89, 595.28]);
+        y = page.getHeight() - M;
+      }
+      var v = videos[vi];
+      var line = "- " + (v.name || "video") + " (" + Math.round((v.size || 0) / 1024) + " Ko)";
+      page.drawText(line.substring(0, 120), { x: M + 8, y: y, size: 10, font: helv, color: PDFLib.rgb(0.15, 0.15, 0.2) });
+      y -= 14;
+    }
+  }
+}
+
+async function downloadPdfBytes(bytes, fname) {
+  if (window.ImboxAndroid && typeof window.ImboxAndroid.saveBase64 === "function") {
+    var b64 = uint8ToBase64(bytes);
+    window.ImboxAndroid.saveBase64(b64, fname, "application/pdf");
+    toast("PDF enregistre : " + fname, "ok");
+    return;
+  }
+  var blob = new Blob([bytes], { type: "application/pdf" });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement("a");
+  a.href = url;
+  a.download = fname;
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(function () {
+    try { URL.revokeObjectURL(url); } catch (e) {}
+    try { a.remove(); } catch (e2) {}
+  }, 2000);
+  toast("PDF genere : " + fname, "ok");
+}
+
+async function genPDF() {
+  updateCdnBanner();
+  if (!pdfLibReady()) {
+    toast("PDF impossible : pdf-lib absent. Verifiez pdf-lib.min.js.", "err");
+    return;
+  }
+  var shop = selectedShop || shopFromFields();
+  if (!shop.name) {
+    toast("Indiquez ou sélectionnez un magasin", "err");
+    return;
+  }
+  var tech = ($("techName").value || "").trim();
+  if (!tech) {
+    toast("Indiquez le nom du technicien", "err");
+    return;
+  }
+  var dateVal = $("svcDate").value || todayISO();
+  var visitType = ($("visitType").value || CURRENT_VISIT_TYPE || "Service").trim();
+  var oldLvl = parseLiters($("oldLevel").value);
+  if (isNaN(oldLvl)) oldLvl = 0;
+  oldLvl = Math.min(20, Math.max(0, oldLvl));
+  var filled = [];
+  var gaps = [];
+
+  try {
+    toast("Generation PDF (modele CAPS)…", "ok");
+    var res = await fetch("imbox-officiel-modele.pdf");
+    if (!res.ok) throw new Error("Modele PDF introuvable (" + res.status + ")");
+    var PDFLib = window.PDFLib;
+    var pdfDoc = await PDFLib.PDFDocument.load(await res.arrayBuffer());
+    var form = pdfDoc.getForm();
+
+    setVisitType(form, visitType);
+    filled.push("visitType→" + visitType);
+
+    var addrFull = [shop.addr, ((shop.cp || "") + " " + (shop.city || "")).trim()].filter(Boolean).join(", ");
+    var addedLvl = Math.max(0, 20 - oldLvl);
+    var oldStr = oldLvl.toFixed(3).replace(".", ",");
+    var addedStr = addedLvl.toFixed(3).replace(".", ",");
+    var ctrVal = (($("shopCtr") && $("shopCtr").value) || shop.counter || "").trim();
+    if (shop) shop.counter = ctrVal;
+    safeSetText(form, "Text1", shop.name, filled);
+    safeSetText(form, "Text2", addrFull, filled);
+    safeSetText(form, "Counter Number  numéro de compteur", ctrVal, filled);
+    safeSetText(form, "Serial Number  Numéro de série", shop.sn || "", filled);
+    safeSetText(form, "Ancien niveau de liquide avant le", oldStr + " L", filled);
+    safeSetText(form, "Text3", addedStr, filled);
+    safeSetText(form, "Nome du technician", tech, filled);
+    safeSetText(form, "Date4_af_date", formatDateFR(dateVal), filled);
+
+    var obs = ($("obsPanne").value || "").trim();
+    var pieces = ($("piecesReplaced") && $("piecesReplaced").value || "").trim();
+    var comments = ($("techComments") && $("techComments").value || "").trim();
+    safeSetText(form, "Veuillez écrire ici tout autre commentaire ou observation", comments, filled);
+    /* Sinon expliquer = obs panne ; Lesquels = liste pièces (PAS Oui/Non dans le champ texte). */
+    safeSetText(form, "Sinon veuillez expliquer Avezvous remplacé des pièces Lesquels", obs, filled);
+    safeSetText(form, "Avez-vous remplacé des pièces?", pieces, filled);
+
+    /* SERVICE Oui/Non pairs — Netlify y0..y11 order */
+    var pairs = [
+      ["Check Box12", "Check Box13", "y0"],
+      ["Check Box14", "Check Box15", "y1"],
+      ["Check Box16", "Check Box17", "y2"],
+      ["Check Box18", "Check Box19", "y3"],
+      ["Check Box20", "Check Box21", "y4"],
+      ["Check Box25", "Check Box26", "y5"],
+      ["Check Box27", "Check Box28", "y6"],
+      ["Check Box29", "Check Box30", "y7"],
+      ["Check Box31", "Check Box32", "y8"],
+      ["Check Box33", "Check Box34", "y9"],
+      ["Check Box38", "Check Box39", "y10"],
+      ["Check Box40", "Check Box41", "y11"]
+    ];
+    pairs.forEach(function (p) {
+      var val = gyn(p[2]);
+      if (p[2] === "y11" && val === "—") {
+        var hasPhotos = mediaStore.some(function (m) { return !m.isVideo; });
+        val = hasPhotos ? "Oui" : "Non";
+      }
+      if (setOuiNon(form, p[0], p[1], val)) filled.push(p[0] + "/" + p[1] + "=" + val);
+      else gaps.push(p[0]);
+    });
+
+    /* Qty: Text7 = buses plastique; Text8/9 = CI right column (NOT filtres) */
+    var q0 = ($("q0") && $("q0").value) || "";
+    var q1 = ($("q1") && $("q1").value) || "";
+    var q2 = ($("q2") && $("q2").value) || "";
+    var ciCtr = ($("ciCtr") && $("ciCtr").value) || "";
+    var ciSn = ($("ciSn") && $("ciSn").value) || "";
+    var ciTel = ($("ciTel") && $("ciTel").value) || "";
+    safeSetText(form, "Text7", q0, filled);
+    safeSetText(form, "Text8", ciCtr, filled);
+    /* Text9: leave empty — was wrongly used for filter qty (right column) */
+
+    /* PANNE */
+    var repaired = gyn("y12");
+    if (setOuiNon(form, "Check Box22", "Check Box24", repaired)) filled.push("Check Box22/24=" + repaired);
+    /* Check Box48/49 = Photo CI (y~278), PAS pièces — ne pas les piloter depuis pieces. */
+
+    /* Circuit imprimé — exact template field names */
+    safeSetText(form, "Circuit Imprimé Remplacement", ciSn, filled);
+    safeSetText(form, "Nro de téléphone du nouuveau  c imprimé", ciTel, filled);
+    /* Check Box48/49 = CI photo row */
+    if (setOuiNon(form, "Check Box48", "Check Box49", gyn("y13"))) filled.push("CI photo y13");
+
+    /* INSTALLATION — Check Box50–55 Oui/Non only; never write LTE text field */
+    setOuiNon(form, "Check Box50", "Check Box51", gyn("y17")); // transport damage
+    setOuiNon(form, "Check Box52", "Check Box53", gyn("y18")); // spray
+    setOuiNon(form, "Check Box54", "Check Box55", gyn("y19")); // LTE
+    filled.push("Installation damage/spray/LTE=" + [gyn("y17"), gyn("y18"), gyn("y19")].join("/"));
+
+    /* FLAGSHIP */
+    safeSetText(form, "Version du Software", ($("swVersion") && $("swVersion").value) || "", filled);
+    /* fluid2: no matching AcroForm on template — skip */
+    setOuiNon(form, "Check Box42", "Check Box43", gyn("y14"));
+    setOuiNon(form, "Check Box44", "Check Box45", gyn("y15"));
+    setOuiNon(form, "Check Box46", "Check Box47", gyn("y16"));
+    filled.push("Flagship LTE/WiFi/photos=" + [gyn("y14"), gyn("y15"), gyn("y16")].join("/"));
+
+    /* Exchange / Enlèvement — exact template names */
+    safeSetText(form, "Entrez le numéro de série de la nouvelle unité enlevée", ($("remSn") && $("remSn").value) || "", filled);
+    safeSetText(form, "Entrez le numéro de compteur de la nouvelle unité_2", ($("remCtr") && $("remCtr").value) || "", filled);
+    safeSetText(form, "Entrez le numéro de série de la nouvelle unité", ($("newSn") && $("newSn").value) || "", filled);
+    safeSetText(form, "Entrez le numéro de compteur de la nouvelle unité", ($("newCtr") && $("newCtr").value) || "", filled);
+
+    /* Consommables Text4/5/6 */
+    safeSetText(form, "Text4", $("cntTapisAv").value || "0", filled);
+    safeSetText(form, "Text5", $("cntTapisAr").value || "0", filled);
+    safeSetText(form, "Text6", $("cntLingettes").value || "0", filled);
+
+    /* Filtres qty = fill_51 (AcroForm TU: Avez-vous remplacé des filtres ? Combien ?) */
+    safeSetText(form, "fill_51", q2, filled);
+
+    /* Buses laiton: no AcroForm qty field — draw beside the question row */
+    try {
+      if (q1) {
+        var page0 = pdfDoc.getPage(0);
+        var helvQty = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+        page0.drawText(String(q1), { x: 330, y: 338, size: 10, font: helvQty, color: PDFLib.rgb(0, 0, 0) });
+        filled.push("q1(drawText buses laiton)");
+      }
+    } catch (qtyDrawErr) {
+      gaps.push("qty drawText: " + (qtyDrawErr && qtyDrawErr.message ? qtyDrawErr.message : qtyDrawErr));
+    }
+
+    /* Signature stamp — draw PNG over Cachet et signature widget, leave field empty */
+    try {
+      safeSetText(form, "Cachet et signature", "", null);
+      var sigUrl = getSignatureDataUrl();
+      if (sigUrl) {
+        var sigField = form.getTextField("Cachet et signature");
+        var rect = sigField.acroField.getWidgets()[0].getRectangle();
+        var page0sig = pdfDoc.getPage(0);
+        var pngBytes = dataUrlToUint8(sigUrl);
+        var sigImg = await pdfDoc.embedPng(pngBytes);
+        var pad = 2;
+        var maxW = Math.max(10, rect.width - pad * 2);
+        var maxH = Math.max(10, rect.height - pad * 2);
+        var sc = Math.min(maxW / sigImg.width, maxH / sigImg.height);
+        var sw = sigImg.width * sc;
+        var sh = sigImg.height * sc;
+        page0sig.drawImage(sigImg, {
+          x: rect.x + pad,
+          y: rect.y + pad,
+          width: sw,
+          height: sh
+        });
+        filled.push("signature(drawImage)");
+      } else {
+        gaps.push("signature vide");
+      }
+    } catch (sigErr) {
+      gaps.push("signature: " + (sigErr && sigErr.message ? sigErr.message : sigErr));
+    }
+
+    /* Do NOT flatten — keep AcroForm editable */
+    await appendMediasPage(pdfDoc, PDFLib);
+
+    try {
+      var helvApp = await pdfDoc.embedFont(PDFLib.StandardFonts.Helvetica);
+      form.updateFieldAppearances(helvApp);
+    } catch (appErr) {
+      gaps.push("appearances: " + (appErr && appErr.message ? appErr.message : appErr));
+    }
+
+    var outBytes = await pdfDoc.save({ updateFieldAppearances: true });
+    var fname = "IMBOX_" + (shop.sn || "report").replace(/[^\w\-]+/g, "_") + "_" + dateVal + ".pdf";
+    await downloadPdfBytes(outBytes, fname);
+    try {
+      window.__IMBOX_LAST_PDF_FILLED = filled.slice();
+      window.__IMBOX_LAST_PDF_GAPS = gaps.slice();
+      console.log("IMBOX PDF filled:", filled);
+      console.log("IMBOX PDF gaps:", gaps);
+    } catch (eLog) {}
+  } catch (err) {
+    console.error(err);
+    toast("Erreur PDF : " + (err && err.message ? err.message : err), "err");
+  }
+}
+
+/* ---- Reset ---- */
+function resetForm() {
+  if (!confirm("Reinitialiser tout le formulaire ?")) return;
+  clearShop();
+  $("svcDate").value = todayISO();
+  $("techName").value = "";
+  setVisitTypeUI("Service");
+  $("oldLevel").value = "0";
+  updateAdded();
+  $("cntTapisAv").value = "0";
+  $("cntTapisAr").value = "0";
+  $("cntLingettes").value = "0";
+  $("obsPanne").value = "";
+  if ($("piecesReplaced")) $("piecesReplaced").value = "";
+  if ($("techComments")) $("techComments").value = "";
+  ["ciSn","ciCtr","ciTel","swVersion","fluid2","remSn","remCtr","newSn","newCtr"].forEach(function (id) {
+    var el = $(id); if (el) el.value = "";
+  });
+  clearAllOuiNon();
+  mediaStore = [];
+  renderMedia();
+  clearSignature();
+  toast("Formulaire reinitialise", "ok");
+}
+
+/* ---- Init ---- */
+function init() {
+  try {
+    $("dbBadge").textContent = DB.length + " magasins · base embarquée";
+    var hint = $("shopCountHint");
+    if (hint) {
+      hint.textContent = DB.length + " magasins préremplis (recherche nom / S/N / ville / CP · accents ignorés). Introuvable → Saisie manuelle.";
+    }
+    unlockShopFields();
+    $("svcDate").value = todayISO();
+    setVisitTypeUI("Service");
+    bindOuiNonToggles();
+    document.querySelectorAll("#visitTypes .tb").forEach(function (btn) {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault();
+        setVisitTypeUI(btn.getAttribute("data-type") || "Service");
+      });
+    });
+
+    var searchTimer = null;
+    $("shopSearch").addEventListener("input", function () {
+      clearTimeout(searchTimer);
+      var q = this.value;
+      searchTimer = setTimeout(function () { renderSuggestions(searchShops(q)); }, 80);
+    });
+    $("shopSearch").addEventListener("focus", function () {
+      if (this.value) renderSuggestions(searchShops(this.value));
+    });
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".search-wrap")) {
+        $("shopSuggestions").className = "";
+      }
+    });
+    document.addEventListener("touchstart", function (e) {
+      if (!e.target.closest(".search-wrap")) {
+        $("shopSuggestions").className = "";
+      }
+    }, { passive: true });
+
+    $("btnManual").addEventListener("click", enableManualShop);
+    $("btnClearShop").addEventListener("click", clearShop);
+
+    var oldLevel = $("oldLevel");
+    oldLevel.readOnly = false;
+    oldLevel.removeAttribute("readonly");
+    ["input","change","keyup","blur"].forEach(function (ev) {
+      oldLevel.addEventListener(ev, function () { updateAdded({ snap: ev === "blur" }); });
+    });
+    $("liqMinus").addEventListener("click", function (e) { e.preventDefault(); bumpLiquid(-0.5); });
+    $("liqPlus").addEventListener("click", function (e) { e.preventDefault(); bumpLiquid(0.5); });
+    updateAdded({ snap: true });
+
+    document.querySelectorAll(".counter button").forEach(function (btn) {
+      function doBump(e) {
+        e.preventDefault();
+        bumpCounter(btn.getAttribute("data-target"), parseInt(btn.getAttribute("data-dir"), 10));
+      }
+      btn.addEventListener("click", doBump);
+      btn.addEventListener("touchend", doBump, { passive: false });
+    });
+    ["cntTapisAv","cntTapisAr","cntLingettes"].forEach(function (id) {
+      var el = $(id);
+      el.readOnly = false;
+      el.removeAttribute("readonly");
+      el.addEventListener("change", function () { clampCounterInput(el); });
+      el.addEventListener("blur", function () { clampCounterInput(el); });
+    });
+
+    /* Soft keyboard: keep focused fields visible above sticky PDF bar */
+    document.addEventListener("focusin", function (e) {
+      var t = e.target;
+      if (!t || !t.matches) return;
+      if (!t.matches("input, textarea, select")) return;
+      setTimeout(function () {
+        try { t.scrollIntoView({ block: "center", behavior: "smooth" }); } catch (err) {
+          try { t.scrollIntoView(true); } catch (e2) {}
+        }
+      }, 320);
+    });
+
+    function bindMediaInput(id) {
+      var el = $(id);
+      if (!el) return;
+      el.addEventListener("change", function () {
+        if (this.files && this.files.length) handleMediaFiles(this.files);
+        this.value = "";
+      });
+    }
+    bindMediaInput("mediaInputGallery");
+    bindMediaInput("mediaInputCamera");
+
+
+    $("sigClear").addEventListener("click", clearSignature);
+    $("btnPdf").addEventListener("click", genPDF);
+    $("btnReset").addEventListener("click", resetForm);
+
+    window.addEventListener("resize", function () {
+      var had = sigPad.hasInk;
+      var data = had ? $("sigCanvas").toDataURL("image/png") : null;
+      initSignature();
+      if (data) {
+        var img = new Image();
+        img.onload = function () {
+          var c = $("sigCanvas");
+          var ctx = c.getContext("2d");
+          var dpr = window.devicePixelRatio || 1;
+          ctx.setTransform(1, 0, 0, 1, 0, 0);
+          ctx.drawImage(img, 0, 0, c.width, c.height);
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.lineWidth = 2.4;
+          ctx.lineCap = "round";
+          ctx.lineJoin = "round";
+          ctx.strokeStyle = "#1a1a2e";
+          sigPad.hasInk = true;
+        };
+        img.src = data;
+      }
+    });
+
+    setTimeout(initSignature, 60);
+    setTimeout(updateCdnBanner, 400);
+    setTimeout(updateCdnBanner, 1500);
+  } catch (err) {
+    console.error(err);
+    toast("Erreur init : " + (err && err.message ? err.message : err), "err");
+  }
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", init);
+} else {
+  init();
+}
+
+</script>
+<script>
+/* ============================================================
+   IMBOX Report v2.0 — couche UI (sections repliables, progression,
+   stepper, compteurs, jauge). N'altère AUCUNE logique métier / PDF.
+   ============================================================ */
+(function () {
+  "use strict";
+  var CHECK = '<svg class="i" viewBox="0 0 24 24"><path d="M5 12.5l4.2 4.2L19 7"/></svg>';
+  var SECTIONS = [
+    { id: "sec-type", label: "Type", req: false },
+    { id: "sec-magasin", label: "Magasin", req: true },
+    { id: "sec-infos", label: "Infos & liquide", req: true },
+    { id: "sec-service", label: "Service", req: true },
+    { id: "sec-panne", label: "Panne", req: false },
+    { id: "sec-ci", label: "Circuit imprimé", req: false },
+    { id: "sec-installation", label: "Installation", req: false },
+    { id: "sec-flagship", label: "Flagship", req: false },
+    { id: "sec-exchange", label: "Échange", req: false },
+    { id: "sec-media", label: "Photos", req: true },
+    { id: "sec-tech", label: "Technicien", req: true },
+    { id: "sec-signature", label: "Signature", req: true }
+  ];
+  function el(id) { return document.getElementById(id); }
+  function val(id) { var e = el(id); return e ? String(e.value || "").trim() : ""; }
+  function ans(id) { var c = el(id); return !!(c && c.querySelector(".yb.on")); }
+  function countAns(ids) { var n = 0; ids.forEach(function (i) { if (ans(i)) n++; }); return n; }
+  function range(a, b) { var r = []; for (var i = a; i <= b; i++) r.push("y" + i); return r; }
+  function photos() { try { return (window.mediaStore || []).filter(function (m) { return !m.isVideo; }).length; } catch (e) { return 0; } }
+  function hasInk() { try { return !!(window.sigPad && window.sigPad.hasInk); } catch (e) { return false; } }
+  function lvlOk() {
+    var v = parseFloat(val("oldLevel").replace(/\s/g, "").replace(",", "."));
+    return !isNaN(v) && v >= 0 && v <= 20;
+  }
+
+  /* status: {state: done|partial|empty, pill: text, frac: 0..1} */
+  function status(id) {
+    var n;
+    switch (id) {
+      case "sec-type": return { state: "done", pill: val("visitType") || "Service", frac: 1 };
+      case "sec-magasin": return val("shopName") ? { state: "done", pill: val("shopSn") ? "S/N " + val("shopSn") : "OK", frac: 1 } : { state: "empty", pill: "À faire", frac: 0 };
+      case "sec-infos":
+        n = (val("shopName") ? 1 : 0) + (val("shopSn") ? 1 : 0) + (lvlOk() ? 1 : 0);
+        return { state: n === 3 ? "done" : n ? "partial" : "empty", pill: n + "/3", frac: n / 3 };
+      case "sec-service":
+        n = countAns(range(0, 11));
+        return { state: n === 12 ? "done" : n ? "partial" : "empty", pill: n + "/12", frac: n / 12 };
+      case "sec-panne":
+        n = (ans("y12") ? 1 : 0) + (val("obsPanne") ? 1 : 0) + (val("piecesReplaced") ? 1 : 0);
+        return { state: n ? "done" : "empty", pill: n ? "Renseigné" : "Optionnel", frac: n ? 1 : 0 };
+      case "sec-ci":
+        n = (val("ciSn") ? 1 : 0) + (val("ciCtr") ? 1 : 0) + (val("ciTel") ? 1 : 0) + (ans("y13") ? 1 : 0);
+        return { state: n ? "done" : "empty", pill: n ? "Renseigné" : "Optionnel", frac: n ? 1 : 0 };
+      case "sec-installation":
+        n = countAns(range(17, 19));
+        return { state: n === 3 ? "done" : n ? "partial" : "empty", pill: n ? n + "/3" : "Optionnel", frac: n / 3 };
+      case "sec-flagship":
+        n = countAns(range(14, 16)) + (val("swVersion") ? 1 : 0) + (val("fluid2") ? 1 : 0);
+        return { state: n ? "done" : "empty", pill: n ? "Renseigné" : "Optionnel", frac: n ? 1 : 0 };
+      case "sec-exchange":
+        n = ["remSn", "remCtr", "newSn", "newCtr"].filter(function (i) { return !!val(i); }).length;
+        return { state: n ? "done" : "empty", pill: n ? n + "/4" : "Optionnel", frac: n / 4 };
+      case "sec-media":
+        n = photos();
+        return { state: n ? "done" : "empty", pill: n + "/8", frac: n ? 1 : 0 };
+      case "sec-tech":
+        n = (val("techName") ? 1 : 0) + (val("svcDate") ? 1 : 0);
+        return { state: n === 2 ? "done" : n ? "partial" : "empty", pill: n === 2 ? "OK" : "Nom requis", frac: n / 2 };
+      case "sec-signature": return hasInk() ? { state: "done", pill: "Signé", frac: 1 } : { state: "empty", pill: "À signer", frac: 0 };
+    }
+    return { state: "empty", pill: "", frac: 0 };
+  }
+
+  var navButtons = [];
+  function buildNav() {
+    var chips = el("stepper"), vnav = el("vnav");
+    SECTIONS.forEach(function (s, i) {
+      [chips, vnav].forEach(function (host, k) {
+        if (!host) return;
+        var b = document.createElement("button");
+        b.type = "button";
+        b.className = k === 0 ? "step" : "";
+        b.setAttribute("data-sec", s.id);
+        b.innerHTML = '<span class="dot">' + (i + 1) + "</span><span>" + s.label + "</span>" + (k === 1 && !s.req && s.id !== "sec-type" ? '<span class="opt">opt.</span>' : "");
+        b.addEventListener("click", function () { goTo(s.id); });
+        host.appendChild(b);
+        navButtons.push(b);
+      });
+    });
+  }
+
+  function setCollapsed(card, collapsed) {
+    if (!card) return;
+    var head = card.querySelector(".card-head");
+    if (collapsed) {
+      card.classList.remove("open-done");
+      card.classList.add("collapsed");
+    } else {
+      card.classList.remove("collapsed");
+      setTimeout(function () {
+        if (!card.classList.contains("collapsed")) card.classList.add("open-done");
+        if (card.querySelector("#sigCanvas") && !hasInk() && typeof window.initSignature === "function") window.initSignature();
+      }, 380);
+    }
+    if (head) head.setAttribute("aria-expanded", collapsed ? "false" : "true");
+  }
+
+  function goTo(id) {
+    var card = el(id);
+    if (!card) return;
+    setCollapsed(card, false);
+    card.scrollIntoView({ behavior: "smooth", block: "start" });
+    setActive(id);
+  }
+
+  function setActive(id) {
+    navButtons.forEach(function (b) { b.classList.toggle("active", b.getAttribute("data-sec") === id); });
+    var chip = document.querySelector('#stepper [data-sec="' + id + '"]');
+    var bar = el("stepper");
+    if (chip && bar) {
+      var left = chip.offsetLeft - bar.clientWidth / 2 + chip.clientWidth / 2;
+      try { bar.scrollTo({ left: left, behavior: "smooth" }); } catch (e) { bar.scrollLeft = left; }
+    }
+  }
+
+  function bindCards() {
+    document.querySelectorAll(".card").forEach(function (card) {
+      var head = card.querySelector(".card-head");
+      if (!head) return;
+      head.addEventListener("click", function () { setCollapsed(card, !card.classList.contains("collapsed")); });
+    });
+  }
+
+  function spy() {
+    if (!("IntersectionObserver" in window)) return;
+    var vis = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { vis[e.target.id] = e.isIntersecting ? e.intersectionRect.top : null; });
+      var best = null, bestTop = Infinity;
+      SECTIONS.forEach(function (s) { var t = vis[s.id]; if (t != null && t < bestTop) { bestTop = t; best = s.id; } });
+      if (best) setActive(best);
+    }, { rootMargin: "-150px 0px -45% 0px", threshold: 0 });
+    SECTIONS.forEach(function (s) { var c = el(s.id); if (c) io.observe(c); });
+  }
+
+  function refresh() {
+    var reqTotal = 0, reqDone = 0;
+    SECTIONS.forEach(function (s) {
+      var st = status(s.id);
+      if (s.req) { reqTotal++; reqDone += st.frac; }
+      var card = el(s.id);
+      var pill = card && card.querySelector(".card-head .pill");
+      if (pill) {
+        pill.textContent = st.pill;
+        pill.className = "pill " + (st.state === "done" ? "ok" : st.state === "partial" ? "part" : (!s.req ? "opt" : ""));
+      }
+      navButtons.forEach(function (b) {
+        if (b.getAttribute("data-sec") !== s.id) return;
+        b.classList.toggle("done", st.state === "done");
+        b.classList.toggle("partial", st.state === "partial");
+        var dot = b.querySelector(".dot");
+        var idx = SECTIONS.indexOf(s) + 1;
+        var want = st.state === "done" ? CHECK : String(idx);
+        if (dot && dot.getAttribute("data-v") !== want) { dot.innerHTML = want; dot.setAttribute("data-v", want); }
+      });
+    });
+    var pct = Math.round((reqDone / reqTotal) * 100);
+    var bar = el("progressFill"); if (bar) bar.style.width = pct + "%";
+    var txt = el("progressTxt"); if (txt) txt.textContent = pct + " % complété";
+    var C = 2 * Math.PI * 27;
+    var sr = el("sideRingFg"); if (sr) { sr.style.strokeDasharray = C; sr.style.strokeDashoffset = C * (1 - pct / 100); }
+    var sp = el("sidePct"); if (sp) sp.textContent = pct + " %";
+    var C2 = 2 * Math.PI * 14;
+    var br = el("btnRingFg"); if (br) { br.style.strokeDasharray = C2; br.style.strokeDashoffset = C2 * (1 - pct / 100); }
+    var bs = el("btnPdfSub"); if (bs) bs.textContent = pct >= 100 ? "Rapport complet · modèle officiel CAPS" : pct + " % · modèle officiel CAPS";
+    /* counters meters */
+    ["cntTapisAv", "cntTapisAr", "cntLingettes"].forEach(function (id) {
+      var i = el(id), m = el("m_" + id);
+      if (!i || !m) return;
+      var max = parseInt(i.getAttribute("max"), 10) || 1, v = parseInt(i.value, 10) || 0;
+      var p = Math.max(0, Math.min(1, v / max));
+      m.style.width = (p * 100) + "%";
+      m.classList.toggle("full", v >= max);
+    });
+    /* liquid gauge */
+    var v = parseFloat(val("oldLevel").replace(/\s/g, "").replace(",", "."));
+    var ok = !isNaN(v) && v >= 0 && v <= 20;
+    var o = el("tankOld"), a = el("tankAdd");
+    if (o) o.style.width = ok ? (v / 20 * 100) + "%" : "0%";
+    if (a) a.style.width = ok ? ((20 - v) / 20 * 100) + "%" : "0%";
+    /* signature placeholder */
+    var ph = el("sigPh"); if (ph) ph.style.opacity = hasInk() ? "0" : "1";
+    /* sidebar shop */
+    var ss = el("sideShop");
+    if (ss) {
+      var nm = val("shopName");
+      ss.innerHTML = nm ? "<b></b><span></span>" : "<span>Aucun magasin sélectionné</span>";
+      if (nm) { ss.querySelector("b").textContent = nm; ss.querySelector("span").textContent = (val("shopSn") ? "S/N " + val("shopSn") + " · " : "") + (val("shopCityCp") || ""); }
+    }
+  }
+  var pending = false;
+  function schedule() {
+    if (pending) return;
+    pending = true;
+    (window.requestAnimationFrame || setTimeout)(function () { pending = false; refresh(); });
+  }
+
+  function start() {
+    buildNav();
+    bindCards();
+    spy();
+    ["input", "change", "click", "pointerup", "touchend", "mouseup", "keyup"].forEach(function (ev) {
+      document.addEventListener(ev, function () { setTimeout(schedule, 30); }, true);
+    });
+    setInterval(refresh, 1200);
+    refresh();
+    setActive("sec-type");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start);
+  else start();
+})();
+
+</script>
+<script>
+/* ============================================================
+   IMBOX Report v2.0 — Agenda / Planning (local à l'appareil)
+   Données stockées uniquement dans localStorage (aucune donnée
+   personnelle dans le site publié).
+   ============================================================ */
+(function () {
+  "use strict";
+  var KEY = "imbox.v2.agenda", TKEY = "imbox.v2.tarifs";
+  var IDF = ["75", "77", "78", "91", "92", "93", "94", "95"];
+  var DEF_TARIFS = { "IDF": { "Dépannage": 80, "Entretien": 60 }, "Région": { "Dépannage": 80, "Entretien": 60 } };
+  var MONTHS = { "jan": 1, "janv": 1, "janvier": 1, "january": 1, "fev": 2, "fevr": 2, "fevrier": 2, "feb": 2, "february": 2,
+    "mar": 3, "mars": 3, "march": 3, "avr": 4, "avril": 4, "apr": 4, "april": 4, "mai": 5, "may": 5,
+    "juin": 6, "jun": 6, "june": 6, "juil": 7, "juillet": 7, "jul": 7, "july": 7, "aou": 8, "aout": 8, "aug": 8, "august": 8,
+    "sep": 9, "sept": 9, "septembre": 9, "september": 9, "oct": 10, "octobre": 10, "october": 10,
+    "nov": 11, "novembre": 11, "november": 11, "dec": 12, "decembre": 12, "december": 12 };
+
+  function el(id) { return document.getElementById(id); }
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function fold(s) { return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase(); }
+  function pad(n) { return String(n).padStart(2, "0"); }
+  function say(m, t) { if (typeof window.toast === "function") window.toast(m, t); }
+
+  /* ---------- storage ---------- */
+  function load() { try { var a = JSON.parse(localStorage.getItem(KEY) || "[]"); return Array.isArray(a) ? a : []; } catch (e) { return []; } }
+  function save(list) { try { localStorage.setItem(KEY, JSON.stringify(list)); } catch (e) { say("Stockage local indisponible", "err"); } }
+  function tarifs() {
+    try { var t = JSON.parse(localStorage.getItem(TKEY) || "null"); if (t && t.IDF && t["Région"]) return t; } catch (e) {}
+    return JSON.parse(JSON.stringify(DEF_TARIFS));
+  }
+  function saveTarifs(t) { try { localStorage.setItem(TKEY, JSON.stringify(t)); } catch (e) {} }
+  var items = load();
+
+  /* ---------- parsing helpers ---------- */
+  function parseDate(raw, refYear) {
+    var s = String(raw == null ? "" : raw).trim();
+    if (!s) return "";
+    var y = refYear || new Date().getFullYear(), m;
+    if ((m = s.match(/^(\d{4})-(\d{1,2})-(\d{1,2})/))) return m[1] + "-" + pad(m[2]) + "-" + pad(m[3]);
+    if ((m = s.match(/^(\d{1,2})[\/.\-](\d{1,2})(?:[\/.\-](\d{2,4}))?$/))) {
+      var yy = m[3] ? (m[3].length === 2 ? 2000 + parseInt(m[3], 10) : parseInt(m[3], 10)) : y;
+      var d1 = parseInt(m[1], 10), mo = parseInt(m[2], 10);
+      if (mo >= 1 && mo <= 12 && d1 >= 1 && d1 <= 31) return yy + "-" + pad(mo) + "-" + pad(d1);
+      return "";
+    }
+    if ((m = fold(s).match(/^(?:[a-z]+\.?\s+)?(\d{1,2})(?:er)?[\s\-\/.]*([a-z]+)\.?(?:[\s\-\/.]*(\d{2,4}))?$/))) {
+      var mon = MONTHS[m[2]] || MONTHS[m[2].slice(0, 4)] || MONTHS[m[2].slice(0, 3)];
+      if (!mon) return "";
+      var y2 = m[3] ? (m[3].length === 2 ? 2000 + parseInt(m[3], 10) : parseInt(m[3], 10)) : y;
+      return y2 + "-" + pad(mon) + "-" + pad(parseInt(m[1], 10));
+    }
+    if ((m = s.match(/^(\d{5})$/))) { /* numéro de série de date Excel */
+      var n = parseInt(m[1], 10);
+      if (n > 40000 && n < 60000) { var dt = new Date(Date.UTC(1899, 11, 30) + n * 86400000); return dt.getUTCFullYear() + "-" + pad(dt.getUTCMonth() + 1) + "-" + pad(dt.getUTCDate()); }
+    }
+    return "";
+  }
+  function parseType(raw) {
+    var f = fold(raw);
+    if (/breakdown|depann|panne|curati|repar/.test(f)) return "Dépannage";
+    if (/service|entretien|maint|prevent|visite/.test(f)) return "Entretien";
+    return "";
+  }
+  function zoneOf(cp) {
+    var d = String(cp || "").replace(/\D/g, "").slice(0, 2);
+    if (!d) return "";
+    return IDF.indexOf(d) >= 0 ? "IDF" : "Région";
+  }
+  function splitStore(txt) {
+    var s = String(txt || "").replace(/\s+/g, " ").trim();
+    var cpM = s.match(/\b(\d{5})\b/);
+    var before = s, cp = "", city = "", extra = "";
+    if (cpM) {
+      cp = cpM[1]; before = s.slice(0, cpM.index).trim();
+      var after = s.slice(cpM.index + 5).trim();
+      var pm = after.match(/\(([^)]*)\)/); if (pm) extra = pm[1].trim();
+      city = after.replace(/\([^)]*\)/g, "").replace(/[,;\-–]+$/, "").trim();
+    }
+    before = before.replace(/[,;\-–]+$/, "").trim();
+    var name = "", street = before;
+    var dm = before.match(/^(.*?)\s*(\b\d{1,4}(?:\s?(?:bis|ter))?,?\s+[A-Za-zÀ-ÿ].*)$/i);
+    if (dm) { name = dm[1].trim(); street = dm[2].trim(); }
+    else if (!cpM) { name = before; street = ""; }
+    var addr = street + (extra ? " – " + extra : "");
+    if (!name) name = [street, city].filter(Boolean).join(", ") || s;
+    return { name: name, addr: addr, cp: cp, city: city, full: s };
+  }
+  function dbFind(sn) {
+    try { var db = window.DB || []; for (var i = 0; i < db.length; i++) if (String(db[i].sn) === String(sn)) return db[i]; } catch (e) {}
+    return null;
+  }
+  function splitRow(line, delim) {
+    if (delim === "\t") return line.split("\t");
+    var out = [], cur = "", q = false;
+    for (var i = 0; i < line.length; i++) {
+      var c = line[i];
+      if (q) { if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+      else if (c === '"') q = true;
+      else if (c === delim) { out.push(cur); cur = ""; }
+      else cur += c;
+    }
+    out.push(cur);
+    return out;
+  }
+  function norm(o, prev) {
+    /* o: {sn, store, cp, date, type, consigne} raw → intervention */
+    var st = splitStore(o.store || "");
+    var cpRaw = String(o.cp || "").replace(/\D/g, "") || st.cp;
+    var shop = dbFind(o.sn);
+    var it = {
+      id: "a" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7),
+      sn: String(o.sn || "").trim(),
+      name: shop ? shop.name : (o.name || st.name),
+      addr: shop ? shop.addr : (o.addr || st.addr),
+      cp: shop ? shop.cp : (st.cp || (cpRaw.length === 5 ? cpRaw : "")),
+      dept: (cpRaw || st.cp || (shop && shop.cp) || "").slice(0, 2),
+      city: shop ? shop.city : (o.city || st.city),
+      storeText: st.full,
+      date: o.date && /^\d{4}-\d{2}-\d{2}$/.test(o.date) ? o.date : parseDate(o.date),
+      type: parseType(o.type) || o.type || "",
+      notes: String(o.consigne || o.notes || "").trim(),
+      inDb: !!shop,
+      done: !!o.done
+    };
+    it.zone = zoneOf(it.dept || it.cp);
+    return it;
+  }
+  function parseText(text) {
+    text = String(text || "").replace(/^\uFEFF/, "").trim();
+    var res = { rows: [], errors: [] };
+    if (!text) return res;
+    if (/^[\[{]/.test(text)) {
+      try {
+        var j = JSON.parse(text);
+        var arr = Array.isArray(j) ? j : (j.interventions || j.items || []);
+        arr.forEach(function (o, i) {
+          var it = norm({ sn: o.sn, store: o.store || o.magasin || [o.name, o.address || o.addr].filter(Boolean).join(" "), name: o.name, addr: o.address || o.addr, city: o.city,
+            cp: o.cp || o.dept || o.postalCode, date: o.date, type: o.type, consigne: o.consigne || o.notes });
+          if (!it.sn || !it.date) res.errors.push("Entrée " + (i + 1) + " incomplète (S/N ou date)"); else res.rows.push(it);
+        });
+      } catch (e) { res.errors.push("JSON invalide : " + e.message); }
+      return res;
+    }
+    var lines = text.split(/\r?\n/).filter(function (l) { return l.trim(); });
+    var delim = text.indexOf("\t") >= 0 ? "\t" : (text.indexOf(";") >= 0 ? ";" : ",");
+    var prev = null;
+    lines.forEach(function (line, li) {
+      var cells = splitRow(line, delim).map(function (c) { return c.trim(); });
+      var snI = -1;
+      for (var i = 0; i < cells.length; i++) if (/^\d{6,}$/.test(cells[i].replace(/\s/g, ""))) { snI = i; break; }
+      if (snI < 0) { if (li > 0 || !/s\/?n|serial|magasin|date|type/i.test(line)) res.errors.push("Ligne " + (li + 1) + " ignorée (pas de S/N) : " + line.slice(0, 60)); return; }
+      var o = { sn: cells[snI].replace(/\s/g, ""), store: "", cp: "", date: "", type: "", consigne: "" };
+      var typeI = -1, rest = [];
+      for (var k = 0; k < cells.length; k++) {
+        if (k === snI) continue;
+        var c = cells[k];
+        if (!c) continue;
+        if (!o.type && parseType(c) && c.length < 30) { o.type = c; typeI = k; continue; }
+        if (!o.date && parseDate(c)) { o.date = c; continue; }
+        if (!o.cp && /^\d{2}(\d{3})?$/.test(c)) { o.cp = c; continue; }
+        rest.push({ k: k, c: c });
+      }
+      rest.forEach(function (r) {
+        if (typeI >= 0 && r.k > typeI) o.consigne = o.consigne ? o.consigne + " " + r.c : r.c;
+        else if (!o.store || r.c.length > o.store.length) { if (o.store && typeI < 0) o.consigne = o.store; o.store = r.c; }
+        else if (typeI < 0) o.consigne = r.c;
+      });
+      if (prev) { /* recopie vers le bas (cellules fusionnées Excel) */
+        if (!o.store || /^(idem|same|"|〃)/i.test(o.store)) o.store = prev.store;
+        if (!o.cp) o.cp = prev.cp;
+        if (!o.date) o.date = prev.date;
+        if (!o.type) o.type = prev.type;
+        if (!o.consigne || /^(idem|same)/i.test(o.consigne)) o.consigne = prev.consigne;
+      }
+      prev = o;
+      var it = norm(o);
+      if (!it.date) res.errors.push("Ligne " + (li + 1) + " : date illisible");
+      if (!it.type) res.errors.push("Ligne " + (li + 1) + " : type inconnu (breakdown / service)");
+      if (it.date) res.rows.push(it);
+    });
+    return res;
+  }
+  function price(it, t) {
+    t = t || tarifs();
+    var z = it.zone === "IDF" ? "IDF" : "Région";
+    var v = t[z] && t[z][it.type];
+    return typeof v === "number" && !isNaN(v) ? v : 0;
+  }
+  function eur(n) { return (Math.round(n * 100) / 100).toLocaleString("fr-FR") + " €"; }
+  function dateLong(iso) {
+    try { var p = iso.split("-"); var d = new Date(+p[0], +p[1] - 1, +p[2]);
+      var s = d.toLocaleDateString("fr-FR", { weekday: "long", day: "numeric", month: "long", year: "numeric" });
+      return s.charAt(0).toUpperCase() + s.slice(1); } catch (e) { return iso; }
+  }
+
+  /* ---------- render ---------- */
+  var preview = null;
+  function typeCls(t) { return t === "Dépannage" ? "t-dep" : "t-ent"; }
+  function render() {
+    var t = tarifs();
+    var list = items.slice().sort(function (a, b) { return (a.date || "").localeCompare(b.date || "") || (a.type || "").localeCompare(b.type || ""); });
+    var total = 0, todo = 0, doneSum = 0;
+    list.forEach(function (it) { var p = price(it, t); total += p; if (!it.done) todo++; else doneSum += p; });
+    el("agKpiN").textContent = list.length;
+    el("agKpiTodo").textContent = todo;
+    el("agKpiEur").textContent = eur(total);
+    el("agKpiDone").textContent = eur(doneSum) + " réalisés";
+    var tabN = el("tabAgendaN"); if (tabN) { tabN.textContent = todo; tabN.style.display = todo ? "" : "none"; }
+    var host = el("agList");
+    if (!list.length) {
+      host.innerHTML = '<div class="ag-empty"><div class="ag-empty-ic">📅</div><b>Aucune intervention planifiée</b><p>Copiez les lignes de votre planning (Excel / e-mail) puis « Importer un planning », ou ajoutez une intervention.</p></div>';
+      return;
+    }
+    var groups = {}, order = [];
+    list.forEach(function (it) { var k = it.date || "—"; if (!groups[k]) { groups[k] = []; order.push(k); } groups[k].push(it); });
+    host.innerHTML = order.map(function (k) {
+      var g = groups[k], sum = 0;
+      g.forEach(function (it) { sum += price(it, t); });
+      return '<section class="ag-day"><header class="ag-day-h"><div><b>' + esc(k === "—" ? "Sans date" : dateLong(k)) + '</b><small>' + g.length + " intervention" + (g.length > 1 ? "s" : "") + '</small></div><span class="ag-sum">' + eur(sum) + "</span></header>" +
+        g.map(function (it) {
+          return '<article class="ag-item' + (it.done ? " done" : "") + '" data-id="' + esc(it.id) + '">' +
+            '<div class="ag-tags"><span class="tag ' + typeCls(it.type) + '">' + esc(it.type || "?") + '</span>' +
+            (it.zone ? '<span class="tag t-zone">' + esc(it.zone) + (it.dept ? " · " + esc(it.dept) : "") + "</span>" : "") +
+            '<span class="tag ' + (it.inDb ? "t-db" : "t-nodb") + '">' + (it.inDb ? "Base ✓" : "Hors base") + '</span><span class="ag-price">' + eur(price(it, t)) + "</span></div>" +
+            '<div class="ag-name">' + esc(it.name || it.storeText || "Magasin") + '</div>' +
+            '<div class="ag-sn">S/N ' + esc(it.sn || "—") + "</div>" +
+            '<div class="ag-addr">' + esc([it.addr, [it.cp, it.city].filter(Boolean).join(" ")].filter(Boolean).join(", ")) + "</div>" +
+            (it.notes ? '<div class="ag-note">📌 ' + esc(it.notes) + "</div>" : "") +
+            '<div class="ag-actions"><button type="button" class="btn primary ag-go">📝 Faire le rapport</button>' +
+            '<button type="button" class="btn ag-done">' + (it.done ? "↺ À faire" : "✓ Fait") + '</button>' +
+            '<button type="button" class="btn icon ag-del" aria-label="Supprimer">🗑</button></div></article>';
+        }).join("") + "</section>";
+    }).join("");
+  }
+
+  function renderPreview() {
+    var box = el("agPreview");
+    if (!preview) { box.innerHTML = ""; box.style.display = "none"; return; }
+    var t = tarifs(), sum = 0;
+    var dup = 0;
+    preview.rows.forEach(function (r) {
+      r._dup = items.some(function (x) { return x.sn === r.sn && x.date === r.date; });
+      if (r._dup) dup++; else sum += price(r, t);
+    });
+    var addN = preview.rows.length - dup;
+    box.style.display = "block";
+    box.innerHTML = '<div class="pv-h"><b>Aperçu : ' + preview.rows.length + " ligne" + (preview.rows.length > 1 ? "s" : "") + "</b><span>" + eur(sum) + " prévus</span></div>" +
+      (preview.errors.length ? '<ul class="pv-err">' + preview.errors.map(function (e) { return "<li>" + esc(e) + "</li>"; }).join("") + "</ul>" : "") +
+      '<div class="pv-list">' + preview.rows.map(function (r) {
+        return '<div class="pv-row' + (r._dup ? " dup" : "") + '"><div class="pv-main"><b>' + esc(r.name || r.storeText) + '</b><small>S/N ' + esc(r.sn) + " · " + esc(r.date ? r.date.split("-").reverse().join("/") : "?") + (r.notes ? " · " + esc(r.notes) : "") + '</small></div>' +
+          '<div class="pv-tags"><span class="tag ' + typeCls(r.type) + '">' + esc(r.type || "?") + '</span><span class="tag t-zone">' + esc(r.zone || "?") + '</span><span class="tag ' + (r.inDb ? "t-db" : "t-nodb") + '">' + (r.inDb ? "Base ✓" : "Hors base") + "</span>" + (r._dup ? '<span class="tag t-nodb">Déjà présent</span>' : "") + "</div></div>";
+      }).join("") + "</div>" +
+      '<div class="pv-act"><button type="button" class="btn" id="agPvCancel">Annuler</button><button type="button" class="btn primary" id="agPvOk"' + (addN ? "" : " disabled") + ">Ajouter " + addN + " intervention" + (addN > 1 ? "s" : "") + "</button></div>";
+    el("agPvCancel").onclick = function () { preview = null; renderPreview(); };
+    el("agPvOk").onclick = function () {
+      var add = preview.rows.filter(function (r) { return !r._dup; }).map(function (r) { delete r._dup; return r; });
+      items = items.concat(add); save(items); preview = null; renderPreview();
+      el("agImportText").value = ""; setPanel(null); render();
+      say(add.length + " intervention(s) ajoutée(s) à l'agenda", "ok");
+    };
+  }
+
+  /* ---------- report pre-fill ---------- */
+  function openReport(it) {
+    showView("report");
+    try {
+      var shop = dbFind(it.sn);
+      if (typeof window.clearShop === "function") window.clearShop();
+      if (shop && typeof window.pickShop === "function") {
+        window.pickShop(shop);
+      } else {
+        if (typeof window.unlockShopFields === "function") window.unlockShopFields();
+        el("shopName").value = it.name || it.storeText || "";
+        el("shopAddr").value = it.addr || "";
+        el("shopSn").value = it.sn || "";
+        el("shopCity").value = it.city || "";
+        el("shopCp").value = it.cp || "";
+        el("shopCityCp").value = (it.city || "") + (it.cp ? " — " + it.cp : "");
+        el("shopSearch").value = it.name || "";
+      }
+      if (typeof window.setVisitTypeUI === "function") window.setVisitTypeUI(it.type === "Dépannage" ? "Panne" : "Service");
+      if (it.date) el("svcDate").value = it.date;
+      var cb = el("consigneBar");
+      if (cb) {
+        cb.innerHTML = "<b>Consigne planning</b> — " + esc(it.notes || "—") + ' <span class="cb-meta">' + esc(it.type) + " · " + esc(it.zone || "") + "</span>";
+        cb.className = "consigne show";
+      }
+      setTimeout(function () { var c = el("sec-magasin"); if (c) c.scrollIntoView({ behavior: "smooth", block: "start" }); }, 60);
+      say("Rapport pré-rempli : " + (it.name || it.sn), "ok");
+    } catch (e) { console.error(e); say("Pré-remplissage impossible : " + e.message, "err"); }
+  }
+
+  /* ---------- views ---------- */
+  function showView(v) {
+    document.body.classList.toggle("view-agenda", v === "agenda");
+    document.querySelectorAll(".tab").forEach(function (b) { var on = b.getAttribute("data-view") === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
+    try { localStorage.setItem("imbox.v2.view", v); } catch (e) {}
+    window.scrollTo({ top: 0, behavior: "auto" });
+    if (v === "agenda") render();
+  }
+  function setPanel(name) {
+    ["import", "add", "tarifs"].forEach(function (n) {
+      var p = el("agPanel-" + n); if (p) p.classList.toggle("open", n === name && !p.classList.contains("open"));
+    });
+    if (name === "tarifs") fillTarifs();
+  }
+  function fillTarifs() {
+    var t = tarifs();
+    document.querySelectorAll("[data-tarif]").forEach(function (i) { var p = i.getAttribute("data-tarif").split("|"); i.value = t[p[0]][p[1]]; });
+  }
+
+  function bind() {
+    document.querySelectorAll(".tab").forEach(function (b) { b.addEventListener("click", function () { showView(b.getAttribute("data-view")); }); });
+    el("agBtnImport").onclick = function () { setPanel("import"); };
+    el("agBtnAdd").onclick = function () { setPanel("add"); el("agAddDate").value = el("agAddDate").value || new Date().toISOString().slice(0, 10); };
+    el("agBtnTarifs").onclick = function () { setPanel("tarifs"); };
+    el("agAnalyze").onclick = function () {
+      preview = parseText(el("agImportText").value);
+      if (!preview.rows.length && !preview.errors.length) { preview = null; say("Collez d'abord les lignes du planning", "err"); }
+      renderPreview();
+    };
+    el("agPasteBtn").onclick = function () {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        navigator.clipboard.readText().then(function (t) { el("agImportText").value = t; el("agAnalyze").click(); }, function () { el("agImportText").focus(); say("Appui long dans la zone → Coller", "ok"); });
+      } else { el("agImportText").focus(); }
+    };
+    el("agFile").addEventListener("change", function () {
+      var f = this.files && this.files[0]; if (!f) return;
+      var r = new FileReader();
+      r.onload = function () { el("agImportText").value = String(r.result || ""); el("agAnalyze").click(); };
+      r.readAsText(f); this.value = "";
+    });
+    el("agAddSn").addEventListener("input", function () {
+      var s = dbFind(this.value.trim()); var h = el("agAddHint");
+      if (s) { el("agAddName").value = s.name; el("agAddAddr").value = s.addr + ", " + s.cp + " " + s.city; el("agAddCp").value = s.cp; h.textContent = "✓ Trouvé dans la base : " + s.name; }
+      else h.textContent = this.value.trim() ? "S/N hors base — saisie libre" : "";
+    });
+    el("agAddOk").onclick = function () {
+      var o = { sn: el("agAddSn").value.trim(), store: (el("agAddName").value.trim() + " " + el("agAddAddr").value.trim()).trim(), name: el("agAddName").value.trim(), cp: el("agAddCp").value.trim(),
+        date: el("agAddDate").value, type: el("agAddType").value, consigne: el("agAddNote").value.trim() };
+      if (!o.sn || !o.date) { say("S/N et date obligatoires", "err"); return; }
+      var it = norm(o); if (o.name && !it.inDb) it.name = o.name;
+      items.push(it); save(items); render(); setPanel(null);
+      ["agAddSn", "agAddName", "agAddAddr", "agAddCp", "agAddNote"].forEach(function (i) { el(i).value = ""; }); el("agAddHint").textContent = "";
+      say("Intervention ajoutée", "ok");
+    };
+    el("agTarifSave").onclick = function () {
+      var t = tarifs();
+      document.querySelectorAll("[data-tarif]").forEach(function (i) { var p = i.getAttribute("data-tarif").split("|"); var v = parseFloat(String(i.value).replace(",", ".")); t[p[0]][p[1]] = isNaN(v) ? 0 : v; });
+      saveTarifs(t); render(); setPanel(null); say("Grille tarifaire enregistrée", "ok");
+    };
+    el("agTarifReset").onclick = function () { saveTarifs(JSON.parse(JSON.stringify(DEF_TARIFS))); fillTarifs(); render(); };
+    el("agClearAll").onclick = function () {
+      if (!items.length) return;
+      if (!confirm("Supprimer toutes les interventions de l'agenda ?")) return;
+      items = []; save(items); render();
+    };
+    el("agList").addEventListener("click", function (e) {
+      var art = e.target.closest(".ag-item"); if (!art) return;
+      var id = art.getAttribute("data-id"), it = items.filter(function (x) { return x.id === id; })[0]; if (!it) return;
+      if (e.target.closest(".ag-go")) openReport(it);
+      else if (e.target.closest(".ag-done")) { it.done = !it.done; save(items); render(); }
+      else if (e.target.closest(".ag-del")) { if (confirm("Supprimer cette intervention ?")) { items = items.filter(function (x) { return x.id !== id; }); save(items); render(); } }
+    });
+    var cbx = el("consigneClose"); if (cbx) cbx.onclick = function () { el("consigneBar").className = "consigne"; };
+  }
+
+  window.IMBOX_AGENDA = { parseText: parseText, parseDate: parseDate, zoneOf: zoneOf, price: price, tarifs: tarifs,
+    list: function () { return items.slice(); }, total: function () { var t = tarifs(); return items.reduce(function (s, it) { return s + price(it, t); }, 0); },
+    showView: showView, openReport: openReport };
+
+  function start() {
+    bind(); render();
+    var v = "report"; try { v = localStorage.getItem("imbox.v2.view") || "report"; } catch (e) {}
+    if (v === "agenda") showView("agenda");
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
+})();
+
+</script>
+</body>
+</html>
