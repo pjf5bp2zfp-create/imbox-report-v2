@@ -336,7 +336,7 @@ svg.i{width:20px;height:20px;flex-shrink:0;stroke:currentColor;fill:none;stroke-
 @media (prefers-reduced-motion: reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
 /* ---------- Tabs (Rapport / Agenda) ---------- */
-.tabs{display:inline-grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
+.tabs{display:inline-grid;grid-template-columns:repeat(4,auto);gap:4px;padding:4px;border-radius:14px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.14)}
 .tab{min-height:40px;padding:0 14px;border:0;border-radius:10px;background:transparent;color:rgba(255,255,255,.8);font-weight:700;font-size:.86rem;display:inline-flex;align-items:center;justify-content:center;gap:7px;transition:background .2s,color .2s}
 .tab.on{background:#fff;color:var(--navy)}
 .tab .n{min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:var(--accent);color:#04202a;font-size:.7rem;font-weight:800;display:inline-grid;place-items:center}
@@ -498,6 +498,77 @@ body.view-gains{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
 .g-bar .progress{background:var(--surface-2);border:1px solid var(--line)}
 @media (prefers-color-scheme:dark){.seg-b.on{background:var(--accent);color:#04202a}}
 
+/* ---------- Sauvegarde / restauration ---------- */
+.ag-backup{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:16px;margin:4px 0 14px}
+.bk-head{display:flex;gap:12px;align-items:flex-start}
+.bk-ic{width:40px;height:40px;border-radius:12px;display:grid;place-items:center;flex-shrink:0;font-size:1.2rem;background:linear-gradient(145deg,rgba(26,95,168,.12),rgba(25,184,214,.12))}
+.ag-backup h3{font-size:1rem;font-weight:750;margin-bottom:2px}
+.bk-note{font-size:.86rem;color:var(--text-2)}
+.bk-last{font-size:.78rem;color:var(--text-3);margin-top:10px}
+.bk-last.ok{color:var(--green);font-weight:650}
+.bk-last.warn{color:#a36d00;font-weight:650}
+@media (prefers-color-scheme: dark){.bk-last.warn{color:#f3c34d}}
+#agBkPreview{display:none;margin-top:14px;border-top:1px solid var(--line);padding-top:14px}
+.bk-sum{padding:12px;border-radius:12px;background:var(--surface-2);border:1px solid var(--line);font-size:.88rem;line-height:1.45}
+.bk-sum b{font-weight:800}
+.bk-sum small{display:block;color:var(--text-3);font-size:.78rem;margin-top:4px}
+.bk-err{color:var(--red);font-size:.86rem;font-weight:650}
+.bk-act{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.bk-act .bk-cancel{grid-column:1 / -1}
+.btn.danger{border-color:var(--red);color:var(--red)}
+
+/* ---------- Historique ---------- */
+.view-history .stepper,.view-history .progress-wrap,.view-history .btnrow,.view-history .report-view,.view-history .sidebar{display:none!important}
+.history-view{display:none;max-width:860px;margin:0 auto}
+.view-history .history-view{display:block}
+.view-history .layout{display:block}
+body.view-history{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
+.hi-filters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 10px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:14px 14px 0;margin-bottom:12px}
+.hi-filters .field{margin-bottom:14px}
+.hi-filters .hi-q{grid-column:1/-1}
+@media (min-width:720px){.hi-filters{grid-template-columns:minmax(0,2fr) minmax(0,1fr) minmax(0,1fr)}.hi-filters .hi-q{grid-column:auto}}
+.hi-filters select{background-image:linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);background-position:calc(100% - 18px) 22px,calc(100% - 13px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
+.hi-summary{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 4px 10px;font-size:.84rem;color:var(--text-2)}
+.hi-summary .ag-sum{font-size:.88rem}
+.hi-item{position:relative;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-2);padding:14px 16px;margin-bottom:10px}
+.hi-item::before{content:"";position:absolute;left:0;top:14px;bottom:14px;width:4px;border-radius:0 4px 4px 0;background:var(--brand)}
+.hi-item:has(.t-dep)::before{background:var(--red)}
+.hi-item.done .hi-name{text-decoration:line-through;opacity:.75}
+.hi-top{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.hi-date{font-weight:750;font-size:.9rem;margin-right:4px}
+.hi-name{font-size:1.02rem;font-weight:750;margin-top:8px;letter-spacing:-.01em}
+.hi-num{font-family:var(--mono);font-size:.8rem;color:var(--brand);font-weight:650}
+.hi-addr{font-size:.86rem;color:var(--text-2);margin-top:2px}
+.t-done{background:var(--green-soft);color:var(--green)}
+.t-todo{background:rgba(227,160,8,.14);color:#a36d00}
+@media (prefers-color-scheme: dark){.t-todo{color:#f3c34d}}
+.hi-actions{display:flex;gap:8px;margin-top:12px}
+.hi-actions .btn{flex:1}
+.hi-form{margin-top:12px;border-top:1px solid var(--line);padding-top:12px}
+.hi-form .g2{margin-top:0}
+.hi-form .field{margin-bottom:12px}
+.hi-form select{background-image:linear-gradient(45deg,transparent 50%,var(--text-3) 50%),linear-gradient(135deg,var(--text-3) 50%,transparent 50%);background-position:calc(100% - 18px) 22px,calc(100% - 13px) 22px;background-size:5px 5px;background-repeat:no-repeat;padding-right:32px}
+.hi-calc{font-size:.82rem;color:var(--text-3);margin:2px 0 10px}
+.hi-calc b{color:var(--green)}
+/* ---------- Rapport du mois ---------- */
+.hi-toolbar{grid-template-columns:1fr}
+.mr-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.mr-head .mr-month{margin:0;min-width:180px}
+.mr-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-bottom:12px}
+@media (min-width:720px){.mr-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.mr-kpis .kpi{padding:12px}
+.mr-kpis .kpi b{font-size:1.3rem}
+.mr-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
+.mr-table{width:100%;border-collapse:collapse;font-size:.82rem;min-width:620px}
+.mr-table th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3);background:var(--surface-2);padding:8px 10px;white-space:nowrap}
+.mr-table td{padding:8px 10px;border-top:1px solid var(--line);vertical-align:top}
+.mr-table td.num,.mr-table th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mr-table tfoot td{font-weight:800;background:var(--surface-2)}
+.mr-empty{padding:18px;text-align:center;color:var(--text-3);font-size:.88rem}
+/* 4 onglets : tenir sur une ligne sur téléphone */
+@media (max-width:479px){.tabs{gap:2px;padding:3px}.tab{padding:0 7px;gap:5px;font-size:.8rem}}
+@media (max-width:380px){.tab{padding:0 5px;gap:3px;font-size:.76rem}}
+
 </style>
 </head>
 <body>
@@ -514,6 +585,7 @@ body.view-gains{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
     <button type="button" class="tab on" data-view="report" role="tab" aria-selected="true"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6v18h12V7z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg> Rapport</button>
     <button type="button" class="tab" data-view="agenda" role="tab" aria-selected="false"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Agenda <span class="n" id="tabAgendaN" style="display:none">0</span></button>
     <button type="button" class="tab" data-view="gains" role="tab" aria-selected="false"><span aria-hidden="true">💶</span> <span class="hide-xs">Mes gains</span><span class="show-xs">Gains</span></button>
+    <button type="button" class="tab" data-view="history" role="tab" aria-selected="false"><span aria-hidden="true" class="hide-xs">🗂️</span> <span class="hide-xs">Historique</span><span class="show-xs">Histo.</span></button>
   </div></div>
     <span class="db-badge" id="dbBadge">Base magasins…</span>
   </div>
@@ -836,6 +908,15 @@ body.view-gains{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
     <div class="ag-row"><button type="button" class="btn" id="agTarifReset">Valeurs par défaut</button><button type="button" class="btn primary" id="agTarifSave">Enregistrer</button></div>
   </div>
   <div id="agList"></div>
+  <section class="ag-backup" id="agBackup" aria-labelledby="agBkTitle">
+    <div class="bk-head"><span class="bk-ic" aria-hidden="true">💾</span><div><h3 id="agBkTitle">Sauvegarde de mes données</h3><p class="bk-note">Tes données sont enregistrées sur cet appareil. Pense à sauvegarder régulièrement.</p></div></div>
+    <p class="bk-last" id="agBkLast">Aucune sauvegarde effectuée sur cet appareil</p>
+    <div class="ag-row">
+      <button type="button" class="btn primary" id="agBkExport">⬇️ Sauvegarder mes données</button>
+      <label class="btn outline file-btn" id="agBkImportLbl">⬆️ Restaurer une sauvegarde<input type="file" id="agBkFile" accept=".json,application/json,text/plain"></label>
+    </div>
+    <div id="agBkPreview"></div>
+  </section>
   <div class="ag-foot"><button type="button" class="btn" id="agClearAll">Vider l'agenda</button></div>
   <p class="foot">Agenda stocké uniquement sur cet appareil · IMBOX Report v2.0</p>
 </div>
@@ -857,6 +938,23 @@ body.view-gains{padding-bottom:calc(32px + env(safe-area-inset-bottom,0px))}
   <p class="hint g-rates" id="gRates"></p>
   <div id="gPeriods"></div>
   <p class="foot">Montants calculés selon la zone (IDF / Région) et le type · IMBOX Report v2.0</p>
+</div>
+<div class="history-view" id="historyView">
+  <h2 class="g-title">Historique des interventions</h2>
+  <div class="ag-toolbar hi-toolbar"><button type="button" class="btn primary" id="hiBtnReport">📊 Rapport du mois</button></div>
+  <div class="ag-panel" id="hiReport">
+    <div class="mr-head"><h3>Rapport du mois</h3><div class="field mr-month"><label for="mrMonth">Mois</label><input type="month" id="mrMonth"></div></div>
+    <div id="mrBody"></div>
+    <div class="ag-row"><button type="button" class="btn primary" id="mrPdf">📄 Exporter en PDF</button><button type="button" class="btn" id="mrCsv">📊 Exporter en CSV</button></div>
+  </div>
+  <div class="hi-filters">
+    <div class="field hi-q"><label for="hiSearch">Rechercher</label><input type="search" id="hiSearch" placeholder="Magasin, adresse, S/N, n°…" autocomplete="off" enterkeyhint="search"></div>
+    <div class="field"><label for="hiMonth">Mois</label><select id="hiMonth"><option value="">Tous les mois</option></select></div>
+    <div class="field"><label for="hiStatus">Statut</label><select id="hiStatus"><option value="">Tous</option><option value="todo">À faire</option><option value="done">Fait</option></select></div>
+  </div>
+  <div class="hi-summary" id="hiSummary"></div>
+  <div id="hiList"></div>
+  <p class="foot">Toutes les interventions, passées et à venir · les modifications mettent à jour l’Agenda et Mes gains</p>
 </div>
 </div>
 
@@ -2594,7 +2692,7 @@ if (document.readyState === "loading") {
     el("agKpiEur").textContent = eur(total);
     el("agKpiDone").textContent = eur(doneSum) + " réalisés";
     var tabN = el("tabAgendaN"); if (tabN) { tabN.textContent = todo; tabN.style.display = todo ? "" : "none"; }
-    renderGains();
+    renderGains(); renderLastBackup(); renderHistory(); if (el("hiReport") && el("hiReport").classList.contains("open")) renderMonthly();
     var host = el("agList");
     if (!list.length) {
       host.innerHTML = '<div class="ag-empty"><div class="ag-empty-ic">📅</div><b>Aucune intervention planifiée</b><p>Copiez les lignes de votre planning (Excel / e-mail) puis « Importer un planning », ou ajoutez une intervention.</p></div>';
@@ -2761,10 +2859,11 @@ if (document.readyState === "loading") {
   function showView(v) {
     document.body.classList.toggle("view-agenda", v === "agenda");
     document.body.classList.toggle("view-gains", v === "gains");
+    document.body.classList.toggle("view-history", v === "history");
     document.querySelectorAll(".tab").forEach(function (b) { var on = b.getAttribute("data-view") === v; b.classList.toggle("on", on); b.setAttribute("aria-selected", on ? "true" : "false"); });
     try { localStorage.setItem("imbox.v2.view", v); } catch (e) {}
     window.scrollTo({ top: 0, behavior: "auto" });
-    if (v === "agenda" || v === "gains") render();
+    if (v === "agenda" || v === "gains" || v === "history") render();
   }
   function setPanel(name) {
     ["import", "add", "tarifs"].forEach(function (n) {
@@ -2835,14 +2934,421 @@ if (document.readyState === "loading") {
     var cbx = el("consigneClose"); if (cbx) cbx.onclick = function () { el("consigneBar").className = "consigne"; };
   }
 
+  /* ---------- Sauvegarde / restauration (toutes les clés imbox.v2.*) ---------- */
+  var PREFIX = "imbox.v2.", LKEY = "imbox.v2.lastbackup", BK_FORMAT = "imbox-v2-backup";
+  var bkPending = null;
+  function lsKeys() {
+    var out = [];
+    try { for (var i = 0; i < localStorage.length; i++) { var k = localStorage.key(i); if (k && k.indexOf(PREFIX) === 0 && k !== LKEY) out.push(k); } } catch (e) {}
+    return out.sort();
+  }
+  function today() { var d = new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+  function fmtStamp(iso) {
+    try { var d = new Date(iso); if (isNaN(d)) return ""; return pad(d.getDate()) + "/" + pad(d.getMonth() + 1) + "/" + d.getFullYear() + " à " + pad(d.getHours()) + ":" + pad(d.getMinutes()); } catch (e) { return ""; }
+  }
+  function plural(n, w) { return n + " " + w + (n > 1 ? "s" : ""); }
+  function buildBackup() {
+    var data = {};
+    lsKeys().forEach(function (k) { try { var v = localStorage.getItem(k); if (v != null) data[k] = v; } catch (e) {} });
+    var n = 0; try { var a = JSON.parse(data[KEY] || "[]"); n = Array.isArray(a) ? a.length : 0; } catch (e) {}
+    return { format: BK_FORMAT, version: 1, app: "IMBOX Report v2.0", exportedAt: new Date().toISOString(), interventions: n, data: data };
+  }
+  function renderLastBackup() {
+    var b = el("agBkLast"); if (!b) return;
+    var last = null; try { last = localStorage.getItem(LKEY); } catch (e) {}
+    var s = last ? fmtStamp(last) : "";
+    if (s) { b.textContent = "Dernière sauvegarde : " + s; b.className = "bk-last ok"; }
+    else { b.textContent = items.length ? "Aucune sauvegarde effectuée sur cet appareil" : "Aucune sauvegarde pour l\u2019instant"; b.className = "bk-last" + (items.length ? " warn" : ""); }
+  }
+  function markBackup() { try { localStorage.setItem(LKEY, new Date().toISOString()); } catch (e) {} renderLastBackup(); }
+  function downloadBlob(blob, name) {
+    var url = URL.createObjectURL(blob), a = document.createElement("a");
+    a.href = url; a.download = name; a.rel = "noopener"; a.style.display = "none";
+    document.body.appendChild(a); a.click();
+    setTimeout(function () { URL.revokeObjectURL(url); a.remove(); }, 4000);
+  }
+  function exportData() {
+    var bk = buildBackup(), name = "imbox-sauvegarde-" + today() + ".json";
+    shareOrDownload(JSON.stringify(bk, null, 2), name, "application/json", function () { markBackup(); say("Sauvegarde créée : " + plural(bk.interventions, "intervention"), "ok"); });
+    return bk;
+  }
+  function parseBackup(text) {
+    var j;
+    try { j = JSON.parse(String(text || "").replace(/^\uFEFF/, "")); } catch (e) { return { error: "Ce fichier n\u2019est pas un JSON valide." }; }
+    if (!j || typeof j !== "object" || Array.isArray(j) || j.format !== BK_FORMAT || !j.data || typeof j.data !== "object" || Array.isArray(j.data))
+      return { error: "Ce fichier n\u2019est pas une sauvegarde IMBOX v2 (imbox-sauvegarde-….json)." };
+    var data = {}, bad = [];
+    Object.keys(j.data).forEach(function (k) {
+      if (k.indexOf(PREFIX) !== 0 || k === LKEY) return; /* on ignore toute clé étrangère */
+      var v = j.data[k];
+      data[k] = typeof v === "string" ? v : JSON.stringify(v);
+    });
+    var list = [];
+    if (data[KEY] != null) {
+      try { list = JSON.parse(data[KEY]); } catch (e) { bad.push("liste d\u2019interventions illisible"); }
+      if (!Array.isArray(list)) { bad.push("liste d\u2019interventions invalide"); list = []; }
+      else if (list.some(function (o) { return !o || typeof o !== "object" || Array.isArray(o); })) bad.push("intervention mal formée");
+    }
+    if (data[TKEY] != null) { try { var t = JSON.parse(data[TKEY]); if (!t || typeof t !== "object") bad.push("grille tarifaire invalide"); } catch (e) { bad.push("grille tarifaire illisible"); } }
+    if (bad.length) return { error: "Sauvegarde corrompue : " + bad.join(", ") + "." };
+    if (!Object.keys(data).length) return { error: "Cette sauvegarde ne contient aucune donnée." };
+    return { data: data, list: list, exportedAt: j.exportedAt || "" };
+  }
+  function mergePlan(bk) {
+    var have = {}; items.forEach(function (x) { if (x && x.id) have[x.id] = 1; });
+    var add = [], dup = 0;
+    bk.list.forEach(function (o) { if (o.id && have[o.id]) dup++; else { add.push(o); if (o.id) have[o.id] = 1; } });
+    return { add: add, dup: dup };
+  }
+  function reloadState() {
+    items = load();
+    try { gPeriod = localStorage.getItem("imbox.v2.gperiod") || "day"; } catch (e) {}
+    render(); renderLastBackup();
+  }
+  function restore(bk, mode) {
+    try {
+      if (mode === "replace") {
+        lsKeys().forEach(function (k) { localStorage.removeItem(k); });
+        Object.keys(bk.data).forEach(function (k) { localStorage.setItem(k, bk.data[k]); });
+        reloadState();
+        return { mode: mode, count: items.length };
+      }
+      var plan = mergePlan(bk);
+      var merged = items.concat(plan.add.map(function (o) { o = clone(o); if (!o.id) o.id = "a" + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); return o; }));
+      Object.keys(bk.data).forEach(function (k) { /* réglages : on garde ceux de l'appareil s'ils existent */
+        if (k === KEY) return;
+        if (localStorage.getItem(k) == null) localStorage.setItem(k, bk.data[k]);
+      });
+      localStorage.setItem(KEY, JSON.stringify(merged));
+      reloadState();
+      return { mode: mode, added: plan.add.length, skipped: plan.dup, count: items.length };
+    } catch (e) { say("Restauration impossible : " + e.message, "err"); return { error: e.message }; }
+  }
+  function renderBkPreview(msg) {
+    var box = el("agBkPreview"); if (!box) return;
+    if (!bkPending && !msg) { box.innerHTML = ""; box.style.display = "none"; return; }
+    box.style.display = "block";
+    if (msg) { box.innerHTML = '<p class="bk-err">⚠️ ' + esc(msg) + '</p><div class="bk-act"><button type="button" class="btn bk-cancel" id="agBkCancel">Fermer</button></div>'; }
+    else {
+      var bk = bkPending, plan = mergePlan(bk), st = fmtStamp(bk.exportedAt);
+      box.innerHTML = '<div class="bk-sum">Cette sauvegarde contient <b id="agBkCount">' + plural(bk.list.length, "intervention") + "</b>" + (st ? " (du " + esc(st) + ")" : "") + "." +
+        "<small>Sur cet appareil : " + plural(items.length, "intervention") + ".<br>« Remplacer » efface les données actuelles et les remplace par la sauvegarde.<br>« Fusionner » ajoute " + plural(plan.add.length, "intervention") + " (" + plural(plan.dup, "doublon") + " ignoré" + (plan.dup > 1 ? "s" : "") + ") et garde tes réglages.</small></div>" +
+        '<div class="bk-act"><button type="button" class="btn danger" id="agBkReplace">Remplacer</button><button type="button" class="btn primary" id="agBkMerge">Fusionner</button><button type="button" class="btn bk-cancel" id="agBkCancel">Annuler</button></div>';
+      el("agBkReplace").onclick = function () {
+        if (items.length && !confirm("Remplacer les " + plural(items.length, "intervention") + " de cet appareil par les " + plural(bk.list.length, "intervention") + " de la sauvegarde ?")) return;
+        var r = restore(bk, "replace"); bkPending = null; renderBkPreview();
+        if (!r.error) say("Sauvegarde restaurée : " + plural(r.count, "intervention"), "ok");
+      };
+      el("agBkMerge").onclick = function () {
+        if (!confirm("Ajouter " + plural(plan.add.length, "intervention") + " de la sauvegarde à l\u2019agenda ?")) return;
+        var r = restore(bk, "merge"); bkPending = null; renderBkPreview();
+        if (!r.error) say(plural(r.added, "intervention") + " ajoutée" + (r.added > 1 ? "s" : "") + " · " + plural(r.skipped, "doublon") + " ignoré" + (r.skipped > 1 ? "s" : ""), "ok");
+      };
+    }
+    el("agBkCancel").onclick = function () { bkPending = null; renderBkPreview(); };
+  }
+  function bindBackup() {
+    if (!el("agBackup")) return;
+    el("agBkExport").onclick = function () { try { exportData(); } catch (e) { say("Sauvegarde impossible : " + e.message, "err"); } };
+    el("agBkFile").addEventListener("change", function () {
+      var f = this.files && this.files[0]; if (!f) return;
+      var r = new FileReader();
+      r.onload = function () { var p = parseBackup(r.result); bkPending = p.error ? null : p; renderBkPreview(p.error || null); var b = el("agBackup"); if (b && b.scrollIntoView) b.scrollIntoView({ behavior: "smooth", block: "nearest" }); };
+      r.onerror = function () { bkPending = null; renderBkPreview("Lecture du fichier impossible."); };
+      r.readAsText(f); this.value = "";
+    });
+    renderLastBackup();
+  }
+
+  /* ---------- Partage / téléchargement de fichier (iPhone : feuille de partage) ---------- */
+  function shareOrDownload(data, name, mime, onDone) {
+    var blob = new Blob([data], { type: mime }), file = null;
+    try { file = new File([data], name, { type: mime }); } catch (e) { file = null; }
+    var touch = false; try { touch = window.matchMedia("(pointer: coarse)").matches; } catch (e) {}
+    if (file && touch && navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+      navigator.share({ files: [file], title: name }).then(function () { if (onDone) onDone("share"); }, function (err) {
+        if (err && err.name === "AbortError") return; /* partage annulé */
+        downloadBlob(blob, name); if (onDone) onDone("download");
+      });
+      return "share";
+    }
+    downloadBlob(blob, name); if (onDone) onDone("download");
+    return "download";
+  }
+
+  /* ---------- Historique ---------- */
+  var hiEditId = null;
+  function frDate(iso) { return iso ? iso.split("-").reverse().join("/") : "—"; }
+  function monthLabel(ym) {
+    var p = String(ym || "").split("-"); if (p.length < 2) return ym || "";
+    var s = new Date(+p[0], +p[1] - 1, 1).toLocaleDateString("fr-FR", { month: "long", year: "numeric" });
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+  function itNum(it) { return it.num ? String(it.num) : ""; }
+  function itAddr(it) { return [it.addr, [it.cp, it.city].filter(Boolean).join(" ")].filter(Boolean).join(", "); }
+  function newestFirst(a, b) {
+    if (!a.date && b.date) return 1; if (a.date && !b.date) return -1;
+    return (b.date || "").localeCompare(a.date || "") || (a.name || "").localeCompare(b.name || "");
+  }
+  function hiFiltered() {
+    var q = fold(el("hiSearch") ? el("hiSearch").value : "").trim(), m = el("hiMonth") ? el("hiMonth").value : "", st = el("hiStatus") ? el("hiStatus").value : "";
+    return items.filter(function (it) {
+      if (m && (it.date || "").slice(0, 7) !== m) return false;
+      if (st === "done" && !it.done) return false;
+      if (st === "todo" && it.done) return false;
+      if (q) { var hay = fold([it.name, it.storeText, it.addr, it.cp, it.city, it.sn, it.num, it.notes, it.type, frDate(it.date)].join(" ")); if (hay.indexOf(q) < 0) return false; }
+      return true;
+    }).sort(newestFirst);
+  }
+  function fillMonthSelect() {
+    var sel = el("hiMonth"); if (!sel) return;
+    var cur = sel.value, months = {};
+    items.forEach(function (it) { if (it.date) months[it.date.slice(0, 7)] = 1; });
+    var keys = Object.keys(months).sort().reverse();
+    sel.innerHTML = '<option value="">Tous les mois</option>' + keys.map(function (k) { return '<option value="' + k + '">' + esc(monthLabel(k)) + "</option>"; }).join("");
+    if (cur && months[cur]) sel.value = cur;
+  }
+  function editForm(it) {
+    function opt(v, cur) { return '<option' + (v === cur ? " selected" : "") + ">" + v + "</option>"; }
+    return '<form class="hi-form" data-id="' + esc(it.id) + '" novalidate>' +
+      '<div class="g2">' +
+      '<div class="field"><label>Date</label><input name="date" type="date" value="' + esc(it.date || "") + '"></div>' +
+      '<div class="field"><label>Type</label><select name="type">' + opt("Entretien", it.type) + opt("Dépannage", it.type) + (it.type && it.type !== "Entretien" && it.type !== "Dépannage" ? opt(it.type, it.type) : "") + "</select></div>" +
+      '<div class="field"><label>N° intervention</label><input name="num" type="text" value="' + esc(it.num || "") + '" placeholder="ex. ticket / OT"></div>' +
+      '<div class="field"><label>S/N</label><input name="sn" type="text" inputmode="numeric" value="' + esc(it.sn || "") + '"></div>' +
+      '<div class="field"><label>Client / magasin</label><input name="name" type="text" value="' + esc(it.name || it.storeText || "") + '"></div>' +
+      '<div class="field"><label>Adresse</label><input name="addr" type="text" value="' + esc(it.addr || "") + '"></div>' +
+      '<div class="field"><label>Code postal</label><input name="cp" type="text" inputmode="numeric" value="' + esc(it.cp || it.dept || "") + '"></div>' +
+      '<div class="field"><label>Ville</label><input name="city" type="text" value="' + esc(it.city || "") + '"></div>' +
+      '<div class="field"><label>Statut</label><select name="done"><option value="0"' + (it.done ? "" : " selected") + '>À faire</option><option value="1"' + (it.done ? " selected" : "") + ">Fait</option></select></div>" +
+      "</div>" +
+      '<div class="field"><label>Consigne / notes</label><input name="notes" type="text" value="' + esc(it.notes || "") + '"></div>' +
+      '<p class="hi-calc">Montant recalculé : <b class="hi-calc-v">' + eur(price(it)) + "</b></p>" +
+      '<div class="hi-actions"><button type="button" class="btn hi-cancel">Annuler</button><button type="submit" class="btn primary hi-save">Enregistrer</button></div></form>';
+  }
+  function formValues(f) {
+    var g = function (n) { var x = f.querySelector('[name="' + n + '"]'); return x ? String(x.value).trim() : ""; };
+    return { date: g("date"), type: g("type"), num: g("num"), sn: g("sn"), name: g("name"), addr: g("addr"), cp: g("cp"), city: g("city"), done: g("done") === "1", notes: g("notes") };
+  }
+  function applyEdit(it, v) {
+    var cpD = v.cp.replace(/\D/g, "");
+    it.date = /^\d{4}-\d{2}-\d{2}$/.test(v.date) ? v.date : (parseDate(v.date) || "");
+    it.type = v.type; it.sn = v.sn; it.name = v.name; it.addr = v.addr; it.city = v.city; it.notes = v.notes; it.done = !!v.done;
+    if (v.num) it.num = v.num; else delete it.num;
+    it.cp = cpD.length === 5 ? cpD : ""; it.dept = cpD.slice(0, 2);
+    it.zone = zoneOf(it.dept || it.cp);
+    it.inDb = !!dbFind(it.sn);
+    return it;
+  }
+  function updateIntervention(id, v) {
+    var it = items.filter(function (x) { return x.id === id; })[0]; if (!it) return null;
+    applyEdit(it, v); save(items); render(); return it;
+  }
+  function deleteIntervention(id) { var n = items.length; items = items.filter(function (x) { return x.id !== id; }); save(items); render(); return n !== items.length; }
+  function renderHistory() {
+    var host = el("hiList"); if (!host) return;
+    fillMonthSelect();
+    var t = tarifs(), list = hiFiltered(), sum = 0, dsum = 0;
+    list.forEach(function (it) { var p = price(it, t); sum += p; if (it.done) dsum += p; });
+    el("hiSummary").innerHTML = "<span><b>" + plural(list.length, "intervention") + "</b>" + (list.length !== items.length ? " sur " + items.length : "") + " · " + eur(dsum) + " réalisés</span><span class=\"ag-sum\">" + eur(sum) + "</span>";
+    if (!list.length) {
+      host.innerHTML = '<div class="ag-empty"><div class="ag-empty-ic">🗂️</div><b>' + (items.length ? "Aucune intervention ne correspond aux filtres" : "Aucune intervention") + "</b><p>" + (items.length ? "Modifiez la recherche, le mois ou le statut." : "Importez un planning ou ajoutez une intervention dans l\u2019onglet Agenda.") + "</p></div>";
+      return;
+    }
+    host.innerHTML = list.map(function (it) {
+      var num = itNum(it);
+      return '<article class="hi-item' + (it.done ? " done" : "") + '" data-id="' + esc(it.id) + '">' +
+        '<div class="hi-top"><span class="hi-date">' + esc(frDate(it.date)) + '</span><span class="tag ' + typeCls(it.type) + '">' + esc(it.type || "?") + "</span>" +
+        '<span class="tag ' + (it.done ? "t-done" : "t-todo") + '">' + (it.done ? "Fait" : "À faire") + "</span>" +
+        (it.zone ? '<span class="tag t-zone">' + esc(it.zone) + "</span>" : "") + '<span class="ag-price">' + eur(price(it, t)) + "</span></div>" +
+        '<div class="hi-name">' + esc(it.name || it.storeText || "Magasin") + "</div>" +
+        '<div class="hi-num">' + (num ? "N° " + esc(num) + " · " : "") + "S/N " + esc(it.sn || "—") + "</div>" +
+        '<div class="hi-addr">' + esc(itAddr(it) || "—") + "</div>" +
+        (hiEditId === it.id ? editForm(it) : '<div class="hi-actions"><button type="button" class="btn outline hi-edit">✏️ Modifier</button><button type="button" class="btn danger hi-del">🗑 Supprimer</button></div>') +
+        "</article>";
+    }).join("");
+  }
+  function bindHistory() {
+    if (!el("historyView")) return;
+    ["hiSearch", "hiMonth", "hiStatus"].forEach(function (id) { el(id).addEventListener(id === "hiSearch" ? "input" : "change", function () { hiEditId = null; renderHistory(); }); });
+    var host = el("hiList");
+    host.addEventListener("click", function (e) {
+      var art = e.target.closest(".hi-item"); if (!art) return;
+      var id = art.getAttribute("data-id"), it = items.filter(function (x) { return x.id === id; })[0]; if (!it) return;
+      if (e.target.closest(".hi-edit")) { hiEditId = id; renderHistory(); var f = host.querySelector(".hi-form"); if (f && f.scrollIntoView) f.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+      else if (e.target.closest(".hi-cancel")) { hiEditId = null; renderHistory(); }
+      else if (e.target.closest(".hi-del")) {
+        if (!confirm("Supprimer définitivement l\u2019intervention « " + (it.name || it.sn || "") + " » du " + frDate(it.date) + " ?")) return;
+        if (hiEditId === id) hiEditId = null;
+        deleteIntervention(id); say("Intervention supprimée", "ok");
+      }
+    });
+    host.addEventListener("input", function (e) { /* aperçu du montant recalculé */
+      var f = e.target.closest(".hi-form"); if (!f) return;
+      var it = items.filter(function (x) { return x.id === f.getAttribute("data-id"); })[0]; if (!it) return;
+      var v = el("hiList").querySelector(".hi-calc-v"); if (v) v.textContent = eur(price(applyEdit(clone(it), formValues(f))));
+    });
+    host.addEventListener("change", function (e) {
+      var f = e.target.closest(".hi-form"); if (!f) return;
+      var it = items.filter(function (x) { return x.id === f.getAttribute("data-id"); })[0], v = f.querySelector(".hi-calc-v");
+      if (it && v) v.textContent = eur(price(applyEdit(clone(it), formValues(f))));
+    });
+    host.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var f = e.target.closest(".hi-form"); if (!f) return;
+      var v = formValues(f);
+      if (!v.date) { say("La date est obligatoire", "err"); return; }
+      var it = updateIntervention(f.getAttribute("data-id"), v);
+      hiEditId = null; renderHistory();
+      if (it) say("Intervention modifiée · " + eur(price(it)), "ok");
+    });
+    bindMonthly();
+  }
+
+  /* ---------- Rapport du mois ---------- */
+  function curMonth() { var d = new Date(); return d.getFullYear() + "-" + pad(d.getMonth() + 1); }
+  function monthData(ym) {
+    var t = tarifs();
+    var list = items.filter(function (it) { return (it.date || "").slice(0, 7) === ym; })
+      .sort(function (a, b) { return (a.date || "").localeCompare(b.date || "") || (a.name || "").localeCompare(b.name || ""); });
+    var r = { month: ym, label: monthLabel(ym), n: list.length, done: 0, eur: 0, earned: 0, byType: {}, rows: [] };
+    list.forEach(function (it) {
+      var p = price(it, t), ty = it.type || "Autre";
+      if (!r.byType[ty]) r.byType[ty] = { n: 0, done: 0, eur: 0, earned: 0 };
+      var b = r.byType[ty]; b.n++; b.eur += p; r.eur += p;
+      if (it.done) { r.done++; b.done++; b.earned += p; r.earned += p; }
+      r.rows.push({ date: frDate(it.date), num: itNum(it) || (it.sn ? "S/N " + it.sn : "—"), client: it.name || it.storeText || "—", addr: itAddr(it) || "—", type: it.type || "?", status: it.done ? "Fait" : "À faire", amount: p, done: !!it.done });
+    });
+    return r;
+  }
+  function renderMonthly() {
+    var box = el("mrBody"); if (!box) return;
+    var inp = el("mrMonth"); if (!inp.value) inp.value = curMonth();
+    var r = monthData(inp.value), types = Object.keys(r.byType).sort();
+    var kp = '<div class="mr-kpis">' +
+      '<div class="kpi done"><small>Faites</small><b id="mrDone">' + r.done + " / " + r.n + "</b><em>interventions du mois</em></div>" +
+      types.map(function (ty) { var b = r.byType[ty]; return '<div class="kpi"><small>' + esc(ty) + "</small><b>" + b.done + " / " + b.n + "</b><em>" + eur(b.earned) + " gagnés</em></div>"; }).join("") +
+      '<div class="kpi money"><small>Total gagné</small><b id="mrEarned">' + eur(r.earned) + "</b><em>" + eur(r.eur) + " prévus</em></div></div>";
+    var tb = r.rows.length ? '<div class="mr-table-wrap"><table class="mr-table"><thead><tr><th>Date</th><th>N°</th><th>Client</th><th>Adresse</th><th>Type</th><th>Statut</th><th class="num">Montant</th></tr></thead><tbody>' +
+      r.rows.map(function (x) { return "<tr><td>" + esc(x.date) + "</td><td>" + esc(x.num) + "</td><td>" + esc(x.client) + "</td><td>" + esc(x.addr) + '</td><td><span class="tag ' + typeCls(x.type) + '">' + esc(x.type) + '</span></td><td><span class="tag ' + (x.done ? "t-done" : "t-todo") + '">' + x.status + '</span></td><td class="num">' + eur(x.amount) + "</td></tr>"; }).join("") +
+      '</tbody><tfoot><tr><td colspan="6">Total gagné (interventions faites)</td><td class="num">' + eur(r.earned) + "</td></tr></tfoot></table></div>"
+      : '<div class="mr-empty">Aucune intervention en ' + esc(r.label) + ".</div>";
+    box.innerHTML = kp + tb;
+    el("mrPdf").disabled = !r.rows.length; el("mrCsv").disabled = !r.rows.length;
+    prepPdf(r);
+  }
+  /* PDF pré-généré : sur iPhone, navigator.share doit être appelé dans le geste (clic) de l'utilisateur */
+  var mrCache = { sig: "", bytes: null };
+  function prepPdf(r) {
+    if (!r.rows.length) return;
+    var sig = JSON.stringify(r); if (mrCache.sig === sig && mrCache.bytes) return;
+    mrCache = { sig: sig, bytes: null };
+    monthPdf(r).then(function (bytes) { if (mrCache.sig === sig) mrCache.bytes = bytes; }, function () {});
+  }
+  function eurPlain(n) { return (Math.round(n * 100) / 100).toFixed(2).replace(".", ",") + " €"; }
+  function monthCsv(r) {
+    var q = function (s) { s = String(s == null ? "" : s); return /[";\n\r]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s; };
+    var lines = [["Date", "N°", "Client", "Adresse", "Type", "Statut", "Montant (€)"].join(";")];
+    r.rows.forEach(function (x) { lines.push([x.date, x.num, x.client, x.addr, x.type, x.status, x.amount.toFixed(2).replace(".", ",")].map(q).join(";")); });
+    lines.push(""); lines.push(["Total gagné (faites)", "", "", "", "", r.done + "/" + r.n, r.earned.toFixed(2).replace(".", ",")].map(q).join(";"));
+    lines.push(["Total prévu", "", "", "", "", "", r.eur.toFixed(2).replace(".", ",")].map(q).join(";"));
+    return "\uFEFF" + lines.join("\r\n");
+  }
+  function pdfSafe(s) { /* Helvetica standard = WinAnsi : on remplace ce qui n'est pas encodable */
+    return String(s == null ? "" : s).replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D«»]/g, '"').replace(/[\u2013\u2014]/g, "-").replace(/\u2026/g, "...").replace(/[\u00A0\u202F]/g, " ")
+      .replace(/[^\x20-\x7E\u00A1-\u00FF€]/g, "");
+  }
+  async function monthPdf(r) {
+    var L = window.PDFLib; if (!L || !L.PDFDocument) throw new Error("pdf-lib non chargé");
+    var doc = await L.PDFDocument.create();
+    doc.setTitle("Rapport IMBOX — " + pdfSafe(r.label)); doc.setAuthor("IMBOX Report v2.0"); doc.setCreator("IMBOX Report v2.0");
+    var F = await doc.embedFont(L.StandardFonts.Helvetica), FB = await doc.embedFont(L.StandardFonts.HelveticaBold);
+    var W = 841.89, H = 595.28, M = 36, navy = L.rgb(0.04, 0.10, 0.20), brand = L.rgb(0.10, 0.37, 0.66), grey = L.rgb(0.42, 0.46, 0.52), line = L.rgb(0.85, 0.87, 0.90), green = L.rgb(0.05, 0.55, 0.33);
+    var cols = [{ k: "date", h: "Date", w: 62 }, { k: "num", h: "N°", w: 90 }, { k: "client", h: "Client", w: 160 }, { k: "addr", h: "Adresse", w: 240 }, { k: "type", h: "Type", w: 70 }, { k: "status", h: "Statut", w: 56 }, { k: "amount", h: "Montant", w: W - 2 * M - 678, right: true }];
+    function fit(s, font, size, w) { s = pdfSafe(s); if (font.widthOfTextAtSize(s, size) <= w) return s; while (s.length > 1 && font.widthOfTextAtSize(s + "…".replace("…", "..."), size) > w) s = s.slice(0, -1); return s + "..."; }
+    var page, y, pageNo = 0;
+    function header() {
+      page = doc.addPage([W, H]); pageNo++;
+      page.drawRectangle({ x: 0, y: H - 64, width: W, height: 64, color: navy });
+      page.drawText("IMBOX Report", { x: M, y: H - 32, size: 16, font: FB, color: L.rgb(1, 1, 1) });
+      page.drawText(pdfSafe("Rapport du mois - " + r.label), { x: M, y: H - 50, size: 11, font: F, color: L.rgb(0.8, 0.88, 0.97) });
+      var gen = pdfSafe("Généré le " + fmtStamp(new Date().toISOString()) + "  ·  page " + pageNo);
+      page.drawText(gen, { x: W - M - F.widthOfTextAtSize(gen, 9), y: H - 40, size: 9, font: F, color: L.rgb(0.8, 0.88, 0.97) });
+      y = H - 64 - 24;
+    }
+    function tableHead() {
+      page.drawRectangle({ x: M, y: y - 6, width: W - 2 * M, height: 20, color: L.rgb(0.95, 0.96, 0.98) });
+      var x = M + 6; cols.forEach(function (c) { var t = pdfSafe(c.h.toUpperCase()); page.drawText(t, { x: c.right ? x + c.w - 12 - FB.widthOfTextAtSize(t, 8) : x, y: y, size: 8, font: FB, color: grey }); x += c.w; });
+      y -= 22;
+    }
+    header();
+    /* synthèse */
+    var boxes = [{ t: "Interventions faites", v: r.done + " / " + r.n }];
+    Object.keys(r.byType).sort().forEach(function (ty) { var b = r.byType[ty]; boxes.push({ t: ty, v: b.done + " / " + b.n + "  (" + eurPlain(b.earned) + ")" }); });
+    boxes.push({ t: "Total gagné", v: eurPlain(r.earned), hl: true });
+    boxes.push({ t: "Total prévu", v: eurPlain(r.eur) });
+    var bw = (W - 2 * M - (boxes.length - 1) * 8) / boxes.length;
+    boxes.forEach(function (b, i) {
+      var x = M + i * (bw + 8);
+      page.drawRectangle({ x: x, y: y - 34, width: bw, height: 44, color: b.hl ? navy : L.rgb(0.97, 0.98, 0.99), borderColor: b.hl ? navy : line, borderWidth: 1 });
+      page.drawText(fit(b.t.toUpperCase(), FB, 7.5, bw - 16), { x: x + 8, y: y - 2, size: 7.5, font: FB, color: b.hl ? L.rgb(0.8, 0.88, 0.97) : grey });
+      page.drawText(fit(b.v, FB, 13, bw - 16), { x: x + 8, y: y - 24, size: 13, font: FB, color: b.hl ? L.rgb(1, 1, 1) : navy });
+    });
+    y -= 60;
+    tableHead();
+    r.rows.forEach(function (row, i) {
+      if (y < M + 40) { header(); tableHead(); }
+      if (i % 2 === 1) page.drawRectangle({ x: M, y: y - 5, width: W - 2 * M, height: 18, color: L.rgb(0.985, 0.988, 0.995) });
+      var x = M + 6;
+      cols.forEach(function (c) {
+        var raw = c.k === "amount" ? eurPlain(row.amount) : row[c.k], font = c.k === "amount" ? FB : F;
+        var txt = fit(raw, font, 8.5, c.w - 10);
+        var col = c.k === "status" ? (row.done ? green : grey) : c.k === "type" ? brand : navy;
+        page.drawText(txt, { x: c.right ? x + c.w - 12 - font.widthOfTextAtSize(txt, 8.5) : x, y: y, size: 8.5, font: font, color: col });
+        x += c.w;
+      });
+      y -= 18;
+    });
+    if (y < M + 40) { header(); }
+    page.drawLine({ start: { x: M, y: y + 8 }, end: { x: W - M, y: y + 8 }, thickness: 1, color: navy });
+    var tl = "Total gagné (interventions faites)", tv = eurPlain(r.earned);
+    page.drawText(pdfSafe(tl), { x: M + 6, y: y - 8, size: 10, font: FB, color: navy });
+    page.drawText(pdfSafe(tv), { x: W - M - 6 - FB.widthOfTextAtSize(pdfSafe(tv), 11), y: y - 8, size: 11, font: FB, color: green });
+    page.drawText(pdfSafe("Montants calculés selon la grille tarifaire IMBOX (zone IDF / Région × type)."), { x: M + 6, y: y - 24, size: 8, font: F, color: grey });
+    return await doc.save();
+  }
+  function bindMonthly() {
+    var btn = el("hiBtnReport"), panel = el("hiReport"); if (!btn || !panel) return;
+    btn.onclick = function () { panel.classList.toggle("open"); if (panel.classList.contains("open")) { if (!el("mrMonth").value) el("mrMonth").value = curMonth(); renderMonthly(); } };
+    el("mrMonth").addEventListener("change", renderMonthly);
+    el("mrMonth").addEventListener("input", renderMonthly);
+    el("mrCsv").onclick = function () {
+      var r = monthData(el("mrMonth").value || curMonth()); if (!r.rows.length) return;
+      shareOrDownload(monthCsv(r), "rapport-imbox-" + r.month + ".csv", "text/csv", function () { say("CSV prêt : rapport-imbox-" + r.month + ".csv", "ok"); });
+    };
+    el("mrPdf").onclick = function () {
+      var r = monthData(el("mrMonth").value || curMonth()); if (!r.rows.length) return;
+      var b = this, name = "rapport-imbox-" + r.month + ".pdf", sig = JSON.stringify(r);
+      var send = function (bytes) { shareOrDownload(bytes, name, "application/pdf", function () { say("PDF prêt : " + name, "ok"); }); };
+      if (mrCache.sig === sig && mrCache.bytes) { send(mrCache.bytes); return; }
+      b.disabled = true;
+      monthPdf(r).then(function (bytes) {
+        b.disabled = false;
+        shareOrDownload(bytes, "rapport-imbox-" + r.month + ".pdf", "application/pdf", function () { say("PDF prêt : rapport-imbox-" + r.month + ".pdf", "ok"); });
+      }, function (e) { b.disabled = false; say("PDF impossible : " + e.message, "err"); });
+    };
+  }
+
   window.IMBOX_AGENDA = { parseText: parseText, parseDate: parseDate, zoneOf: zoneOf, price: price, tarifs: tarifs, DEF_TARIFS: DEF_TARIFS, renderGains: renderGains,
     list: function () { return items.slice(); }, total: function () { var t = tarifs(); return items.reduce(function (s, it) { return s + price(it, t); }, 0); },
-    showView: showView, openReport: openReport };
+    showView: showView, openReport: openReport,
+    backup: { build: buildBackup, exportData: exportData, parse: parseBackup, restore: restore },
+    history: { update: updateIntervention, remove: deleteIntervention, filtered: hiFiltered }, monthly: { data: monthData, csv: monthCsv, pdf: monthPdf } };
 
   function start() {
-    bind(); render();
+    bind(); bindBackup(); bindHistory(); render();
     var v = "report"; try { v = localStorage.getItem("imbox.v2.view") || "report"; } catch (e) {}
-    if (v === "agenda" || v === "gains") showView(v);
+    if (v === "agenda" || v === "gains" || v === "history") showView(v);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
